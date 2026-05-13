@@ -1,0 +1,275 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#cf-main {
+  position: relative;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+  background: #f1f1f1;
+  color: #000;
+}
+
+#cf-page {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: #f1f1f1;
+}
+
+#cf-page1 {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: #f1f1f1;
+}
+
+#cf-page2 {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: #f1f1f1;
+}
+
+#cf-page3 {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  background: #f1f1f1;
+}
+
+#cf-page canvas {
+  position: relative;
+  z-index: 9;
+  width: 100vw;
+  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
+  display: block;
+}
+
+#cf-loop {
+  display: flex;
+  position: absolute;
+  top: 30%;
+  height: 25%;
+  width: 100%;
+  font-size: clamp(60px, 8vw, 100px);
+  white-space: nowrap;
+  font-family: "Space Grotesk", sans-serif;
+  overflow: hidden;
+}
+
+#cf-loop > h1 {
+  font-weight: 400;
+  animation: cf-anim 15s linear infinite;
+  padding-right: 0;
+}
+
+#cf-loop > h1 > span {
+  -webkit-text-stroke: 1.2px #000;
+  color: transparent;
+  font-weight: 500;
+}
+
+@keyframes cf-anim {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+#cf-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 7%;
+  width: 100%;
+  position: fixed;
+  z-index: 99;
+  padding: 0 30px;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#cf-nav > h3 {
+  font-weight: 400;
+  font-size: 22px;
+}
+
+#cf-nav > button {
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: #000;
+  color: #fff;
+  border: none;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+}
+
+#cf-page > h3 {
+  position: absolute;
+  top: 55%;
+  font-weight: 400;
+  color: #7c7c7c;
+  left: 5%;
+  font-size: clamp(12px, 1.5vw, 16px);
+  z-index: 10;
+  opacity: 0;
+}
+
+#cf-page > h4 {
+  position: absolute;
+  top: 62%;
+  left: 25%;
+  font-weight: 500;
+  font-size: clamp(12px, 1.5vw, 16px);
+  z-index: 10;
+  opacity: 0;
+}
+
+#cf-page1 > #cf-right-text {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  z-index: 10;
+}
+
+#cf-page1 > #cf-right-text > h3,
+#cf-page1 > #cf-right-text > h1 {
+  opacity: 0;
+}
+
+#cf-page1 > #cf-right-text > h3 {
+  font-weight: 400;
+  color: #7c7c7c;
+  font-size: clamp(12px, 1.2vw, 14px);
+}
+
+#cf-page1 > #cf-right-text > h1 {
+  line-height: 1.5;
+  font-size: clamp(28px, 4vw, 50px);
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#cf-page1 > #cf-left-text {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  text-align: end;
+  z-index: 10;
+}
+
+#cf-page1 > #cf-left-text > h1,
+#cf-page1 > #cf-left-text > h3 {
+  opacity: 0;
+}
+
+#cf-page1 > #cf-left-text > h1 {
+  font-size: clamp(28px, 4vw, 50px);
+  line-height: 1.5;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#cf-page1 > #cf-left-text > h3 {
+  color: #7c7c7c;
+  font-weight: 400;
+  font-size: clamp(12px, 1.2vw, 14px);
+}
+
+#cf-page2 > #cf-text1 {
+  position: absolute;
+  top: 30%;
+  left: 10%;
+  z-index: 10;
+}
+
+#cf-page2 > #cf-text1 > h3,
+#cf-page2 > #cf-text1 > h1 {
+  opacity: 0;
+}
+
+#cf-page2 > #cf-text1 > h3 {
+  color: #7c7c7c;
+  font-weight: 400;
+  font-size: clamp(12px, 1.2vw, 14px);
+}
+
+#cf-page2 > #cf-text1 > h1 {
+  font-size: clamp(32px, 5vw, 60px);
+  line-height: 1.5;
+  font-family: "Space Grotesk", sans-serif;
+}
+
+#cf-page2 > #cf-text2 {
+  position: absolute;
+  top: 55%;
+  right: 10%;
+  text-align: end;
+  z-index: 10;
+}
+
+#cf-page2 > #cf-text2 > p {
+  color: #7c7c7c;
+  font-weight: 400;
+  font-size: clamp(10px, 1.1vw, 14px);
+  line-height: 1.6;
+  opacity: 0;
+}
+
+#cf-page3 > #cf-text3 {
+  position: absolute;
+  top: 40%;
+  right: 10%;
+  text-align: end;
+  z-index: 10;
+}
+
+#cf-page3 > #cf-text3 > h3,
+#cf-page3 > #cf-text3 > h1 {
+  opacity: 0;
+}
+
+#cf-page3 > #cf-text3 > h3 {
+  color: #7c7c7c;
+  font-weight: 400;
+  font-size: clamp(12px, 1.2vw, 14px);
+}
+
+#cf-page3 > #cf-text3 > h1 {
+  font-size: clamp(36px, 6vw, 70px);
+  font-family: "Space Grotesk", sans-serif;
+  line-height: 1.2;
+}
+
+@media (max-width: 768px) {
+  #cf-page > h4 {
+    left: 5%;
+  }
+  #cf-page1 > #cf-right-text {
+    left: 5%;
+  }
+  #cf-page1 > #cf-left-text {
+    right: 5%;
+  }
+  #cf-page2 > #cf-text1 {
+    left: 5%;
+  }
+  #cf-page2 > #cf-text2 {
+    right: 5%;
+  }
+  #cf-page3 > #cf-text3 {
+    right: 5%;
+  }
+}
