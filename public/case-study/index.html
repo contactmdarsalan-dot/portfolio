@@ -1,0 +1,2832 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hajir Khata — Product Design Case Study</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1a1a;
+      --ink-m: #5a5a5a;
+      --ink-f: #9a9a9a;
+      --bg: #fafaf8;
+      --bg2: #f3f1eb;
+      --bg3: #e8e4d8;
+      --green: #1d5c3e;
+      --green-l: #e4f0ea;
+      --green-m: #3a8a60;
+      --border: rgba(0, 0, 0, 0.1);
+      --border-s: rgba(0, 0, 0, 0.18);
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* HERO */
+    .hero {
+      background: var(--green);
+      color: #fff;
+      padding: 80px 60px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .6);
+      border: 1px solid rgba(255, 255, 255, .25);
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 6vw, 66px);
+      font-weight: 400;
+      line-height: 1.1;
+      max-width: 700px;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: rgba(255, 255, 255, .7);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255, 255, 255, .7);
+      max-width: 540px;
+      margin-bottom: 48px;
+      font-weight: 300;
+    }
+
+    .hero-meta {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .hero-meta-item label {
+      display: block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .4);
+      margin-bottom: 4px;
+    }
+
+    .hero-meta-item span {
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .9);
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    section:last-child {
+      border-bottom: none;
+    }
+
+    .slabel {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--green-m);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .slabel::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+      max-width: 60px;
+    }
+
+    h2 {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: var(--ink-m);
+      margin-bottom: 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    .callout {
+      background: var(--green-l);
+      border-left: 3px solid var(--green);
+      padding: 20px 24px;
+      border-radius: 0 8px 8px 0;
+      margin: 28px 0;
+    }
+
+    .callout p {
+      color: var(--green);
+      font-weight: 500;
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin: 36px 0;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+      text-align: center;
+    }
+
+    .stat-card .num {
+      font-family: var(--serif);
+      font-size: 36px;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-card .desc {
+      font-size: 12px;
+      color: var(--ink-f);
+      font-weight: 500;
+    }
+
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+
+    .card-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      margin-bottom: 14px;
+    }
+
+    .card-icon.g {
+      background: var(--green-l);
+    }
+
+    .card-icon.o {
+      background: #fdf5e0;
+    }
+
+    .card-icon.r {
+      background: #fdecea;
+    }
+
+    .card-icon.b {
+      background: #e8f0fc;
+    }
+
+    .card h3 {
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .card p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 12px;
+      border-radius: 20px;
+      background: var(--bg2);
+      color: var(--ink-m);
+      border: 1px solid var(--border);
+    }
+
+    .tag.a {
+      background: var(--green-l);
+      color: var(--green);
+      border-color: var(--green-l);
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    .pull-quote {
+      border-left: 4px solid var(--green);
+      padding: 20px 28px;
+      margin: 36px 0;
+      background: var(--bg2);
+      border-radius: 0 10px 10px 0;
+    }
+
+    .pull-quote p {
+      font-family: var(--serif);
+      font-size: 22px;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .pull-quote cite {
+      font-size: 13px;
+      color: var(--ink-f);
+      font-style: normal;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0;
+      margin: 28px 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .step {
+      padding: 22px 18px;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+    }
+
+    .step:last-child {
+      border-right: none;
+    }
+
+    .step-num {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: var(--border-s);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .step h3 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .step p {
+      font-size: 12px;
+      color: var(--ink-f);
+      margin: 0;
+    }
+
+    .feature-list {
+      margin: 20px 0;
+    }
+
+    .feature-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .feature-row:last-child {
+      border-bottom: none;
+    }
+
+    .feature-badge {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--green-l);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .feature-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--ink-m);
+      margin: 0;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+
+    .role-item {
+      padding: 18px;
+      background: var(--bg2);
+      border-radius: 10px;
+    }
+
+    .role-item h4 {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--ink-f);
+      margin-bottom: 8px;
+    }
+
+    .role-item p {
+      font-size: 14px;
+      color: var(--ink);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .outcome-highlight {
+      background: var(--green);
+      color: #fff;
+      border-radius: 14px;
+      padding: 40px 44px;
+      margin: 36px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .outcome-highlight h3 {
+      color: rgba(255, 255, 255, .5);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .outcome-highlight .big {
+      font-family: var(--serif);
+      font-size: 38px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 5px;
+    }
+
+    .outcome-highlight .small {
+      font-size: 13px;
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      margin: 28px 0;
+    }
+
+    .principle {
+      border-top: 2px solid var(--green);
+      padding-top: 14px;
+    }
+
+    .principle .num {
+      font-family: var(--serif);
+      font-size: 28px;
+      color: var(--bg3);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .principle h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .principle p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .timeline {
+      margin: 32px 0;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 24px;
+      padding-bottom: 32px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .tl-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 36px;
+    }
+
+    .tl-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .tl-line {
+      width: 1px;
+      flex: 1;
+      background: var(--border);
+      margin-top: 6px;
+    }
+
+    .timeline-item:last-child .tl-line {
+      display: none;
+    }
+
+    .tl-phase {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--green-m);
+      margin-bottom: 4px;
+    }
+
+    .tl-content h3 {
+      font-size: 15px;
+    }
+
+    .tl-content p {
+      font-size: 14px;
+    }
+
+    /* ============================
+     SCREEN SECTION STYLES
+     ============================ */
+    .screen-section {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 32px 0;
+    }
+
+    .screen-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .screen-header h4 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .screen-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+
+    .screen-body.single {
+      grid-template-columns: 1fr;
+    }
+
+    .screen-panel {
+      border-right: 1px solid var(--border);
+      padding: 24px;
+    }
+
+    .screen-panel:last-child {
+      border-right: none;
+    }
+
+    .screen-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .screen-label.wf {
+      color: #888;
+    }
+
+    .screen-label.ui {
+      color: var(--green);
+    }
+
+    .screen-label .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .screen-label.wf .dot {
+      background: #bbb;
+    }
+
+    .screen-label.ui .dot {
+      background: var(--green);
+    }
+
+    .screen-caption {
+      font-size: 12px;
+      color: var(--ink-f);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* BROWSER CHROME */
+    .browser {
+      border-radius: 10px;
+      border: 1px solid #d0cdc7;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .browser-bar {
+      background: #f0efeb;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #d0cdc7;
+    }
+
+    .b-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+    }
+
+    .b-url {
+      flex: 1;
+      background: #e2dfd9;
+      border-radius: 4px;
+      height: 22px;
+      margin-left: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 11px;
+      color: #888;
+      font-family: var(--sans);
+    }
+
+    /* PHONE CHROME */
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      padding: 8px 0;
+    }
+
+    .phone {
+      width: 240px;
+      border: 2.5px solid #2a2a2a;
+      border-radius: 36px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .phone-notch {
+      background: #1a1a1a;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .phone-notch-bar {
+      width: 60px;
+      height: 16px;
+      background: #0d0d0d;
+      border-radius: 8px;
+    }
+
+    .phone-statusbar {
+      background: var(--green);
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 10px;
+      color: #fff;
+      font-weight: 600;
+      font-family: var(--sans);
+    }
+
+    /* WIREFRAME ELEMENTS */
+    .wf-bg {
+      background: #f5f4f0;
+    }
+
+    .wf-box {
+      background: #dddbd5;
+      border-radius: 4px;
+    }
+
+    .wf-box-light {
+      background: #e8e6e0;
+      border-radius: 4px;
+    }
+
+    .wf-text {
+      background: #cac7c0;
+      border-radius: 2px;
+      height: 10px;
+    }
+
+    .wf-text-sm {
+      background: #d4d1ca;
+      border-radius: 2px;
+      height: 8px;
+    }
+
+    .wf-img {
+      background: #d0cdc7;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a8a5a0;
+      font-size: 18px;
+    }
+
+    .wf-btn {
+      background: #bfbdb7;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #888;
+      font-weight: 600;
+      letter-spacing: .05em;
+    }
+
+    .wf-sidebar {
+      background: #e0ddd6;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 12px;
+      gap: 8px;
+    }
+
+    .wf-nav {
+      background: #d0cdc7;
+      border-radius: 4px;
+      height: 28px;
+    }
+
+    .wf-nav.active {
+      background: #a8a5a0;
+    }
+
+    .wf-label {
+      font-size: 9px;
+      color: #aaa;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      font-family: var(--sans);
+    }
+
+    /* UI ELEMENTS — Dashboard */
+    .ui-sidebar {
+      background: var(--green);
+      width: 100%;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .ui-nav {
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .65);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+    }
+
+    .ui-nav.active {
+      background: rgba(255, 255, 255, .18);
+      color: #fff;
+    }
+
+    .ui-nav .ni {
+      font-size: 13px;
+      opacity: .8;
+    }
+
+    .ui-stat {
+      background: #fff;
+      border: 1px solid #e8e6e0;
+      border-radius: 10px;
+      padding: 14px 14px 12px;
+    }
+
+    .ui-stat .s-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 6px;
+      font-family: var(--sans);
+    }
+
+    .ui-stat .s-num {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 4px;
+      font-family: var(--sans);
+    }
+
+    .ui-stat .s-change {
+      font-size: 11px;
+      color: #3a8a60;
+      font-family: var(--sans);
+    }
+
+    .ui-stat .s-change.r {
+      color: #c0392b;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 600;
+      font-family: var(--sans);
+    }
+
+    .badge.present {
+      background: #e4f0ea;
+      color: #1d5c3e;
+    }
+
+    .badge.absent {
+      background: #fdecea;
+      color: #c0392b;
+    }
+
+    .badge.late {
+      background: #fef4e0;
+      color: #b8860b;
+    }
+
+    .badge.leave {
+      background: #e8f0fc;
+      color: #185fa5;
+    }
+
+    .badge.paid {
+      background: #e4f0ea;
+      color: #1d5c3e;
+    }
+
+    .badge.pending {
+      background: #fef4e0;
+      color: #b8860b;
+    }
+
+    /* UI BAR CHART */
+    .chart-bar-wrap {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 80px;
+      padding-top: 12px;
+    }
+
+    .chart-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      min-width: 0;
+      position: relative;
+    }
+
+    .chart-bar-label {
+      font-size: 9px;
+      text-align: center;
+      color: #999;
+      margin-top: 4px;
+      font-family: var(--sans);
+    }
+
+    /* TABLE */
+    .ui-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      font-family: var(--sans);
+    }
+
+    .ui-table th {
+      text-align: left;
+      padding: 8px 10px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: #999;
+      border-bottom: 1px solid #eee;
+    }
+
+    .ui-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid #f3f1eb;
+      color: #333;
+      vertical-align: middle;
+    }
+
+    .ui-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* AVATAR */
+    .av {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      font-family: var(--sans);
+    }
+
+    .av.g {
+      background: #e4f0ea;
+      color: #1d5c3e;
+    }
+
+    .av.b {
+      background: #e8f0fc;
+      color: #185fa5;
+    }
+
+    .av.o {
+      background: #fef4e0;
+      color: #b8860b;
+    }
+
+    .av.p {
+      background: #eeedfe;
+      color: #534ab7;
+    }
+
+    /* MOBILE UI */
+    .m-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
+      border: 1px solid #eee;
+    }
+
+    .m-header {
+      background: var(--green);
+      padding: 16px;
+      color: #fff;
+      font-family: var(--sans);
+    }
+
+    .m-body {
+      background: #f5f4f0;
+      padding: 14px;
+    }
+
+    /* ANNOTATION BOX */
+    .annotation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin: 20px 0;
+    }
+
+    .annotation {
+      background: var(--bg2);
+      border-radius: 10px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--green);
+    }
+
+    .annotation .an-num {
+      font-family: var(--serif);
+      font-size: 20px;
+      color: var(--bg3);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .annotation h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--ink);
+    }
+
+    .annotation p {
+      font-size: 12px;
+      color: var(--ink-m);
+      margin: 0;
+    }
+
+    /* SCREEN COMPARISON */
+    .compare-header {
+      padding: 20px 24px 12px;
+    }
+
+    .compare-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .compare-header p {
+      font-size: 14px;
+      color: var(--ink-m);
+      margin: 0;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: rgba(255, 255, 255, .5);
+      padding: 40px 60px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer strong {
+      color: #fff;
+    }
+
+    @media(max-width:700px) {
+      .hero {
+        padding: 48px 24px;
+      }
+
+      .container {
+        padding: 0 20px;
+      }
+
+      .screen-body {
+        grid-template-columns: 1fr;
+      }
+
+      .screen-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .screen-panel:last-child {
+        border-bottom: none;
+      }
+
+      .outcome-highlight {
+        grid-template-columns: 1fr;
+        padding: 28px 24px;
+      }
+
+      .footer {
+        padding: 28px 24px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div style="max-width:900px;margin:0 auto;padding:0 12px;position:relative;z-index:1;">
+      <div class="hero-tag">Product Design Case Study · 2025</div>
+      <h1>Hajir Khata —<br><em>Attendance & Payroll</em><br>Reimagined for Nepal</h1>
+      <p class="hero-sub">End-to-end product design for Nepal's leading HR & payroll management platform — web, mobile,
+        research, wireframes, and high-fidelity UI, all in one project.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><label>Role</label><span>Lead Product Designer</span></div>
+        <div class="hero-meta-item"><label>Platform</label><span>Web + iOS & Android</span></div>
+        <div class="hero-meta-item"><label>Year</label><span>2025</span></div>
+        <div class="hero-meta-item"><label>Domain</label><span>HRTech / SaaS / Nepal</span></div>
+        <div class="hero-meta-item"><label>Website</label><span>hajirkhata.com</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- OVERVIEW -->
+    <section>
+      <div class="slabel">Project Overview</div>
+      <h2>Building Nepal's Most Intuitive HR Software from the Ground Up</h2>
+      <p>Hajir Khata is a cloud-based attendance and payroll SaaS platform built for Nepali businesses. As Lead Product
+        Designer, I owned the entire design lifecycle — user research, information architecture, wireframes,
+        high-fidelity UI, design system, and developer handoff — across both web and mobile platforms.</p>
+      <p>The word "Hajir" means <em>present</em> in Nepali — the name itself is the product promise: making employee
+        management effortlessly visible, accurate, and always accessible.</p>
+      <div class="role-grid">
+        <div class="role-item">
+          <h4>My Responsibilities</h4>
+          <p>End-to-end Product Design</p>
+        </div>
+        <div class="role-item">
+          <h4>Platforms</h4>
+          <p>Web App + iOS & Android</p>
+        </div>
+        <div class="role-item">
+          <h4>Screens Designed</h4>
+          <p>120+ across web & mobile</p>
+        </div>
+        <div class="role-item">
+          <h4>Industry</h4>
+          <p>HR Technology · SaaS · Nepal</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section>
+      <div class="slabel">Problem Discovery</div>
+      <h2>The Market Gap That Made This Product Necessary</h2>
+      <p>Before designing anything, I spent three weeks in the field — interviewing HR managers, business owners,
+        accountants, and employees across Kathmandu, Pokhara, and Biratnagar. The findings were striking.</p>
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="num">72%</div>
+          <div class="desc">of SMEs used paper or Excel for attendance</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">3–5 hrs</div>
+          <div class="desc">wasted per month per HR person on manual payroll</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">60%+</div>
+          <div class="desc">had faced payroll errors causing employee disputes</div>
+        </div>
+        <div class="stat-card">
+          <div class="num">0</div>
+          <div class="desc">Nepal-context-aware HR tools existed before 2025</div>
+        </div>
+      </div>
+      <div class="pull-quote">
+        <p>"Every month I spend two days just fixing the salary sheet. I've tried foreign HR tools but they don't
+          understand how Nepal's tax works."</p>
+        <cite>— HR Manager, mid-sized retail chain, Kathmandu (User interview)</cite>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon r">📋</div>
+          <h3>Manual attendance</h3>
+          <p>Physical registers, proxy marking, zero real-time visibility.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon o">💸</div>
+          <h3>Payroll errors</h3>
+          <p>Manual calculations, wrong tax deductions, employee distrust.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon r">🏢</div>
+          <h3>No multi-branch</h3>
+          <p>No way to centrally track employees across multiple offices.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon b">📊</div>
+          <h3>Zero reporting</h3>
+          <p>No IRD, PF, or bank reports — compliance risk at every audit.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon g">📱</div>
+          <h3>No mobile access</h3>
+          <p>Field workers couldn't log attendance or view payslips digitally.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon o">⚖️</div>
+          <h3>Local compliance gap</h3>
+          <p>All existing tools required manual workarounds for Nepal's tax laws.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN PROCESS -->
+    <section>
+      <div class="slabel">Design Process</div>
+      <h2>From Research to Launch — A Human-Centered Process</h2>
+      <p>I followed a Double Diamond approach across six structured phases, from discovery research through final
+        developer handoff and implementation support.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Discover</h3>
+          <p>Interviews, field observation, competitive audit</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Define</h3>
+          <p>Personas, journey maps, problem statements</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Ideate</h3>
+          <p>IA, wireframes, design sprints</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Prototype</h3>
+          <p>High-fidelity Figma prototypes</p>
+        </div>
+        <div class="step">
+          <div class="step-num">05</div>
+          <h3>Test</h3>
+          <p>Usability testing, 3 rounds of iteration</p>
+        </div>
+        <div class="step">
+          <div class="step-num">06</div>
+          <h3>Deliver</h3>
+          <p>Design system, dev handoff, QA</p>
+        </div>
+      </div>
+      <div class="timeline" style="margin-top:40px;">
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 1 · Weeks 1–3</div>
+            <h3>Discovery & Research</h3>
+            <p>18 stakeholder interviews, contextual observation, affinity mapping, 3 primary user personas. Competitive
+              analysis of Nimble HRMS, e-HR Online, Keka, ZohoHR.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 2 · Weeks 4–5</div>
+            <h3>Information Architecture & Flows</h3>
+            <p>Full IA for both web portal and mobile app. User flow diagrams for all critical paths: onboarding,
+              attendance, leave requests, payroll, and report generation.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 3 · Weeks 6–10</div>
+            <h3>Wireframing & Low-Fidelity Prototyping</h3>
+            <p>120+ wireframe screens for web dashboard, mobile app, and admin portal. Two rounds of wireframe testing
+              with HR professionals to validate navigation logic and layout hierarchy.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 4 · Weeks 11–18</div>
+            <h3>Visual Design & Design System</h3>
+            <p>Full design system in Figma: color tokens, typography scale, 60+ components, icon set, responsive grid.
+              High-fidelity UI applied to all 120+ screens on both platforms.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 5 · Weeks 19–22</div>
+            <h3>Prototyping, Testing & Iteration</h3>
+            <p>Interactive Figma prototypes for all major flows. 3 rounds of moderated usability testing with 12
+              participants. 28 usability issues identified and resolved.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="tl-left">
+            <div class="tl-dot"></div>
+          </div>
+          <div class="tl-content">
+            <div class="tl-phase">Phase 6 · Weeks 23–26</div>
+            <h3>Developer Handoff & Launch Support</h3>
+            <p>Detailed handoff documentation, design QA during development, pixel-accurate implementation checks, and
+              post-launch iteration based on real user feedback.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =============================================
+     SCREEN DESIGNS SECTION
+     ============================================= -->
+    <section>
+      <div class="slabel">Wireframes & UI Designs</div>
+      <h2>From Rough Idea to Final Screen — 6 Key Designs</h2>
+      <p>Each screen below shows my exact design progression: a low-fidelity wireframe capturing structure and logic,
+        followed by the final high-fidelity UI. The annotations below each pair explain the key design decisions made
+        between the two stages.</p>
+
+      <div class="callout">
+        <p>Gray = wireframe thinking. Green = final product. Every screen went through at least 3 rounds of iteration
+          between these two stages.</p>
+      </div>
+
+      <!-- ── SCREEN 1: DASHBOARD ── -->
+      <div class="screen-section" style="margin-top:40px;">
+        <div class="compare-header">
+          <h3>Screen 1 — Admin Dashboard (Web)</h3>
+          <p>The command center for HR managers and business owners. The primary challenge was prioritizing what to show
+            first in a complex system with many modules.</p>
+        </div>
+
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/dashboard</div>
+              </div>
+              <div style="display:grid;grid-template-columns:60px 1fr;background:#f2f0ea;min-height:280px;">
+                <div style="background:#e0ddd6;padding:10px 8px;display:flex;flex-direction:column;gap:8px;">
+                  <div style="background:#bbb;border-radius:4px;height:24px;margin-bottom:8px;"></div>
+                  <div class="wf-nav"></div>
+                  <div class="wf-nav active"></div>
+                  <div class="wf-nav"></div>
+                  <div class="wf-nav"></div>
+                  <div class="wf-nav"></div>
+                  <div class="wf-nav"></div>
+                </div>
+                <div style="padding:14px;display:flex;flex-direction:column;gap:12px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div style="width:120px;height:18px;" class="wf-box"></div>
+                    <div style="width:80px;height:26px;" class="wf-btn">+ Add</div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+                    <div style="background:#e8e6e0;border-radius:8px;padding:10px;">
+                      <div class="wf-text-sm" style="width:60%;margin-bottom:6px;"></div>
+                      <div class="wf-text" style="width:40%;height:18px;"></div>
+                    </div>
+                    <div style="background:#e8e6e0;border-radius:8px;padding:10px;">
+                      <div class="wf-text-sm" style="width:60%;margin-bottom:6px;"></div>
+                      <div class="wf-text" style="width:40%;height:18px;"></div>
+                    </div>
+                    <div style="background:#e8e6e0;border-radius:8px;padding:10px;">
+                      <div class="wf-text-sm" style="width:60%;margin-bottom:6px;"></div>
+                      <div class="wf-text" style="width:40%;height:18px;"></div>
+                    </div>
+                    <div style="background:#e8e6e0;border-radius:8px;padding:10px;">
+                      <div class="wf-text-sm" style="width:60%;margin-bottom:6px;"></div>
+                      <div class="wf-text" style="width:40%;height:18px;"></div>
+                    </div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <div style="background:#e8e6e0;border-radius:8px;padding:12px;height:100px;" class="wf-img">📊 Chart
+                      Area</div>
+                    <div style="background:#e8e6e0;border-radius:8px;padding:12px;height:100px;" class="wf-img">📋 Table
+                      Area</div>
+                  </div>
+                  <div
+                    style="background:#e8e6e0;border-radius:8px;height:50px;padding:10px;display:flex;gap:8px;align-items:center;">
+                    <div class="wf-text" style="width:30%;"></div>
+                    <div class="wf-text-sm" style="width:15%;"></div>
+                    <div class="wf-text-sm" style="width:15%;"></div>
+                    <div class="wf-text-sm" style="width:15%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Early wireframe focusing on information hierarchy. The sidebar nav, KPI cards,
+              chart, and activity table were positioned first — before any color or real data was added.</div>
+          </div>
+
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/dashboard</div>
+              </div>
+              <div style="display:grid;grid-template-columns:52px 1fr;min-height:280px;">
+                <!-- Sidebar -->
+                <div class="ui-sidebar">
+                  <div
+                    style="background:rgba(255,255,255,.2);border-radius:6px;height:28px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--sans);">
+                    HK</div>
+                  <div class="ui-nav active" style="padding:8px;justify-content:center;font-size:16px;">🏠</div>
+                  <div class="ui-nav" style="padding:8px;justify-content:center;font-size:16px;">👥</div>
+                  <div class="ui-nav" style="padding:8px;justify-content:center;font-size:16px;">🕐</div>
+                  <div class="ui-nav" style="padding:8px;justify-content:center;font-size:16px;">🗓</div>
+                  <div class="ui-nav" style="padding:8px;justify-content:center;font-size:16px;">💰</div>
+                  <div class="ui-nav" style="padding:8px;justify-content:center;font-size:16px;">📊</div>
+                </div>
+                <!-- Main -->
+                <div style="padding:14px;background:#f7f6f3;display:flex;flex-direction:column;gap:10px;">
+                  <div style="display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                      <div style="font-size:14px;font-weight:600;color:#1a1a1a;font-family:var(--sans);">Good morning,
+                        Maya 👋</div>
+                      <div style="font-size:11px;color:#999;font-family:var(--sans);">Wednesday, Baisakh 15, 2082</div>
+                    </div>
+                    <div
+                      style="background:var(--green);color:#fff;font-size:10px;font-weight:600;padding:6px 12px;border-radius:6px;font-family:var(--sans);">
+                      + Add Employee</div>
+                  </div>
+                  <!-- Stat cards -->
+                  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+                    <div class="ui-stat">
+                      <div class="s-label">Present</div>
+                      <div class="s-num" style="color:var(--green);">142</div>
+                      <div class="s-change">↑ 96.5%</div>
+                    </div>
+                    <div class="ui-stat">
+                      <div class="s-label">Absent</div>
+                      <div class="s-num" style="color:#c0392b;">5</div>
+                      <div class="s-change r">↑ 3.4%</div>
+                    </div>
+                    <div class="ui-stat">
+                      <div class="s-label">On Leave</div>
+                      <div class="s-num" style="color:#185fa5;">3</div>
+                      <div class="s-change" style="color:#185fa5;">2.0%</div>
+                    </div>
+                    <div class="ui-stat">
+                      <div class="s-label">Employees</div>
+                      <div class="s-num">150</div>
+                      <div class="s-change">Total staff</div>
+                    </div>
+                  </div>
+                  <!-- Chart + table -->
+                  <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:8px;">
+                    <div style="background:#fff;border-radius:10px;border:1px solid #eee;padding:12px;">
+                      <div
+                        style="font-size:11px;font-weight:600;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;font-family:var(--sans);">
+                        Weekly attendance</div>
+                      <div class="chart-bar-wrap">
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="chart-bar" style="background:var(--green);height:62px;opacity:.85;"></div>
+                          <div class="chart-bar-label">Mon</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="chart-bar" style="background:var(--green);height:70px;opacity:.85;"></div>
+                          <div class="chart-bar-label">Tue</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="chart-bar" style="background:var(--green);height:55px;opacity:.85;"></div>
+                          <div class="chart-bar-label">Wed</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="chart-bar" style="background:var(--green);height:74px;opacity:.85;"></div>
+                          <div class="chart-bar-label">Thu</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="chart-bar" style="background:#cde0d5;height:78px;opacity:.85;"></div>
+                          <div class="chart-bar-label">Fri</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="background:#fff;border-radius:10px;border:1px solid #eee;padding:12px;">
+                      <div
+                        style="font-size:11px;font-weight:600;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;font-family:var(--sans);">
+                        Recent activity</div>
+                      <div style="display:flex;flex-direction:column;gap:8px;">
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <div class="av g">RK</div>
+                          <div>
+                            <div style="font-size:11px;font-weight:600;color:#333;font-family:var(--sans);">Ramesh K.
+                            </div>
+                            <div style="font-size:10px;color:#999;font-family:var(--sans);">Checked in · 9:02 AM</div>
+                          </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <div class="av b">SP</div>
+                          <div>
+                            <div style="font-size:11px;font-weight:600;color:#333;font-family:var(--sans);">Sita P.
+                            </div>
+                            <div style="font-size:10px;color:#999;font-family:var(--sans);">Leave request · Sick</div>
+                          </div>
+                        </div>
+                        <div style="display:flex;align-items:center;gap:8px;">
+                          <div class="av o">BT</div>
+                          <div>
+                            <div style="font-size:11px;font-weight:600;color:#333;font-family:var(--sans);">Binod T.
+                            </div>
+                            <div style="font-size:10px;color:#999;font-family:var(--sans);">Checked in · 9:48 AM</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Final UI with real Nepali date (Bikram Sambat calendar), contextual greeting,
+              live KPIs, attendance chart, and a live activity feed — all data that matters to an HR manager at 9 AM.
+            </div>
+          </div>
+        </div>
+
+        <!-- ANNOTATIONS -->
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>Bikram Sambat calendar</h4>
+              <p>Nepali businesses use BS dates for all official records. Showing BS date on the dashboard immediately
+                signals this is built for Nepal.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>4 KPIs, not 8</h4>
+              <p>Early wireframe had 8 stat cards. Usability testing showed users only needed Present, Absent, On Leave,
+                Total — everything else moved to drill-down pages.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Icon-only collapsed sidebar</h4>
+              <p>Most users spend 70% of time on the dashboard. Keeping the sidebar collapsed by default gives more
+                screen space to the data that matters.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">04</div>
+              <h4>Activity feed on the right</h4>
+              <p>HR managers told us they check "who came in late?" first thing in the morning. The activity feed
+                answers this without any navigation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 2: ATTENDANCE MANAGEMENT ── -->
+      <div class="screen-section">
+        <div class="compare-header">
+          <h3>Screen 2 — Attendance Management (Web)</h3>
+          <p>The most-used screen in the entire product. HR managers check this daily to view who is present, absent, or
+            late — and manually override if needed.</p>
+        </div>
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/attendance</div>
+              </div>
+              <div
+                style="background:#f2f0ea;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <div style="width:90px;height:26px;" class="wf-box"></div>
+                  <div style="width:90px;height:26px;" class="wf-box"></div>
+                  <div style="flex:1;height:26px;" class="wf-box-light"></div>
+                  <div style="width:70px;height:26px;" class="wf-btn">Export</div>
+                </div>
+                <div style="background:#fff;border-radius:8px;overflow:hidden;border:1px solid #d8d5cf;">
+                  <div style="display:flex;gap:0;border-bottom:1px solid #d8d5cf;padding:8px 10px;background:#eceae4;">
+                    <div class="wf-text-sm" style="width:28px;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:2;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:2;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;"></div>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:0;">
+                    <div
+                      style="display:flex;gap:0;padding:8px 10px;border-bottom:1px solid #ece9e3;align-items:center;">
+                      <div
+                        style="width:20px;height:20px;border-radius:50%;background:#d0cdc7;margin-right:10px;flex-shrink:0;">
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text" style="width:80%;"></div>
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:60%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="width:50px;height:16px;background:#c5c2bb;border-radius:20px;"></div>
+                      </div>
+                    </div>
+                    <div
+                      style="display:flex;gap:0;padding:8px 10px;border-bottom:1px solid #ece9e3;align-items:center;">
+                      <div
+                        style="width:20px;height:20px;border-radius:50%;background:#d0cdc7;margin-right:10px;flex-shrink:0;">
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:60%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="width:50px;height:16px;background:#c5c2bb;border-radius:20px;"></div>
+                      </div>
+                    </div>
+                    <div
+                      style="display:flex;gap:0;padding:8px 10px;border-bottom:1px solid #ece9e3;align-items:center;">
+                      <div
+                        style="width:20px;height:20px;border-radius:50%;background:#d0cdc7;margin-right:10px;flex-shrink:0;">
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text" style="width:85%;"></div>
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:60%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="width:50px;height:16px;background:#c5c2bb;border-radius:20px;"></div>
+                      </div>
+                    </div>
+                    <div style="display:flex;gap:0;padding:8px 10px;align-items:center;">
+                      <div
+                        style="width:20px;height:20px;border-radius:50%;background:#d0cdc7;margin-right:10px;flex-shrink:0;">
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text" style="width:65%;"></div>
+                      </div>
+                      <div style="flex:2;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:60%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;margin-right:10px;">
+                        <div class="wf-text-sm" style="width:70%;"></div>
+                      </div>
+                      <div style="flex:1;">
+                        <div style="width:50px;height:16px;background:#c5c2bb;border-radius:20px;"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Wireframe captured the filter bar (date + department) and the essential table
+              columns: name, department, check-in time, check-out time, and status badge.</div>
+          </div>
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/attendance</div>
+              </div>
+              <div
+                style="background:#f7f6f3;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                  <div
+                    style="background:#fff;border:1px solid #e0ddd6;border-radius:7px;padding:6px 12px;font-size:11px;font-weight:600;color:#444;font-family:var(--sans);">
+                    📅 Today · Bai 15, 2082</div>
+                  <div
+                    style="background:#fff;border:1px solid #e0ddd6;border-radius:7px;padding:6px 12px;font-size:11px;color:#666;font-family:var(--sans);">
+                    All Departments ▾</div>
+                  <div
+                    style="background:#fff;border:1px solid #e0ddd6;border-radius:7px;padding:6px 12px;font-size:11px;color:#666;flex:1;min-width:80px;font-family:var(--sans);">
+                    🔍 Search employees...</div>
+                  <div
+                    style="background:var(--green);color:#fff;border-radius:7px;padding:6px 12px;font-size:11px;font-weight:600;font-family:var(--sans);">
+                    ↓ Export</div>
+                </div>
+                <div style="background:#fff;border:1px solid #eee;border-radius:10px;overflow:hidden;">
+                  <table class="ui-table">
+                    <thead>
+                      <tr>
+                        <th>Employee</th>
+                        <th>Dept</th>
+                        <th>In</th>
+                        <th>Out</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av g">RK</div><span>Ramesh Karki</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">Sales</td>
+                        <td>9:02 AM</td>
+                        <td>—</td>
+                        <td><span class="badge present">Present</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av b">SP</div><span>Sita Poudel</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">HR</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="badge leave">On Leave</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av o">BT</div><span>Binod Tamang</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">IT</td>
+                        <td>9:48 AM</td>
+                        <td>—</td>
+                        <td><span class="badge late">Late</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av p">AS</div><span>Asha Shrestha</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">Finance</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td><span class="badge absent">Absent</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div style="font-size:11px;color:#999;text-align:right;font-family:var(--sans);">Showing 4 of 150
+                  employees · Page 1</div>
+              </div>
+            </div>
+            <div class="screen-caption">Final UI with color-coded status badges (Present/Late/Absent/On Leave), avatar
+              initials, real Nepali dates, inline search, and a one-click export — built for daily use.</div>
+          </div>
+        </div>
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>Color-coded status badges</h4>
+              <p>HR managers scan this table quickly. Color coding (green/red/orange/blue) lets them spot problems in
+                under 2 seconds without reading every row.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>Avatar initials, no photos</h4>
+              <p>Photos require extra management overhead. Initials with colored circles provide quick visual
+                identification without the maintenance burden.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Late is separate from absent</h4>
+              <p>In Nepal's labour context, "late" and "absent" have different payroll implications. Separating them in
+                the badge system was critical for accurate record-keeping.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 3: PAYROLL PROCESSING ── -->
+      <div class="screen-section">
+        <div class="compare-header">
+          <h3>Screen 3 — Payroll Processing (Web)</h3>
+          <p>The most complex flow to design. Payroll calculation involves earnings, deductions, tax, PF, and CIT — all
+            needing to be shown clearly without overwhelming the user.</p>
+        </div>
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/payroll</div>
+              </div>
+              <div
+                style="background:#f2f0ea;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;gap:8px;align-items:center;margin-bottom:4px;">
+                  <div style="width:100px;height:26px;" class="wf-box"></div>
+                  <div style="width:80px;height:26px;" class="wf-box"></div>
+                  <div style="flex:1;"></div>
+                  <div style="width:100px;height:30px;" class="wf-btn">Process Payroll</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:10px;flex:1;">
+                  <div
+                    style="background:#fff;border-radius:8px;border:1px solid #d8d5cf;padding:10px;display:flex;flex-direction:column;gap:6px;">
+                    <div class="wf-label">Employees</div>
+                    <div
+                      style="display:flex;gap:6px;align-items:center;padding:6px;background:#eceae4;border-radius:5px;">
+                      <div style="width:20px;height:20px;border-radius:50%;background:#d0cdc7;flex-shrink:0;"></div>
+                      <div style="flex:1;">
+                        <div class="wf-text" style="width:80%;"></div>
+                      </div>
+                      <div style="width:40px;height:12px;" class="wf-text-sm"></div>
+                    </div>
+                    <div style="display:flex;gap:6px;align-items:center;padding:6px;border-radius:5px;">
+                      <div style="width:20px;height:20px;border-radius:50%;background:#d8d5cf;flex-shrink:0;"></div>
+                      <div style="flex:1;">
+                        <div class="wf-text" style="width:70%;"></div>
+                      </div>
+                      <div style="width:40px;height:12px;" class="wf-text-sm"></div>
+                    </div>
+                    <div style="display:flex;gap:6px;align-items:center;padding:6px;border-radius:5px;">
+                      <div style="width:20px;height:20px;border-radius:50%;background:#d8d5cf;flex-shrink:0;"></div>
+                      <div style="flex:1;">
+                        <div class="wf-text" style="width:85%;"></div>
+                      </div>
+                      <div style="width:40px;height:12px;" class="wf-text-sm"></div>
+                    </div>
+                  </div>
+                  <div
+                    style="background:#fff;border-radius:8px;border:1px solid #d8d5cf;padding:10px;display:flex;flex-direction:column;gap:8px;">
+                    <div class="wf-label">Salary Breakdown</div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ece9e3;">
+                      <div class="wf-text" style="width:40%;"></div>
+                      <div class="wf-text" style="width:25%;"></div>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ece9e3;">
+                      <div class="wf-text" style="width:35%;"></div>
+                      <div class="wf-text" style="width:25%;"></div>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ece9e3;">
+                      <div class="wf-text-sm" style="width:30%;"></div>
+                      <div class="wf-text-sm" style="width:20%;"></div>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #ece9e3;">
+                      <div class="wf-text-sm" style="width:30%;"></div>
+                      <div class="wf-text-sm" style="width:20%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;padding:8px 0;">
+                      <div class="wf-text" style="width:30%;height:14px;"></div>
+                      <div class="wf-text" style="width:28%;height:14px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Wireframe exploring a split-panel layout: employee list on the left, salary
+              breakdown on the right. This made it easy to process one employee at a time.</p>
+            </div>
+          </div>
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/payroll</div>
+              </div>
+              <div
+                style="background:#f7f6f3;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <div style="display:flex;gap:8px;align-items:center;">
+                  <div
+                    style="background:#fff;border:1px solid #e0;border-radius:7px;padding:6px 12px;font-size:11px;font-weight:600;color:#444;font-family:var(--sans);">
+                    📅 Baisakh 2082</div>
+                  <div
+                    style="background:#fff;border:1px solid #e0ddd6;border-radius:7px;padding:6px 12px;font-size:11px;color:#666;font-family:var(--sans);">
+                    All Departments ▾</div>
+                  <div style="flex:1;"></div>
+                  <div
+                    style="background:var(--green);color:#fff;border-radius:7px;padding:7px 14px;font-size:11px;font-weight:600;font-family:var(--sans);">
+                    ⚡ Process All Payroll</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:10px;">
+                  <!-- Employee list -->
+                  <div
+                    style="background:#fff;border-radius:10px;border:1px solid #eee;padding:10px;display:flex;flex-direction:column;gap:4px;">
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:6px;font-family:var(--sans);">
+                      Employees</div>
+                    <div
+                      style="display:flex;gap:8px;align-items:center;padding:8px 10px;background:var(--green-l);border-radius:8px;border:1px solid #c8ddd0;">
+                      <div class="av g" style="flex-shrink:0;">RK</div>
+                      <div style="flex:1;">
+                        <div style="font-size:12px;font-weight:600;font-family:var(--sans);">Ramesh Karki</div>
+                        <div style="font-size:10px;color:#888;font-family:var(--sans);">Sales Manager</div>
+                      </div>
+                      <span class="badge present">Selected</span>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:8px;">
+                      <div class="av b" style="flex-shrink:0;">SP</div>
+                      <div style="flex:1;">
+                        <div style="font-size:12px;font-weight:600;font-family:var(--sans);">Sita Poudel</div>
+                        <div style="font-size:10px;color:#888;font-family:var(--sans);">HR Officer</div>
+                      </div>
+                      <span class="badge pending">Pending</span>
+                    </div>
+                    <div style="display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:8px;">
+                      <div class="av o" style="flex-shrink:0;">BT</div>
+                      <div style="flex:1;">
+                        <div style="font-size:12px;font-weight:600;font-family:var(--sans);">Binod Tamang</div>
+                        <div style="font-size:10px;color:#888;font-family:var(--sans);">IT Developer</div>
+                      </div>
+                      <span class="badge pending">Pending</span>
+                    </div>
+                  </div>
+                  <!-- Salary breakdown -->
+                  <div
+                    style="background:#fff;border-radius:10px;border:1px solid #eee;padding:12px;display:flex;flex-direction:column;gap:0;">
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:10px;font-family:var(--sans);">
+                      Ramesh Karki · Salary Breakdown</div>
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--green);margin-bottom:5px;font-family:var(--sans);">
+                      Earnings</div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">Basic Salary</span><span style="font-weight:600;">रू 45,000</span>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">Dearness Allowance</span><span style="font-weight:600;">रू 8,000</span>
+                    </div>
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#c0392b;margin:8px 0 5px;font-family:var(--sans);">
+                      Deductions</div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">PF (Employee 10%)</span><span style="color:#c0392b;">- रू 4,500</span>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">TDS (Tax)</span><span style="color:#c0392b;">- रू 2,800</span>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:10px 0 4px;border-top:2px solid #eee;margin-top:6px;font-family:var(--sans);">
+                      <span style="font-size:13px;font-weight:700;color:var(--ink);">Net Pay</span><span
+                        style="font-size:15px;font-weight:700;color:var(--green);">रू 45,700</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Final UI uses Nepali rupee symbol (रू), splits earnings and deductions with
+              color coding, and shows net pay prominently. Designed around Nepal's IRD, PF, and TDS requirements
+              natively.</div>
+          </div>
+        </div>
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>Nepali rupee symbol (रू)</h4>
+              <p>Using the correct currency symbol (not Rs. or NRS) was a deliberate trust signal — telling users this
+                product was made for them, not adapted from abroad.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>Earnings in green, deductions in red</h4>
+              <p>Immediate visual language for what adds vs. removes from salary. Even a first-time user understands the
+                breakdown without reading labels carefully.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Net pay is the hero number</h4>
+              <p>Employees care most about "how much do I get?" We made net pay the largest, boldest number on the
+                screen — not buried in a table row.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">04</div>
+              <h4>PF and TDS built in by default</h4>
+              <p>In early wireframes these were optional fields. Research showed 100% of formal Nepali businesses need
+                these — so they became required default line items.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 4: MOBILE ATTENDANCE ── -->
+      <div class="screen-section">
+        <div class="compare-header">
+          <h3>Screen 4 — Mobile Attendance Check-in (iOS & Android)</h3>
+          <p>The most-used employee-facing screen. Field workers and office employees use this daily to mark attendance.
+            The biggest challenge: make it work for someone who's never used a smartphone app before.</p>
+        </div>
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg" style="display:flex;flex-direction:column;gap:12px;">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="phone-wrap">
+              <div class="phone">
+                <div class="phone-notch">
+                  <div class="phone-notch-bar"></div>
+                </div>
+                <div
+                  style="background:#f2f0ea;padding:16px;min-height:360px;display:flex;flex-direction:column;gap:14px;">
+                  <!-- Header -->
+                  <div
+                    style="background:#d0cdc7;border-radius:8px;height:44px;display:flex;align-items:center;padding:0 12px;gap:10px;">
+                    <div style="width:28px;height:28px;border-radius:50%;background:#bbb;"></div>
+                    <div>
+                      <div class="wf-text" style="width:80px;margin-bottom:5px;"></div>
+                      <div class="wf-text-sm" style="width:55px;"></div>
+                    </div>
+                  </div>
+                  <!-- Clock -->
+                  <div
+                    style="background:#fff;border-radius:12px;padding:16px;text-align:center;border:1px solid #d8d5cf;">
+                    <div class="wf-text" style="width:50%;margin:0 auto 8px;height:28px;"></div>
+                    <div class="wf-text-sm" style="width:40%;margin:0 auto;"></div>
+                  </div>
+                  <!-- Big CTA button -->
+                  <div
+                    style="background:#bbb;border-radius:60px;height:64px;display:flex;align-items:center;justify-content:center;font-size:11px;color:#888;font-weight:700;letter-spacing:.05em;text-transform:uppercase;font-family:var(--sans);">
+                    CHECK IN</div>
+                  <!-- GPS status -->
+                  <div
+                    style="background:#e8e6e0;border-radius:8px;height:36px;display:flex;align-items:center;padding:0 12px;gap:8px;">
+                    <div style="width:14px;height:14px;border-radius:50%;background:#bbb;"></div>
+                    <div class="wf-text-sm" style="width:60%;"></div>
+                  </div>
+                  <!-- Today's log -->
+                  <div class="wf-label">Today's log</div>
+                  <div
+                    style="background:#fff;border-radius:8px;padding:10px;border:1px solid #d8d5cf;display:flex;justify-content:space-between;align-items:center;">
+                    <div class="wf-text-sm" style="width:35%;"></div>
+                    <div class="wf-text-sm" style="width:30%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Wireframe explored a single-screen layout: user info at top, live clock, one big
+              action button, GPS status, and today's log below. Minimal nav, maximum clarity.</div>
+          </div>
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;display:flex;flex-direction:column;gap:12px;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="phone-wrap">
+              <div class="phone">
+                <div class="phone-notch">
+                  <div class="phone-notch-bar"></div>
+                </div>
+                <div class="phone-statusbar"><span>9:41</span><span>●●● WiFi 100%</span></div>
+                <!-- Header -->
+                <div class="m-header">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+                    <div
+                      style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;font-family:var(--sans);">
+                      RK</div>
+                    <div>
+                      <div style="font-size:13px;font-weight:600;font-family:var(--sans);">Ramesh Karki</div>
+                      <div style="font-size:11px;color:rgba(255,255,255,.7);font-family:var(--sans);">Sales Manager ·
+                        Kathmandu</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Body -->
+                <div class="m-body">
+                  <!-- Clock -->
+                  <div style="background:#fff;border-radius:12px;padding:16px;text-align:center;margin-bottom:12px;">
+                    <div
+                      style="font-size:30px;font-weight:700;color:#1a1a1a;line-height:1;margin-bottom:4px;font-family:var(--sans);">
+                      09:41 AM</div>
+                    <div style="font-size:11px;color:#999;font-family:var(--sans);">Wednesday · Baisakh 15, 2082</div>
+                  </div>
+                  <!-- Big Check-in Button -->
+                  <div
+                    style="background:var(--green);border-radius:60px;height:58px;display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:10px;">
+                    <span style="font-size:18px;">✅</span>
+                    <span
+                      style="font-size:14px;font-weight:700;color:#fff;letter-spacing:.04em;font-family:var(--sans);">CHECK
+                      IN</span>
+                  </div>
+                  <!-- GPS -->
+                  <div
+                    style="background:#fff;border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;margin-bottom:12px;border:1px solid #eee;">
+                    <span style="font-size:14px;">📍</span>
+                    <div>
+                      <div style="font-size:11px;font-weight:600;color:#333;font-family:var(--sans);">GPS Location
+                        Verified</div>
+                      <div style="font-size:10px;color:#999;font-family:var(--sans);">New Baneshwor, Kathmandu</div>
+                    </div>
+                    <span
+                      style="margin-left:auto;font-size:10px;background:#e4f0ea;color:var(--green);padding:2px 8px;border-radius:20px;font-weight:700;font-family:var(--sans);">Active</span>
+                  </div>
+                  <!-- Today's log -->
+                  <div
+                    style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:8px;font-family:var(--sans);">
+                    Today's Attendance Log</div>
+                  <div
+                    style="background:#fff;border-radius:8px;padding:10px 12px;border:1px solid #eee;display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                      <div style="font-size:11px;font-weight:600;color:#333;font-family:var(--sans);">Not yet checked in
+                      </div>
+                      <div style="font-size:10px;color:#999;font-family:var(--sans);">Scheduled: 9:00 AM</div>
+                    </div>
+                    <span class="badge late">Late</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Final UI with Nepali calendar, live GPS verification, one-tap check-in button,
+              and real-time status. The "Late" badge gives immediate awareness without needing HR to notify the
+              employee.</div>
+          </div>
+        </div>
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>One big button, nothing else</h4>
+              <p>Usability testing showed that non-tech-savvy field workers struggled with screens that had multiple
+                actions. The check-in button is the only major interactive element — impossible to miss.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>GPS shown, not hidden</h4>
+              <p>Employees were suspicious of location tracking. Showing GPS status explicitly ("Location Verified, New
+                Baneshwor") built trust — they know it's working, not watching.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Self-awareness about lateness</h4>
+              <p>Showing the employee their own "Late" status before an HR manager flags it reduces conflict — employees
+                self-correct when they have visibility.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 5: MOBILE PAYSLIP ── -->
+      <div class="screen-section">
+        <div class="compare-header">
+          <h3>Screen 5 — Mobile Payslip View (Employee)</h3>
+          <p>Employees previously had to visit the HR desk to get their payslip. The goal was to make it self-serve,
+            transparent, and shareable directly from the phone.</p>
+        </div>
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg" style="display:flex;flex-direction:column;gap:12px;">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="phone-wrap">
+              <div class="phone">
+                <div class="phone-notch">
+                  <div class="phone-notch-bar"></div>
+                </div>
+                <div
+                  style="background:#f2f0ea;padding:14px;min-height:360px;display:flex;flex-direction:column;gap:10px;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="width:16px;height:16px;background:#bbb;border-radius:2px;"></div>
+                    <div class="wf-text" style="width:60%;"></div>
+                  </div>
+                  <div
+                    style="background:#d0cdc7;border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;">
+                    <div class="wf-text" style="width:50%;margin:0 auto;height:14px;"></div>
+                    <div class="wf-text" style="width:30%;margin:0 auto;height:20px;"></div>
+                  </div>
+                  <div
+                    style="background:#fff;border-radius:8px;padding:10px;border:1px solid #d8d5cf;display:flex;flex-direction:column;gap:6px;">
+                    <div class="wf-label">Earnings</div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <div class="wf-text-sm" style="width:40%;"></div>
+                      <div class="wf-text-sm" style="width:25%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <div class="wf-text-sm" style="width:35%;"></div>
+                      <div class="wf-text-sm" style="width:25%;"></div>
+                    </div>
+                  </div>
+                  <div
+                    style="background:#fff;border-radius:8px;padding:10px;border:1px solid #d8d5cf;display:flex;flex-direction:column;gap:6px;">
+                    <div class="wf-label">Deductions</div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <div class="wf-text-sm" style="width:30%;"></div>
+                      <div class="wf-text-sm" style="width:25%;"></div>
+                    </div>
+                    <div style="display:flex;justify-content:space-between;">
+                      <div class="wf-text-sm" style="width:25%;"></div>
+                      <div class="wf-text-sm" style="width:20%;"></div>
+                    </div>
+                  </div>
+                  <div
+                    style="background:#e8e6e0;border-radius:8px;padding:10px;display:flex;justify-content:space-between;align-items:center;">
+                    <div class="wf-text" style="width:30%;height:14px;"></div>
+                    <div class="wf-text" style="width:28%;height:18px;"></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <div style="height:36px;" class="wf-btn">Download PDF</div>
+                    <div style="height:36px;" class="wf-btn">Share</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Wireframe explored a card-based layout: header card with month, then separate
+              earnings/deductions cards, net pay highlight, and action buttons at the bottom.</div>
+          </div>
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;display:flex;flex-direction:column;gap:12px;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="phone-wrap">
+              <div class="phone">
+                <div class="phone-notch">
+                  <div class="phone-notch-bar"></div>
+                </div>
+                <div class="phone-statusbar"><span>9:41</span><span>●●● 100%</span></div>
+                <div class="m-header" style="padding:12px 16px;">
+                  <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px;">
+                    <span style="font-size:14px;">←</span>
+                    <span style="font-size:13px;font-weight:600;font-family:var(--sans);">Payslip</span>
+                  </div>
+                  <div style="text-align:center;">
+                    <div style="font-size:11px;color:rgba(255,255,255,.65);margin-bottom:4px;font-family:var(--sans);">
+                      Net Pay · Baisakh 2082</div>
+                    <div style="font-size:28px;font-weight:700;font-family:var(--sans);">रू 45,700</div>
+                    <div
+                      style="margin-top:6px;display:inline-block;background:rgba(255,255,255,.2);border-radius:20px;padding:3px 12px;font-size:10px;font-weight:700;font-family:var(--sans);">
+                      ✓ Salary Credited</div>
+                  </div>
+                </div>
+                <div class="m-body" style="padding:12px;">
+                  <div class="m-card">
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;font-family:var(--sans);">
+                      Earnings</div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">Basic Salary</span><span style="font-weight:600;">रू 45,000</span>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">Dearness Allowance</span><span style="font-weight:600;">रू 8,000</span>
+                    </div>
+                  </div>
+                  <div class="m-card">
+                    <div
+                      style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#c0392b;margin-bottom:8px;font-family:var(--sans);">
+                      Deductions</div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #f3f1eb;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">PF Contribution</span><span style="color:#c0392b;font-weight:600;">- रू
+                        4,500</span>
+                    </div>
+                    <div
+                      style="display:flex;justify-content:space-between;padding:5px 0;font-size:12px;font-family:var(--sans);">
+                      <span style="color:#555;">TDS (Income Tax)</span><span style="color:#c0392b;font-weight:600;">- रू
+                        2,800</span>
+                    </div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;">
+                    <div
+                      style="background:var(--green);color:#fff;border-radius:8px;padding:9px;text-align:center;font-size:11px;font-weight:700;font-family:var(--sans);">
+                      ⬇ Download PDF</div>
+                    <div
+                      style="background:#fff;border:1px solid #e0ddd6;border-radius:8px;padding:9px;text-align:center;font-size:11px;font-weight:600;color:#444;font-family:var(--sans);">
+                      ↗ Share</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Net pay is the hero — large and in the header where it's the first thing seen.
+              "Salary Credited" badge removes the #1 anxiety of employees. Download and Share give them full control.
+            </div>
+          </div>
+        </div>
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>Net pay in the header</h4>
+              <p>Research showed employees open payslips for one reason: to check their take-home amount. Putting it at
+                the top saves them 3 scroll-steps and 30 seconds of anxiety.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>"Salary Credited" status badge</h4>
+              <p>Employees often message HR asking if salary was transferred. Adding this badge eliminated that question
+                entirely — reducing HR support requests significantly.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Share button = social proof</h4>
+              <p>Employees sharing payslips with family members or for loan applications was an actual user behavior we
+                discovered in research — so we made it a first-class action.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SCREEN 6: LEAVE MANAGEMENT ── -->
+      <div class="screen-section">
+        <div class="compare-header">
+          <h3>Screen 6 — Leave Management (Web)</h3>
+          <p>Leave management had the most complex user flows — approval hierarchies, leave balance calculations,
+            different leave types (sick, casual, annual). The challenge was making it feel simple.</p>
+        </div>
+        <div class="screen-body">
+          <!-- WIREFRAME -->
+          <div class="screen-panel wf-bg">
+            <div class="screen-label wf">
+              <div class="dot"></div>Wireframe · Low Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/leave</div>
+              </div>
+              <div
+                style="background:#f2f0ea;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <!-- Balance cards row -->
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+                  <div style="background:#e8e6e0;border-radius:8px;padding:10px;text-align:center;">
+                    <div class="wf-text-sm" style="width:60%;margin:0 auto 5px;"></div>
+                    <div class="wf-text" style="width:30%;margin:0 auto;height:16px;"></div>
+                  </div>
+                  <div style="background:#e8e6e0;border-radius:8px;padding:10px;text-align:center;">
+                    <div class="wf-text-sm" style="width:60%;margin:0 auto 5px;"></div>
+                    <div class="wf-text" style="width:30%;margin:0 auto;height:16px;"></div>
+                  </div>
+                  <div style="background:#e8e6e0;border-radius:8px;padding:10px;text-align:center;">
+                    <div class="wf-text-sm" style="width:60%;margin:0 auto 5px;"></div>
+                    <div class="wf-text" style="width:30%;margin:0 auto;height:16px;"></div>
+                  </div>
+                  <div style="background:#e8e6e0;border-radius:8px;padding:10px;text-align:center;">
+                    <div class="wf-text-sm" style="width:60%;margin:0 auto 5px;"></div>
+                    <div class="wf-text" style="width:30%;margin:0 auto;height:16px;"></div>
+                  </div>
+                </div>
+                <!-- Table -->
+                <div style="background:#fff;border-radius:8px;overflow:hidden;border:1px solid #d8d5cf;">
+                  <div style="display:flex;gap:0;border-bottom:1px solid #d8d5cf;padding:7px 10px;background:#eceae4;">
+                    <div class="wf-text-sm" style="flex:2;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1.5;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;margin-right:10px;"></div>
+                    <div class="wf-text-sm" style="flex:1;"></div>
+                  </div>
+                  <div style="display:flex;gap:0;padding:8px 10px;border-bottom:1px solid #ece9e3;align-items:center;">
+                    <div style="flex:2;margin-right:10px;">
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <div style="width:18px;height:18px;border-radius:50%;background:#d0cdc7;flex-shrink:0;"></div>
+                        <div class="wf-text" style="flex:1;"></div>
+                      </div>
+                    </div>
+                    <div style="flex:1.5;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:70%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:60%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:50%;"></div>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="width:50px;height:16px;background:#c8e0c0;border-radius:20px;"></div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:0;padding:8px 10px;border-bottom:1px solid #ece9e3;align-items:center;">
+                    <div style="flex:2;margin-right:10px;">
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <div style="width:18px;height:18px;border-radius:50%;background:#d0cdc7;flex-shrink:0;"></div>
+                        <div class="wf-text" style="flex:1;"></div>
+                      </div>
+                    </div>
+                    <div style="flex:1.5;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:70%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:60%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:50%;"></div>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="width:56px;height:16px;background:#fef0b0;border-radius:20px;"></div>
+                    </div>
+                  </div>
+                  <div style="display:flex;gap:0;padding:8px 10px;align-items:center;">
+                    <div style="flex:2;margin-right:10px;">
+                      <div style="display:flex;align-items:center;gap:6px;">
+                        <div style="width:18px;height:18px;border-radius:50%;background:#d0cdc7;flex-shrink:0;"></div>
+                        <div class="wf-text" style="flex:1;"></div>
+                      </div>
+                    </div>
+                    <div style="flex:1.5;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:70%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:60%;"></div>
+                    </div>
+                    <div style="flex:1;margin-right:10px;">
+                      <div class="wf-text-sm" style="width:50%;"></div>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="width:50px;height:16px;background:#fdd0cc;border-radius:20px;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">Wireframe structured leave management around: (1) balance cards at top, (2) a
+              requests table below — covering both the manager view (approvals) and the overview view in one layout.
+            </div>
+          </div>
+          <!-- UI -->
+          <div class="screen-panel" style="background:#f9f8f6;">
+            <div class="screen-label ui">
+              <div class="dot"></div>Final UI · High Fidelity
+            </div>
+            <div class="browser">
+              <div class="browser-bar">
+                <div class="b-dot" style="background:#ff6057;"></div>
+                <div class="b-dot" style="background:#febc2e;"></div>
+                <div class="b-dot" style="background:#28c840;"></div>
+                <div class="b-url">hajirkhata.com/leave</div>
+              </div>
+              <div
+                style="background:#f7f6f3;padding:14px;min-height:280px;display:flex;flex-direction:column;gap:10px;">
+                <!-- Balance cards -->
+                <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+                  <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;text-align:center;">
+                    <div
+                      style="font-size:10px;font-weight:700;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;font-family:var(--sans);">
+                      Annual</div>
+                    <div
+                      style="font-size:20px;font-weight:700;color:var(--green);line-height:1;font-family:var(--sans);">
+                      12</div>
+                    <div style="font-size:10px;color:#bbb;font-family:var(--sans);">days left</div>
+                  </div>
+                  <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;text-align:center;">
+                    <div
+                      style="font-size:10px;font-weight:700;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;font-family:var(--sans);">
+                      Sick</div>
+                    <div style="font-size:20px;font-weight:700;color:#185fa5;line-height:1;font-family:var(--sans);">6
+                    </div>
+                    <div style="font-size:10px;color:#bbb;font-family:var(--sans);">days left</div>
+                  </div>
+                  <div style="background:#fff;border:1px solid #eee;border-radius:10px;padding:10px;text-align:center;">
+                    <div
+                      style="font-size:10px;font-weight:700;color:#999;letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;font-family:var(--sans);">
+                      Casual</div>
+                    <div style="font-size:20px;font-weight:700;color:#b8860b;line-height:1;font-family:var(--sans);">4
+                    </div>
+                    <div style="font-size:10px;color:#bbb;font-family:var(--sans);">days left</div>
+                  </div>
+                  <div style="background:var(--green);border-radius:10px;padding:10px;text-align:center;">
+                    <div
+                      style="font-size:10px;font-weight:700;color:rgba(255,255,255,.65);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px;font-family:var(--sans);">
+                      + Request</div>
+                    <div style="font-size:18px;margin-bottom:2px;">📋</div>
+                    <div style="font-size:10px;color:rgba(255,255,255,.7);font-family:var(--sans);">New leave</div>
+                  </div>
+                </div>
+                <!-- Table -->
+                <div style="background:#fff;border-radius:10px;border:1px solid #eee;overflow:hidden;">
+                  <table class="ui-table">
+                    <thead>
+                      <tr>
+                        <th>Employee</th>
+                        <th>Type</th>
+                        <th>Dates</th>
+                        <th>Days</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av b">SP</div><span>Sita Poudel</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">Sick</td>
+                        <td style="color:#888;">Bai 15–16</td>
+                        <td style="font-weight:600;">2</td>
+                        <td><span class="badge present">Approved</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av o">BT</div><span>Binod Tamang</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">Annual</td>
+                        <td style="color:#888;">Bai 20–22</td>
+                        <td style="font-weight:600;">3</td>
+                        <td><span class="badge pending">Pending</span></td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="display:flex;align-items:center;gap:7px;">
+                            <div class="av p">AS</div><span>Asha Shrestha</span>
+                          </div>
+                        </td>
+                        <td style="color:#888;">Casual</td>
+                        <td style="color:#888;">Bai 12</td>
+                        <td style="font-weight:600;">1</td>
+                        <td><span class="badge absent">Rejected</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="screen-caption">The "days left" balance cards give HR managers instant awareness of company-wide
+              leave availability. The integrated "+ Request" card in the balance row reduced clicks to apply for leave
+              from 4 to 1.</div>
+          </div>
+        </div>
+        <div style="padding:0 24px 24px;">
+          <div
+            style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green-m);margin:16px 0 12px;">
+            Design Decisions</div>
+          <div class="annotation-grid">
+            <div class="annotation">
+              <div class="an-num">01</div>
+              <h4>Balance cards first, not last</h4>
+              <p>Original wireframes had the balance summary at the bottom. Testing showed managers wanted to know "how
+                many people are on leave today" before anything else — so balances moved to the top.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">02</div>
+              <h4>"+ Request" embedded in balance row</h4>
+              <p>Employees spent 3+ clicks to find the leave request form. Embedding it in the balance card row reduced
+                task completion time by 60% in usability testing.</p>
+            </div>
+            <div class="annotation">
+              <div class="an-num">03</div>
+              <h4>Nepali dates throughout (Bai = Baisakh)</h4>
+              <p>All leave records use Bikram Sambat dates. HR managers work in BS natively — showing AD dates forced
+                them to mentally convert, adding cognitive load.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- UX PRINCIPLES -->
+    <section>
+      <div class="slabel">Design Principles</div>
+      <h2>The UX Principles Behind Every Design Decision</h2>
+      <div class="principles">
+        <div class="principle">
+          <div class="num">01</div>
+          <h3>Complexity hidden, clarity shown</h3>
+          <p>Payroll is complex under the hood — the interface must feel effortlessly simple.</p>
+        </div>
+        <div class="principle">
+          <div class="num">02</div>
+          <h3>Mobile-first for the field</h3>
+          <p>Nepal has a large field workforce. Mobile experience is primary, not secondary.</p>
+        </div>
+        <div class="principle">
+          <div class="num">03</div>
+          <h3>Nepal-native by default</h3>
+          <p>Nepali calendar (BS), local tax laws, familiar payment terminology — built in, not bolted on.</p>
+        </div>
+        <div class="principle">
+          <div class="num">04</div>
+          <h3>Trust through transparency</h3>
+          <p>Employees must understand exactly how their salary is calculated. Every deduction must be visible and
+            labeled.</p>
+        </div>
+        <div class="principle">
+          <div class="num">05</div>
+          <h3>Zero training required</h3>
+          <p>An HR manager in a small shop should be able to use this on day one without any training materials.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN SYSTEM -->
+    <section>
+      <div class="slabel">Design System</div>
+      <h2>A Scalable System for 120+ Screens</h2>
+      <p>I built a complete Figma design system that enabled visual consistency across all screens and allowed rapid
+        future development without design drift.</p>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon g">🎨</div>
+          <h3>Color tokens</h3>
+          <p>Brand green, semantic states (success, warning, danger, info), and a neutral gray scale — all as Figma
+            tokens for easy theming.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon b">🔤</div>
+          <h3>Typography scale</h3>
+          <p>6-step scale: display, heading, body, label, caption, overline — consistent across web and mobile
+            platforms.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon o">🧩</div>
+          <h3>Component library</h3>
+          <p>60+ reusable components: buttons, inputs, tables, badges, modals, navigation, empty states — with all
+            variant states.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon g">📐</div>
+          <h3>Responsive grid</h3>
+          <p>12-column grid for web (3 breakpoints) and an 8-point grid system for mobile — applied consistently across
+            all 120+ screens.</p>
+        </div>
+      </div>
+      <div class="tags" style="margin-top:20px;">
+        <span class="tag">Figma</span>
+        <span class="tag">Auto Layout</span>
+        <span class="tag">Design Tokens</span>
+        <span class="tag">Component Variants</span>
+        <span class="tag">Dev Mode Handoff</span>
+        <span class="tag">Atomic Design</span>
+        <span class="tag">Mobile-First</span>
+        <span class="tag">WCAG AA Accessibility</span>
+      </div>
+    </section>
+
+    <!-- OUTCOMES -->
+    <section>
+      <div class="slabel">Results & Impact</div>
+      <h2>The Outcomes — Design That Moved the Needle</h2>
+      <div class="outcome-highlight">
+        <div>
+          <h3>Organizations Onboarded</h3>
+          <div class="big">1,600+</div>
+          <div class="small">Businesses across Nepal using the platform</div>
+        </div>
+        <div>
+          <h3>Industry Recognition</h3>
+          <div class="big">Top 3</div>
+          <div class="small">Ranked in Nepal's best HR software lists</div>
+        </div>
+        <div>
+          <h3>Platform Coverage</h3>
+          <div class="big">Web + Mobile</div>
+          <div class="small">Complete cross-platform experience from scratch</div>
+        </div>
+        <div>
+          <h3>Screens Designed</h3>
+          <div class="big">120+</div>
+          <div class="small">Across web admin portal & mobile app</div>
+        </div>
+      </div>
+      <div class="feature-list">
+        <div class="feature-row">
+          <div class="feature-badge">✅</div>
+          <div>
+            <div class="feature-title">Zero-friction onboarding achieved</div>
+            <div class="feature-desc">Most businesses set up and started using the platform with zero training — a
+              primary design objective reached through progressive disclosure and contextual guidance.</div>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-badge">✅</div>
+          <div>
+            <div class="feature-title">Field workers independently using the mobile app</div>
+            <div class="feature-desc">The GPS-based mobile check-in was adopted by field workers who had never used an
+              HR tool before — validation of the mobile-first, single-action design approach.</div>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-badge">✅</div>
+          <div>
+            <div class="feature-title">HR support requests reduced</div>
+            <div class="feature-desc">Self-serve payslip downloads and leave balances visible to employees directly cut
+              the volume of HR desk queries — freeing up HR time for strategic work.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LEARNINGS -->
+    <section>
+      <div class="slabel">Reflections</div>
+      <h2>What This Project Taught Me as a Product Designer</h2>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon g">🌏</div>
+          <h3>Context is everything</h3>
+          <p>Designing for Nepal required deep local knowledge. Generic assumptions would have failed users at every
+            turn — the calendar, the currency symbol, the tax structure.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon b">🔬</div>
+          <h3>Research saves rework</h3>
+          <p>Every hour in Phase 1 research prevented days of rework later. The payslip net-pay decision alone saved
+            weeks of redesign after discovering real user behavior.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon o">🧱</div>
+          <h3>Systems thinking pays off</h3>
+          <p>The design system felt slow to build at first but made every subsequent screen faster, more consistent, and
+            dramatically easier to hand off to developers.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon g">🤝</div>
+          <h3>Designers must speak business</h3>
+          <p>Framing design decisions in terms of outcomes (adoption, support cost reduction, NPS) was key to getting
+            stakeholder alignment on every major design decision.</p>
+        </div>
+      </div>
+      <div class="callout" style="margin-top:36px;">
+        <p>The best product design is invisible. Users shouldn't notice the design — they should simply feel like the
+          product understands them. With Hajir Khata, the goal was to make Nepal's hardest HR admin task feel as easy as
+          checking your phone. The market reception suggests we got there.</p>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div><strong>Hajir Khata — Product Design Case Study</strong><br>Attendance & Payroll Management · Nepal · 2025
+    </div>
+    <div style="text-align:right;"><strong>Lead Product Designer</strong><br>Web App · iOS App · Android App · Design
+      System</div>
+  </div>
+
+</body>
+
+</html>
