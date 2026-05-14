@@ -186,7 +186,6 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
         const infoPanel = hero.querySelector<HTMLElement>(".hero-info-panel");
         const body = hero.querySelector<HTMLElement>(".story-body");
         const markers = hero.querySelector<HTMLElement>(".story-markers");
-        const signalStack = containerRef.current?.querySelector<HTMLElement>(".hero-signal-stack") ?? null;
 
         words.forEach((word, index) => {
           const start = index * 0.2;
@@ -197,7 +196,6 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
 
         const bodyReveal = Math.max(0, Math.min(1, (progress - 0.56) / 0.18));
         const markerReveal = Math.max(0, Math.min(1, (progress - 0.68) / 0.16));
-        const signalReveal = Math.max(0, Math.min(1, (progress - 0.76) / 0.14));
 
         if (infoPanel) {
           infoPanel.style.opacity = String(bodyReveal);
@@ -213,10 +211,6 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
           markers.style.opacity = String(markerReveal);
           markers.style.transform = `translate3d(0, ${(1 - markerReveal) * 18}px, 0)`;
           markers.style.pointerEvents = markerReveal > 0.7 ? "auto" : "none";
-        }
-        if (signalStack) {
-          signalStack.style.opacity = String(signalReveal);
-          signalStack.style.transform = `translate3d(0, ${(1 - signalReveal) * 18}px, 0)`;
         }
       }
     }
@@ -265,13 +259,17 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       className={`canvas-section canvas-section-${variant}`}
       id={variant === "hero" ? "about" : "resume"}
       data-story-root={variant}
+      data-scroll-section
+      data-section-reveal
     >
       <canvas ref={canvasRef} />
 
       <div className="hero-orbit" aria-hidden="true" />
-      <div className="hero-wordmark" aria-hidden="true">
-        {variant === "hero" ? "UX / QA" : "BUILD / TEST"}
-      </div>
+      {variant === "resume" && (
+        <div className="hero-wordmark" aria-hidden="true">
+          BUILD / TEST
+        </div>
+      )}
 
       <div className="chapter-stage" aria-live="polite">
         {chapters.map((chapter, chapterIndex) => (
@@ -366,14 +364,6 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
                     </ul>
                   </section>
                 ))}
-              </div>
-            )}
-
-            {variant === "resume" && chapter.id === "process" && (
-              <div className="resume-snapshot" aria-hidden="true">
-                <span>Profile snapshot</span>
-                <strong>UX + QA</strong>
-                <p>Journey mapping, interface review, release validation, and product communication.</p>
               </div>
             )}
 

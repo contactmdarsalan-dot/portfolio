@@ -47,8 +47,8 @@ export default function SkillsSection() {
   }, []);
 
   return (
-    <section className="skills-showcase" id="skills">
-      <div className="skills-heading">
+    <section className="skills-showcase" id="skills" data-scroll-section data-section-reveal>
+      <div className="skills-heading" data-reveal-item>
         <p className="section-pill">Skill Stack</p>
         <h2 className="color-shift-heading">UX skills, built for release.</h2>
         <p>
@@ -59,7 +59,7 @@ export default function SkillsSection() {
 
       <div className="skill-system-grid">
         {skillGroups.map((group, index) => (
-          <article key={group.title} className="skill-system-card">
+          <article key={group.title} className="skill-system-card" data-reveal-item>
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{group.title}</h3>
             <p>{group.summary}</p>
