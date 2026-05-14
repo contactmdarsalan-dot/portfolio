@@ -9,6 +9,7 @@ export default function WorkSection() {
 
   useEffect(() => {
     let context: { revert: () => void } | undefined;
+    let mediaCleanup: (() => void) | undefined;
 
     async function initWorkMotion() {
       const gsap = (await import("gsap")).default;
@@ -48,12 +49,27 @@ export default function WorkSection() {
           },
         });
 
-        gsap.utils.toArray<HTMLElement>(".portfolio-stack-card").forEach((card, index) => {
-          gsap.from(card, {
+        const stack = sectionRef.current?.querySelector<HTMLElement>(".portfolio-stack");
+        const cards = gsap.utils.toArray<HTMLElement>(".portfolio-stack-card");
+        const rootFont = () => parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+        const readStackTop = (card: HTMLElement, index: number) => {
+          const value = getComputedStyle(card).getPropertyValue("--stack-top").trim();
+
+          if (value.endsWith("px")) return parseFloat(value);
+          if (value.endsWith("rem")) return parseFloat(value) * rootFont();
+          return (5.8 + Math.min(index, 8) * 0.22) * rootFont();
+        };
+
+        cards.forEach((card) => {
+          const cardParts = card.querySelectorAll<HTMLElement>(
+            ".portfolio-visual, .portfolio-stack-content, .portfolio-stack-index",
+          );
+
+          gsap.from(cardParts, {
             opacity: 0,
-            y: 110,
-            rotate: index % 2 === 0 ? -1.2 : 1.2,
-            duration: 0.9,
+            y: 42,
+            stagger: 0.07,
+            duration: 0.74,
             ease: "power3.out",
             scrollTrigger: {
               trigger: card,
@@ -61,28 +77,63 @@ export default function WorkSection() {
               toggleActions: "play none none reverse",
             },
           });
-
-          if (index < projects.length - 1) {
-            gsap.to(card, {
-              scale: 0.9 + Math.min(index, 8) * 0.006,
-              opacity: 0.62,
-              filter: "saturate(0.72) brightness(0.8)",
-              ease: "none",
-              scrollTrigger: {
-                trigger: card,
-                start: "top 12%",
-                end: "bottom 12%",
-                scrub: true,
-              },
-            });
-          }
         });
+
+        const media = gsap.matchMedia();
+        media.add("(min-width: 769px)", () => {
+          if (!stack) return;
+          const createdTriggers: Array<{ kill: () => void }> = [];
+
+          cards.forEach((card, index) => {
+            createdTriggers.push(
+              ScrollTrigger.create({
+                trigger: card,
+                start: () => `top top+=${readStackTop(card, index)}`,
+                endTrigger: stack,
+                end: () => `bottom top+=${readStackTop(card, index) + card.offsetHeight}`,
+                pin: true,
+                pinSpacing: false,
+                anticipatePin: 1,
+                invalidateOnRefresh: true,
+              }),
+            );
+
+            gsap.set(card, {
+              transformOrigin: "center top",
+              zIndex: 20 + index,
+            });
+
+            if (index < cards.length - 1) {
+              gsap.to(card, {
+                scale: 0.9 + Math.min(index, 8) * 0.006,
+                opacity: 0.62,
+                filter: "saturate(0.72) brightness(0.8)",
+                ease: "none",
+                scrollTrigger: {
+                  trigger: cards[index + 1],
+                  start: "top 82%",
+                  end: () => `top top+=${readStackTop(cards[index + 1], index + 1) + 28}`,
+                  scrub: true,
+                  invalidateOnRefresh: true,
+                },
+              });
+            }
+          });
+
+          ScrollTrigger.refresh();
+
+          return () => createdTriggers.forEach((trigger) => trigger.kill());
+        });
+        mediaCleanup = () => media.revert();
       }, sectionRef.current);
     }
 
     initWorkMotion();
 
-    return () => context?.revert();
+    return () => {
+      mediaCleanup?.();
+      context?.revert();
+    };
   }, []);
 
   return (
@@ -114,7 +165,7 @@ export default function WorkSection() {
         <span>04 Start a brief</span>
       </div>
 
-      <div className="portfolio-stack" data-reveal-item>
+      <div className="portfolio-stack">
         {projects.map((project, index) => (
           <article
             key={project.title}

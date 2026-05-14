@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const skillGroups = [
   {
@@ -21,33 +21,102 @@ const skillGroups = [
 ];
 
 export default function SkillsSection() {
+  const sectionRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
+    let context: { revert: () => void } | undefined;
+    let mediaCleanup: (() => void) | undefined;
+
     async function initSkillsMotion() {
       const gsap = (await import("gsap")).default;
       const { ScrollTrigger } = await import("gsap/ScrollTrigger");
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.utils.toArray<HTMLElement>(".skill-system-card").forEach((card, index) => {
-        gsap.from(card, {
-          opacity: 0,
-          y: 70,
-          rotate: index === 1 ? 1.5 : -1.5,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 86%",
-            toggleActions: "play none none reverse",
-          },
+      if (!sectionRef.current) return;
+
+      context = gsap.context(() => {
+        const grid = sectionRef.current?.querySelector<HTMLElement>(".skill-system-grid");
+        const cards = gsap.utils.toArray<HTMLElement>(".skill-system-card");
+
+        cards.forEach((card) => {
+          const cardParts = card.querySelectorAll<HTMLElement>("span, h3, p, div");
+
+          gsap.from(cardParts, {
+            opacity: 0,
+            y: 34,
+            stagger: 0.06,
+            duration: 0.72,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 88%",
+              toggleActions: "play none none reverse",
+            },
+          });
         });
-      });
+
+        const media = gsap.matchMedia();
+        media.add("(min-width: 769px)", () => {
+          if (!grid) return;
+
+          const stackTimeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top top",
+              end: "+=92%",
+              scrub: true,
+              pin: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true,
+            },
+          });
+
+          stackTimeline.to(
+            cards,
+            {
+              x: (_index, card) => {
+                const gridBounds = grid.getBoundingClientRect();
+                const cardBounds = (card as HTMLElement).getBoundingClientRect();
+                const cardCenter = cardBounds.left - gridBounds.left + cardBounds.width / 2;
+
+                return gridBounds.width / 2 - cardCenter;
+              },
+              y: (index) => index * -26,
+              rotate: (index) => [-4, 0, 4][index] ?? 0,
+              scale: (index) => 1 - index * 0.035,
+              filter: (index) => (index === 0 ? "none" : "saturate(0.9) brightness(0.94)"),
+              ease: "none",
+              stagger: 0.02,
+            },
+            0,
+          );
+
+          stackTimeline.to(
+            ".skills-heading",
+            {
+              y: -34,
+              opacity: 0.84,
+              ease: "none",
+            },
+            0,
+          );
+
+          return () => stackTimeline.kill();
+        });
+        mediaCleanup = () => media.revert();
+      }, sectionRef.current);
     }
 
     initSkillsMotion();
+
+    return () => {
+      mediaCleanup?.();
+      context?.revert();
+    };
   }, []);
 
   return (
-    <section className="skills-showcase" id="skills" data-scroll-section data-section-reveal>
+    <section ref={sectionRef} className="skills-showcase" id="skills" data-scroll-section data-section-reveal>
       <div className="skills-heading" data-reveal-item>
         <p className="section-pill">Skill Stack</p>
         <h2 className="color-shift-heading">UX skills, built for release.</h2>
@@ -59,7 +128,7 @@ export default function SkillsSection() {
 
       <div className="skill-system-grid">
         {skillGroups.map((group, index) => (
-          <article key={group.title} className="skill-system-card" data-reveal-item>
+          <article key={group.title} className="skill-system-card">
             <span>{String(index + 1).padStart(2, "0")}</span>
             <h3>{group.title}</h3>
             <p>{group.summary}</p>
