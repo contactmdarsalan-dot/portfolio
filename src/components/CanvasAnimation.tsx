@@ -87,7 +87,7 @@ const resumeChapters: StoryChapter[] = [
     contact: [
       ["Email", "contactmdarsalan@gmail.com", "mailto:contactmdarsalan@gmail.com"],
       ["Phone", "+977 9713159720", "tel:+9779713159720"],
-      ["LinkedIn", "linkedin.com/in/md-arsalan", "https://linkedin.com/in/md-arsalan"],
+      ["LinkedIn", "linkedin.com/in/md-arsalan-a547a3279", "https://www.linkedin.com/in/md-arsalan-a547a3279/"],
     ],
     align: "right",
   },
