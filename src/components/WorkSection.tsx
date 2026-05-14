@@ -124,6 +124,66 @@ export default function WorkSection() {
 
           return () => createdTriggers.forEach((trigger) => trigger.kill());
         });
+
+        media.add("(max-width: 768px)", () => {
+          if (!stack || !cards.length) return;
+
+          const tweens: Array<{ kill: () => void }> = [];
+
+          cards.forEach((card, index) => {
+            gsap.set(card, {
+              transformOrigin: "center top",
+              zIndex: 20 + index,
+            });
+
+            tweens.push(
+              gsap.fromTo(
+                card,
+                {
+                  opacity: 0.82,
+                  y: 54,
+                  rotate: index % 2 === 0 ? -1.8 : 1.8,
+                  scale: 0.965,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  rotate: 0,
+                  scale: 1,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: card,
+                    start: "top 94%",
+                    end: "top 52%",
+                    scrub: true,
+                  },
+                },
+              ),
+            );
+
+            if (index < cards.length - 1) {
+              tweens.push(
+                gsap.to(card, {
+                  scale: 0.9 + Math.min(index, 8) * 0.006,
+                  y: -18 - Math.min(index, 8) * 5,
+                  opacity: 0.64,
+                  filter: "saturate(0.72) brightness(0.8)",
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: cards[index + 1],
+                    start: "top 82%",
+                    end: "top 34%",
+                    scrub: true,
+                  },
+                }),
+              );
+            }
+          });
+
+          ScrollTrigger.refresh();
+
+          return () => tweens.forEach((tween) => tween.kill());
+        });
         mediaCleanup = () => media.revert();
       }, sectionRef.current);
     }

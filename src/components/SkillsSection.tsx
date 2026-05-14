@@ -103,6 +103,66 @@ export default function SkillsSection() {
 
           return () => stackTimeline.kill();
         });
+
+        media.add("(max-width: 768px)", () => {
+          if (!cards.length) return;
+
+          const tweens: Array<{ kill: () => void }> = [];
+
+          cards.forEach((card, index) => {
+            gsap.set(card, {
+              transformOrigin: "center top",
+              zIndex: 10 + index,
+            });
+
+            tweens.push(
+              gsap.fromTo(
+                card,
+                {
+                  opacity: 0.84,
+                  y: 46,
+                  rotate: index % 2 === 0 ? -2.2 : 2.2,
+                  scale: 0.97,
+                },
+                {
+                  opacity: 1,
+                  y: 0,
+                  rotate: 0,
+                  scale: 1,
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: card,
+                    start: "top 92%",
+                    end: "top 54%",
+                    scrub: true,
+                  },
+                },
+              ),
+            );
+
+            if (index < cards.length - 1) {
+              tweens.push(
+                gsap.to(card, {
+                  scale: 0.92 + index * 0.025,
+                  y: -16 - index * 8,
+                  opacity: 0.76,
+                  filter: "saturate(0.9) brightness(0.95)",
+                  ease: "none",
+                  scrollTrigger: {
+                    trigger: cards[index + 1],
+                    start: "top 80%",
+                    end: "top 36%",
+                    scrub: true,
+                  },
+                }),
+              );
+            }
+          });
+
+          ScrollTrigger.refresh();
+
+          return () => tweens.forEach((tween) => tween.kill());
+        });
         mediaCleanup = () => media.revert();
       }, sectionRef.current);
     }

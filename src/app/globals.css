@@ -6589,6 +6589,28 @@ body {
     border-radius: 24px;
   }
 
+  .skill-system-grid {
+    align-items: start;
+    gap: 0.9rem;
+    padding-bottom: clamp(4rem, 22svh, 7rem);
+    perspective: 900px;
+  }
+
+  .skill-system-card {
+    position: sticky;
+    top: calc(5.25rem + env(safe-area-inset-top, 0px));
+    min-height: min(72svh, 27rem);
+    will-change: transform, opacity, filter;
+  }
+
+  .skill-system-card:nth-child(2) {
+    top: calc(5.95rem + env(safe-area-inset-top, 0px));
+  }
+
+  .skill-system-card:nth-child(3) {
+    top: calc(6.65rem + env(safe-area-inset-top, 0px));
+  }
+
   .work-showcase {
     padding: 6rem 1rem;
   }
@@ -6605,18 +6627,29 @@ body {
   }
 
   .portfolio-stack {
+    align-items: start;
     gap: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: clamp(5rem, 28svh, 9rem);
   }
 
   .portfolio-stack-card {
-    position: relative;
-    top: auto;
+    position: sticky;
+    top: calc(5.2rem + env(safe-area-inset-top, 0px));
+    min-height: min(78svh, 39rem);
     border-radius: 24px;
+    will-change: transform, opacity, filter;
+  }
+
+  .portfolio-stack-card:nth-child(2n) {
+    top: calc(5.8rem + env(safe-area-inset-top, 0px));
+  }
+
+  .portfolio-stack-card:nth-child(3n) {
+    top: calc(6.4rem + env(safe-area-inset-top, 0px));
   }
 
   .portfolio-stack-card .portfolio-visual {
-    min-height: 18rem;
+    min-height: clamp(15rem, 38svh, 20rem);
   }
 
   .portfolio-stack-content {
@@ -7232,11 +7265,11 @@ body {
   }
 
   .skill-system-grid {
-    perspective: none;
+    perspective: 900px;
   }
 
   .skill-system-card {
-    transform: none;
+    will-change: transform, opacity, filter;
   }
 
   .process-orbit-section {
