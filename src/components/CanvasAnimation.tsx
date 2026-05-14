@@ -148,15 +148,17 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       const hRatio = cvs.width / img.width;
       const vRatio = cvs.height / img.height;
       const isMobileHero = variant === "hero" && window.innerWidth <= 768;
+      const heroScale = window.innerWidth >= 1440 ? 1.16 : 1.1;
       const ratio = variant === "hero"
         ? isMobileHero
           ? Math.max(hRatio, vRatio) * 0.76
-          : Math.min(hRatio, vRatio)
+          : Math.min(hRatio, vRatio) * heroScale
         : Math.max(hRatio, vRatio);
       const cx = (cvs.width - img.width * ratio) / 2;
       const mobileBottomBleed = isMobileHero ? cvs.height * 0.07 : 0;
+      const desktopHeroLift = variant === "hero" && !isMobileHero ? cvs.height * 0.015 : 0;
       const cy = variant === "hero"
-        ? cvs.height - img.height * ratio + mobileBottomBleed
+        ? cvs.height - img.height * ratio + mobileBottomBleed - desktopHeroLift
         : (cvs.height - img.height * ratio) / 2;
       context.clearRect(0, 0, cvs.width, cvs.height);
       context.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);

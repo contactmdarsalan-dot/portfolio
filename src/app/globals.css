@@ -408,9 +408,9 @@ body {
 
 .canvas-section-hero canvas {
   z-index: 14;
-  top: 3vh;
-  width: min(100vw, 1660px);
-  height: 99vh;
+  top: 1vh;
+  width: min(112vw, 1920px);
+  height: 102vh;
   filter: drop-shadow(0 50px 92px rgba(23, 19, 31, 0.26)) saturate(0.98) contrast(1.03);
 }
 
