@@ -31,7 +31,7 @@ const heroChapters: StoryChapter[] = [
     id: "about",
     eyebrow: "Md Arsalan / UX, QA and product care",
     title: "Make users Happy.",
-    lead: "I design calm, reliable journeys that turn rough product moments into clear, satisfying experiences.",
+    lead: "I turn rough product moments into clear, satisfying user journeys.",
     markers: ["Research", "Interface", "Quality"],
     align: "left",
   },
@@ -39,7 +39,7 @@ const heroChapters: StoryChapter[] = [
 
 const resumeChapters: StoryChapter[] = [
   {
-    id: "process",
+    id: "experience",
     eyebrow: "Experience / Education",
     title: "Design. Test. Improve.",
     lead: "A practical product background shaped around user journeys, release quality, and clear digital experiences.",
@@ -83,9 +83,10 @@ const resumeChapters: StoryChapter[] = [
     id: "contact",
     eyebrow: "Contact",
     title: "Start a better flow.",
-    lead: "Send me the screen, journey, or release risk that feels messy. I will help make it easier to use and safer to launch.",
+    lead: "Send the screen, flow, or release risk. I will help make it clear and ready.",
     contact: [
-      ["Email", "arsalan@ncell.com.np", "mailto:arsalan@ncell.com.np"],
+      ["Email", "contactmdarsalan@gmail.com", "mailto:contactmdarsalan@gmail.com"],
+      ["Phone", "+977 9713159720", "tel:+9779713159720"],
       ["LinkedIn", "linkedin.com/in/md-arsalan", "https://linkedin.com/in/md-arsalan"],
     ],
     align: "right",
@@ -111,10 +112,21 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const canvasElement = canvas;
     const context: CanvasRenderingContext2D = ctx;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function sizeCanvas() {
+      const bounds = canvasElement.getBoundingClientRect();
+      const width = Math.max(1, Math.round(bounds.width));
+      const height = Math.max(1, Math.round(bounds.height));
+
+      if (canvasElement.width !== width || canvasElement.height !== height) {
+        canvasElement.width = width;
+        canvasElement.height = height;
+      }
+    }
+
+    sizeCanvas();
 
     const images: HTMLImageElement[] = [];
     const imageSeq = { frame: variant === "hero" ? 0 : 176 };
@@ -138,9 +150,17 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       const cvs = context.canvas;
       const hRatio = cvs.width / img.width;
       const vRatio = cvs.height / img.height;
-      const ratio = Math.max(hRatio, vRatio);
+      const isMobileHero = variant === "hero" && window.innerWidth <= 768;
+      const ratio = variant === "hero"
+        ? isMobileHero
+          ? Math.max(hRatio, vRatio) * 0.76
+          : Math.min(hRatio, vRatio)
+        : Math.max(hRatio, vRatio);
       const cx = (cvs.width - img.width * ratio) / 2;
-      const cy = (cvs.height - img.height * ratio) / 2;
+      const mobileBottomBleed = isMobileHero ? cvs.height * 0.07 : 0;
+      const cy = variant === "hero"
+        ? cvs.height - img.height * ratio + mobileBottomBleed
+        : (cvs.height - img.height * ratio) / 2;
       context.clearRect(0, 0, cvs.width, cvs.height);
       context.drawImage(img, 0, 0, img.width, img.height, cx, cy, img.width * ratio, img.height * ratio);
     }
@@ -194,7 +214,8 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
           word.style.transform = `translate3d(0, ${(1 - reveal) * 34}px, 0) scale(${0.96 + reveal * 0.04})`;
         });
 
-        const bodyReveal = Math.max(0, Math.min(1, (progress - 0.56) / 0.18));
+        const isMobileHero = window.innerWidth <= 768;
+        const bodyReveal = Math.max(0, Math.min(1, (progress - (isMobileHero ? 0.64 : 0.56)) / 0.18));
         const markerReveal = Math.max(0, Math.min(1, (progress - 0.68) / 0.16));
 
         if (infoPanel) {
@@ -240,8 +261,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
     });
 
     const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      sizeCanvas();
       render();
     };
 
@@ -281,7 +301,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
             }}
             className={`story-chapter story-chapter-${chapter.align}`}
           >
-            <div className={variant === "resume" && chapter.id === "process" ? "resume-intro" : undefined}>
+            <div className={variant === "resume" && chapter.id === "experience" ? "resume-intro" : undefined}>
               <p className="story-kicker">{chapter.eyebrow}</p>
               <h1 className="color-shift-heading">
                 {variant === "hero" ? (
