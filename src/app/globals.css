@@ -4358,6 +4358,7 @@ body {
 /* ===== PROCESS CANVAS STORY ===== */
 .process-canvas-section {
   --process-progress: 0;
+  z-index: 20;
   min-height: 100svh;
   display: block;
   padding: 0;
@@ -4386,6 +4387,7 @@ body {
 
 .process-canvas-shell {
   position: relative;
+  width: 100%;
   min-height: 100svh;
   overflow: hidden;
   isolation: isolate;
@@ -4410,19 +4412,38 @@ body {
 .process-canvas-shell::after {
   z-index: 6;
   background:
-    linear-gradient(90deg, rgba(14, 12, 20, 0.78), rgba(14, 12, 20, 0.2) 42%, rgba(14, 12, 20, 0.72)),
-    radial-gradient(ellipse at 48% 40%, transparent 0%, transparent 42%, rgba(12, 10, 17, 0.42) 78%);
+    linear-gradient(90deg, rgba(14, 12, 20, 0.62), rgba(14, 12, 20, 0.08) 42%, rgba(14, 12, 20, 0.58)),
+    radial-gradient(ellipse at 48% 40%, transparent 0%, transparent 50%, rgba(12, 10, 17, 0.34) 82%);
 }
 
+.process-character-fallback,
 .process-character-canvas {
   position: absolute;
   inset: 0;
-  z-index: 4;
   display: block;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  filter: drop-shadow(0 48px 86px rgba(0, 0, 0, 0.34)) saturate(0.95) contrast(1.04);
+}
+
+.process-character-fallback {
+  z-index: 3;
+  object-fit: contain;
+  object-position: center bottom;
+  opacity: 0.88;
+  filter: saturate(0.98) contrast(1.04);
+  transition: opacity 180ms ease;
+}
+
+.process-character-canvas {
+  z-index: 5;
+  width: 100% !important;
+  height: 100% !important;
+  filter: saturate(1.02) contrast(1.06);
+}
+
+.process-canvas-section.is-canvas-ready .process-character-fallback {
+  opacity: 0;
 }
 
 .process-canvas-wordmark {
@@ -7415,12 +7436,18 @@ body {
 
   .process-canvas-shell::after {
     background:
-      linear-gradient(180deg, rgba(14, 12, 20, 0.28), transparent 32%, rgba(14, 12, 20, 0.74)),
-      radial-gradient(ellipse at 50% 42%, transparent 0%, transparent 46%, rgba(12, 10, 17, 0.48) 82%);
+      linear-gradient(180deg, rgba(14, 12, 20, 0.18), transparent 34%, rgba(14, 12, 20, 0.68)),
+      radial-gradient(ellipse at 50% 42%, transparent 0%, transparent 52%, rgba(12, 10, 17, 0.42) 86%);
+  }
+
+  .process-character-fallback {
+    object-position: center 44%;
+    opacity: 0.94;
+    filter: saturate(1) contrast(1.04);
   }
 
   .process-character-canvas {
-    filter: drop-shadow(0 34px 60px rgba(0, 0, 0, 0.34)) saturate(0.98) contrast(1.03);
+    filter: saturate(1) contrast(1.04);
   }
 
   .process-canvas-wordmark {

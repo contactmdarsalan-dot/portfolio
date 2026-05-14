@@ -41,39 +41,36 @@ const resumeChapters: StoryChapter[] = [
   {
     id: "experience",
     eyebrow: "Experience / Education",
-    title: "Design. Test. Improve.",
-    lead: "A practical product background shaped around user journeys, release quality, and clear digital experiences.",
-    steps: ["Discover", "Prototype", "Validate", "Release"],
+    title: "Experience. Education.",
+    lead: "Graphic design, UX design, and software engineering foundations shaped into practical product work.",
+    steps: ["Graphic", "UX", "Software", "Product"],
     credentials: [
       {
-        label: "Work Experience",
-        title: "UI UX and QA Practice",
-        period: "Current focus",
-        meta: "Ncell digital products",
+        label: "Experience",
+        title: "Graphic Designer",
+        period: "Jan 2026 - Present · 5 mos",
+        meta: "Alpha Technology · Full-time · Kathmandu District, Nepal · On-site",
         bullets: [
-          "Maps customer journeys and product workflows to locate friction before release.",
-          "Translates usability findings into cleaner screens, flows, and validation notes.",
-          "Supports release quality through interface review, functional checks, and issue follow-up.",
+          "Wireframing",
         ],
       },
       {
-        label: "Product Background",
-        title: "Workflow Analysis and Digital QA",
-        period: "Past practice",
-        meta: "Product operations, testing, and user flow improvement",
+        label: "Experience",
+        title: "User Experience Designer",
+        period: "Jun 2023 - Feb 2026 · 2 yrs 9 mos",
+        meta: "Hunchha Digital Agency · Full-time · Kosi Zone, Nepal",
         bullets: [
-          "Analyzed platform behavior across user paths, edge cases, and repeated service tasks.",
-          "Built a habit of documenting what breaks, why it matters, and how teams can resolve it.",
+          "In my 3-year journey as a UI/UX Designer, I've learned how to create digital experiences that people love and that also benefit businesses.",
+          "Style Guides, User-centered Design and +10 skills",
         ],
       },
       {
         label: "Education",
-        title: "Technology and Design Foundation",
-        period: "Academic base",
-        meta: "Human-centered digital systems",
+        title: "London Metropolitan University",
+        period: "Sep 2021 - Apr 2024",
+        meta: "Bachelor's degree, Computer Software Engineering",
         bullets: [
-          "Grounded in practical technology concepts, structured problem solving, and digital product thinking.",
-          "Applies learning through interface critique, QA discipline, and product communication.",
+          "Style Guides, Design Thinking and +7 skills",
         ],
       },
     ],
@@ -138,8 +135,8 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       img.src = `/frames/male${num}.png`;
       img.onload = () => {
         loadedCount++;
+        render();
         if (loadedCount === 1) {
-          render();
           updateChapterState(0);
         }
       };
@@ -370,7 +367,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
             {chapter.credentials && (
               <div className="resume-credentials">
                 {chapter.credentials.map((item) => (
-                  <section key={item.label} className="resume-credential">
+                  <section key={`${item.label}-${item.title}`} className="resume-credential">
                     <div className="credential-head">
                       <span>{item.label}</span>
                       <em>{item.period}</em>

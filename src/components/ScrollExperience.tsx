@@ -8,6 +8,7 @@ export default function ScrollExperience() {
     let context: { revert: () => void } | undefined;
     let disposed = false;
     let refreshHandler: (() => void) | undefined;
+    let layoutReadyCleanup: (() => void) | undefined;
 
     async function initScrollExperience() {
       const gsap = (await import("gsap")).default;
@@ -18,6 +19,13 @@ export default function ScrollExperience() {
 
       gsap.registerPlugin(ScrollTrigger);
       ScrollTrigger.config({ ignoreMobileResize: true });
+
+      const notifyLayoutReady = () => {
+        window.dispatchEvent(new Event("portfolio:layout-ready"));
+      };
+
+      ScrollTrigger.addEventListener("refresh", notifyLayoutReady);
+      layoutReadyCleanup = () => ScrollTrigger.removeEventListener("refresh", notifyLayoutReady);
 
       locomotive = new LocomotiveScroll({
         lenisOptions: {
@@ -32,6 +40,7 @@ export default function ScrollExperience() {
       refreshHandler = () => {
         locomotive?.resize?.();
         ScrollTrigger.refresh();
+        notifyLayoutReady();
       };
 
       context = gsap.context(() => {
@@ -87,6 +96,8 @@ export default function ScrollExperience() {
 
       window.addEventListener("load", refreshHandler);
       window.setTimeout(refreshHandler, 220);
+      window.setTimeout(refreshHandler, 1200);
+      window.setTimeout(refreshHandler, 2400);
     }
 
     initScrollExperience();
@@ -94,6 +105,7 @@ export default function ScrollExperience() {
     return () => {
       disposed = true;
       if (refreshHandler) window.removeEventListener("load", refreshHandler);
+      layoutReadyCleanup?.();
       context?.revert();
       locomotive?.destroy();
     };

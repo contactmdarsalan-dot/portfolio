@@ -1,7 +1,7 @@
 "use client";
 
 import { BriefcaseBusiness, Home, Send, Sparkles, Workflow } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const navItems = [
   { label: "About", href: "#about", target: "hero", icon: Home },
@@ -21,6 +21,20 @@ const navIndexByTarget = {
 } as const;
 
 type NavTarget = keyof typeof navIndexByTarget;
+
+const hashTargetMap: Record<string, NavTarget> = {
+  "#about": "hero",
+  "#skills": "skills",
+  "#work": "work",
+  "#process": "process",
+  "#contact": "contact",
+};
+
+function getPinnedSectionTop(section: HTMLElement) {
+  const pinSpacer = section.parentElement;
+  const anchor = pinSpacer?.classList.contains("pin-spacer") ? pinSpacer : section;
+  return Math.max(0, window.scrollY + anchor.getBoundingClientRect().top);
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -88,11 +102,11 @@ export default function Navbar() {
     };
   }, []);
 
-  const getTargetTop = (target: NavTarget) => {
+  const getTargetTop = useCallback((target: NavTarget) => {
     if (target === "contact") {
       const resume = document.querySelector('[data-story-root="resume"]') as HTMLElement | null;
       if (!resume) return null;
-      return resume.offsetTop + window.innerHeight * 2.6 * resumeContactProgress;
+      return getPinnedSectionTop(resume) + window.innerHeight * 2.6 * resumeContactProgress;
     }
 
     const section =
@@ -104,8 +118,8 @@ export default function Navbar() {
       return null;
     }
 
-    return section.offsetTop;
-  };
+    return getPinnedSectionTop(section);
+  }, []);
 
   const handleChapterClick = (target: NavTarget, hash: string) => {
     const targetTop = getTargetTop(target);
@@ -119,6 +133,42 @@ export default function Navbar() {
     setActiveChapter(navIndexByTarget[target]);
     window.scrollTo({ top: targetTop, behavior: "smooth" });
   };
+
+  useEffect(() => {
+    const timers: number[] = [];
+
+    const scrollToCurrentHash = () => {
+      const target = hashTargetMap[window.location.hash];
+      if (!target) return;
+
+      const targetTop = getTargetTop(target);
+      if (targetTop === null) return;
+
+      setActiveChapter(navIndexByTarget[target]);
+      window.scrollTo({ top: targetTop, behavior: "auto" });
+    };
+
+    const scheduleHashScroll = () => {
+      timers.splice(0).forEach((timer) => window.clearTimeout(timer));
+      window.requestAnimationFrame(scrollToCurrentHash);
+      timers.push(window.setTimeout(scrollToCurrentHash, 280));
+      timers.push(window.setTimeout(scrollToCurrentHash, 900));
+      timers.push(window.setTimeout(scrollToCurrentHash, 1800));
+      timers.push(window.setTimeout(scrollToCurrentHash, 3200));
+    };
+
+    scheduleHashScroll();
+    window.addEventListener("hashchange", scheduleHashScroll);
+    window.addEventListener("load", scheduleHashScroll);
+    window.addEventListener("portfolio:layout-ready", scheduleHashScroll);
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("hashchange", scheduleHashScroll);
+      window.removeEventListener("load", scheduleHashScroll);
+      window.removeEventListener("portfolio:layout-ready", scheduleHashScroll);
+    };
+  }, [getTargetTop]);
 
   return (
     <nav className={`navbar nav-${navTone} ${scrolled ? "scrolled" : ""}`} id="navbar">

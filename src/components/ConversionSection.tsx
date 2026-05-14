@@ -15,6 +15,7 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import NextImage from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const PROCESS_START_FRAME = 92;
@@ -77,8 +78,10 @@ export default function ConversionSection() {
   const progressRef = useRef<HTMLDivElement | null>(null);
   const activeStepRef = useRef(0);
   const setCanvasProgressRef = useRef<((progress: number) => void) | null>(null);
+  const canvasReadyRef = useRef(false);
   const [activeProcess, setActiveProcess] = useState<ProcessKey>("design");
   const [activeStep, setActiveStep] = useState(0);
+  const [canvasReady, setCanvasReady] = useState(false);
   const currentProcess = processTabs[activeProcess];
   const currentStep = currentProcess.steps[activeStep] ?? currentProcess.steps[0];
 
@@ -101,7 +104,6 @@ export default function ConversionSection() {
     const imageSeq = { frame: PROCESS_START_FRAME };
     const images: HTMLImageElement[] = [];
     let disposed = false;
-    let loadedCount = 0;
     let scrollTriggerCleanup: (() => void) | null = null;
 
     function sizeCanvas() {
@@ -134,6 +136,10 @@ export default function ConversionSection() {
 
       drawingContext.clearRect(0, 0, cvs.width, cvs.height);
       drawingContext.drawImage(img, 0, 0, width, height, cx, cy, drawWidth, drawHeight);
+      if (!canvasReadyRef.current) {
+        canvasReadyRef.current = true;
+        setCanvasReady(true);
+      }
     }
 
     function render() {
@@ -166,8 +172,7 @@ export default function ConversionSection() {
       const number = String(frame + 1).padStart(4, "0");
       img.src = `/frames/male${number}.png`;
       img.onload = () => {
-        loadedCount++;
-        if (!disposed && loadedCount === 1) render();
+        if (!disposed) render();
       };
       images.push(img);
     }
@@ -180,7 +185,6 @@ export default function ConversionSection() {
       gsap.registerPlugin(ScrollTrigger);
 
       gsap.from(".process-canvas-copy > *, .process-canvas-panel", {
-        opacity: 0,
         y: 34,
         stagger: 0.08,
         duration: 0.72,
@@ -216,6 +220,9 @@ export default function ConversionSection() {
       render();
     };
 
+    const resizeObserver = new ResizeObserver(handleResize);
+    resizeObserver.observe(canvasElement);
+
     window.addEventListener("resize", handleResize);
     setProgress(0);
 
@@ -223,6 +230,7 @@ export default function ConversionSection() {
       disposed = true;
       setCanvasProgressRef.current = null;
       window.removeEventListener("resize", handleResize);
+      resizeObserver.disconnect();
       scrollTriggerCleanup?.();
     };
   }, []);
@@ -236,19 +244,31 @@ export default function ConversionSection() {
   return (
     <section
       ref={sectionRef}
-      className="conversion-section process-focused-section process-canvas-section"
+      className={`conversion-section process-focused-section process-canvas-section ${
+        canvasReady ? "is-canvas-ready" : ""
+      }`}
       id="process"
       data-scroll-section
       data-section-reveal
     >
       <div className="process-canvas-shell" aria-label="Design and QA process">
+        <NextImage
+          className="process-character-fallback"
+          src="/frames/male0093.png"
+          alt=""
+          fill
+          sizes="100vw"
+          aria-hidden="true"
+          priority
+          unoptimized
+        />
         <canvas ref={canvasRef} className="process-character-canvas" aria-hidden="true" />
 
         <div className="process-canvas-wordmark" aria-hidden="true">
           Process
         </div>
 
-        <div className="process-canvas-copy" data-reveal-item>
+        <div className="process-canvas-copy">
           <p className="section-pill">
             <Sparkles size={14} aria-hidden="true" />
             Process Lab
