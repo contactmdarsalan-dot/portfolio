@@ -1,5 +1,6 @@
 "use client";
 
+import { resumeFile } from "@/data/profile";
 import { useEffect, useMemo, useRef } from "react";
 
 const FRAME_COUNT = 300;
@@ -85,6 +86,7 @@ const resumeChapters: StoryChapter[] = [
       ["Email", "contactmdarsalan@gmail.com", "mailto:contactmdarsalan@gmail.com"],
       ["Phone", "+977 9713159720", "tel:+9779713159720"],
       ["LinkedIn", "linkedin.com/in/md-arsalan-a547a3279", "https://www.linkedin.com/in/md-arsalan-a547a3279/"],
+      ["Resume", "Download PDF", resumeFile],
     ],
     align: "right",
   },
@@ -388,12 +390,22 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
 
             {chapter.contact && (
               <div className="story-contact">
-                {chapter.contact.map(([label, value, href]) => (
-                  <a key={label} href={href} target="_blank" rel="noopener noreferrer">
-                    <span>{label}</span>
-                    <strong>{value}</strong>
-                  </a>
-                ))}
+                {chapter.contact.map(([label, value, href]) => {
+                  const isResumeDownload = href === resumeFile;
+
+                  return (
+                    <a
+                      key={label}
+                      href={href}
+                      target={isResumeDownload ? undefined : "_blank"}
+                      rel={isResumeDownload ? undefined : "noopener noreferrer"}
+                      download={isResumeDownload ? "Md-Arsalan-Resume.pdf" : undefined}
+                    >
+                      <span>{label}</span>
+                      <strong>{value}</strong>
+                    </a>
+                  );
+                })}
               </div>
             )}
           </article>

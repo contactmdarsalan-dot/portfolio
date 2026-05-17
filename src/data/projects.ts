@@ -13,6 +13,24 @@ export type Project = {
   challenge: string;
   approach: string[];
   impact: string[];
+  caseStudy?: {
+    role: string;
+    timeline: string;
+    platform: string;
+    scope: string;
+    problem: string;
+    research: string[];
+    decisions: {
+      title: string;
+      detail: string;
+    }[];
+    qa: {
+      title: string;
+      detail: string;
+    }[];
+    outcomes: string[];
+    nextSteps: string[];
+  };
 };
 
 export const projects: Project[] = [
@@ -29,6 +47,57 @@ export const projects: Project[] = [
     challenge: "Students needed a clearer way to explore education options and understand next steps.",
     approach: ["Structured the landing flow", "Clarified program discovery", "Designed trust-building sections"],
     impact: ["Cleaner academic discovery", "Stronger enrollment path", "More credible education interface"],
+    caseStudy: {
+      role: "UX research, IA, UI design, QA review",
+      timeline: "Concept case study",
+      platform: "Responsive education website",
+      scope: "Discovery, program browsing, trust, inquiry flow",
+      problem:
+        "Study-abroad websites often ask students to choose too early. The design problem was to help them compare options, understand credibility, and move toward an inquiry without feeling lost.",
+      research: [
+        "Mapped a first-time student journey from country curiosity to course comparison.",
+        "Grouped content into decision stages: destination, program, requirements, proof, and inquiry.",
+        "Identified trust gaps where students need university context, eligibility signals, and clear support.",
+      ],
+      decisions: [
+        {
+          title: "Browse before commitment",
+          detail: "The hero and program sections prioritize exploration first, then inquiry, so the user does not feel pushed into a lead form too early.",
+        },
+        {
+          title: "Trust next to action",
+          detail: "Eligibility, university, and support cues sit close to action areas to reduce doubt before the student clicks.",
+        },
+        {
+          title: "Scan-friendly hierarchy",
+          detail: "Large category blocks and repeated CTA rhythm make the page easier to skim for students comparing multiple destinations.",
+        },
+      ],
+      qa: [
+        {
+          title: "Inquiry path checks",
+          detail: "Reviewed whether every major browsing area gives the student a clear next step without duplicate or competing CTAs.",
+        },
+        {
+          title: "Responsive risk review",
+          detail: "Checked the mobile flow for stacked content order, tap target spacing, and whether trust cues remain visible before inquiry actions.",
+        },
+        {
+          title: "Content clarity pass",
+          detail: "Flagged vague labels and replaced them with student-facing language around programs, requirements, and support.",
+        },
+      ],
+      outcomes: [
+        "A clearer path from exploration to inquiry.",
+        "Stronger credibility moments around student decision points.",
+        "A reusable structure for future education landing pages.",
+      ],
+      nextSteps: [
+        "Validate program-card labels with students.",
+        "Test inquiry-form completion on mobile.",
+        "Add real conversion data once deployed.",
+      ],
+    },
   },
   {
     slug: "vehicle-rental-website",
@@ -43,6 +112,57 @@ export const projects: Project[] = [
     challenge: "Rental options needed to be easy to scan, compare, and act on.",
     approach: ["Built listing hierarchy", "Clarified booking actions", "Balanced product and trust cues"],
     impact: ["Easier vehicle comparison", "Cleaner rental flow", "More confident booking path"],
+    caseStudy: {
+      role: "Product UX, UI design, booking-flow QA",
+      timeline: "Concept case study",
+      platform: "Responsive rental website",
+      scope: "Vehicle discovery, comparison, booking confidence",
+      problem:
+        "Vehicle rental users need to compare price, type, availability, and trust quickly. The design needed to reduce comparison effort and make booking intent obvious.",
+      research: [
+        "Mapped the rental decision flow from vehicle browsing to booking confirmation.",
+        "Prioritized comparison attributes: vehicle type, price, feature set, availability, and trust signals.",
+        "Reviewed common failure points in rental flows, including hidden fees, weak availability states, and unclear CTAs.",
+      ],
+      decisions: [
+        {
+          title: "Comparison-first cards",
+          detail: "Vehicle cards place core decision data in a repeatable layout so users can compare options without opening every detail page.",
+        },
+        {
+          title: "Action hierarchy",
+          detail: "Primary booking actions are visually stronger than secondary exploration actions to prevent decision drift.",
+        },
+        {
+          title: "Trust before booking",
+          detail: "Support, policy, and reliability cues are positioned near booking moments where hesitation usually appears.",
+        },
+      ],
+      qa: [
+        {
+          title: "Booking path audit",
+          detail: "Checked the flow for missing states around selected vehicle, pickup details, availability, and final action.",
+        },
+        {
+          title: "Edge-case checklist",
+          detail: "Defined QA scenarios for unavailable vehicles, missing price data, invalid dates, and repeated booking attempts.",
+        },
+        {
+          title: "Mobile tap review",
+          detail: "Reviewed card density, CTA spacing, and filter interactions for thumb-friendly mobile use.",
+        },
+      ],
+      outcomes: [
+        "A faster scan path for rental decisions.",
+        "A clearer booking hierarchy with fewer competing actions.",
+        "A QA checklist that connects UI states to real booking risks.",
+      ],
+      nextSteps: [
+        "Prototype filters and date selection.",
+        "Run task testing for vehicle comparison.",
+        "Add error-state screens for the full booking path.",
+      ],
+    },
   },
   {
     slug: "cafe-website-hero-section",
@@ -113,6 +233,57 @@ export const projects: Project[] = [
     challenge: "Connected-home controls needed to feel simple, immediate, and reliable.",
     approach: ["Grouped device controls", "Clarified system status", "Designed quick action patterns"],
     impact: ["Easier device management", "Clearer smart-home status", "More confident control flow"],
+    caseStudy: {
+      role: "Mobile UX, interface design, QA scenarios",
+      timeline: "Concept case study",
+      platform: "Smart-home mobile app",
+      scope: "Device control, status visibility, automation confidence",
+      problem:
+        "Smart-home interfaces fail when users cannot tell what is on, what changed, or what needs attention. The design needed to make control states feel immediate and trustworthy.",
+      research: [
+        "Mapped core smart-home tasks: check status, control device, review room, create quick automation.",
+        "Separated everyday controls from deeper configuration so frequent actions stay fast.",
+        "Identified QA risks around offline devices, delayed states, and unclear toggle feedback.",
+      ],
+      decisions: [
+        {
+          title: "Status-led dashboard",
+          detail: "The first screen favors room and device status so users can understand the home before taking action.",
+        },
+        {
+          title: "Immediate control feedback",
+          detail: "Controls are designed with clear active, inactive, and pending patterns to reduce uncertainty after a tap.",
+        },
+        {
+          title: "Grouped by mental model",
+          detail: "Rooms and device groups follow how people think about their home, not only how devices are technically categorized.",
+        },
+      ],
+      qa: [
+        {
+          title: "State coverage",
+          detail: "Defined UI checks for on, off, pending, offline, error, and disabled device states.",
+        },
+        {
+          title: "Automation safety",
+          detail: "Reviewed whether scheduled actions and quick toggles clearly communicate what will happen next.",
+        },
+        {
+          title: "Regression checklist",
+          detail: "Created repeatable checks for status cards, room navigation, and device-control consistency.",
+        },
+      ],
+      outcomes: [
+        "A more reliable control experience for everyday smart-home actions.",
+        "Clearer state handling for QA and handoff.",
+        "A stronger bridge between UI design and product safety.",
+      ],
+      nextSteps: [
+        "Prototype delayed device response states.",
+        "Test automation creation with non-technical users.",
+        "Document component states for development handoff.",
+      ],
+    },
   },
   {
     slug: "portfolio-website-design",

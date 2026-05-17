@@ -1,7 +1,8 @@
 "use client";
 
-import { BriefcaseBusiness, Home, Send, Sparkles, Workflow } from "lucide-react";
+import { BriefcaseBusiness, Download, Home, Send, Sparkles, Workflow } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
+import { resumeFile } from "@/data/profile";
 
 const navItems = [
   { label: "About", href: "#about", target: "hero", icon: Home },
@@ -200,6 +201,11 @@ export default function Navbar() {
           );
         })}
       </ul>
+
+      <a className="nav-resume-download" href={resumeFile} download aria-label="Download Md Arsalan resume PDF">
+        <Download size={15} aria-hidden="true" />
+        <span>Resume</span>
+      </a>
     </nav>
   );
 }

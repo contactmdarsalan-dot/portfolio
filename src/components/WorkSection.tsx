@@ -2,6 +2,7 @@
 
 import { projects } from "@/data/projects";
 import Image from "next/image";
+import Link from "next/link";
 import { CSSProperties, useEffect, useRef } from "react";
 
 export default function WorkSection() {
@@ -212,16 +213,16 @@ export default function WorkSection() {
       <div className="work-title-row" data-reveal-item>
         <h2 className="color-shift-heading">Work that stacks into proof.</h2>
         <p>
-          A fast path through selected Dribbble shots: browse the visual signal,
-          compare the product intent, then open the full shot when something
-          needs a closer look.
+          A fast path through selected work: browse the visual signal, compare
+          the product intent, then open the case study for process, decisions,
+          and QA checks.
         </p>
       </div>
 
       <div className="work-ia-map" aria-label="Work information architecture" data-reveal-item>
         <span>01 Browse</span>
         <span>02 Compare</span>
-        <span>03 Open Dribbble</span>
+        <span>03 Read case study</span>
         <span>04 Start a brief</span>
       </div>
 
@@ -253,14 +254,9 @@ export default function WorkSection() {
               <p className="portfolio-result">{project.result}</p>
               <div className="portfolio-card-footer">
                 <strong>{project.metric}</strong>
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`View ${project.title} on Dribbble`}
-                >
-                  Open shot
-                </a>
+                <Link href={`/work/${project.slug}`} aria-label={`Read ${project.title} case study`}>
+                  Case study
+                </Link>
               </div>
             </div>
           </article>
