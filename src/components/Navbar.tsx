@@ -202,7 +202,7 @@ export default function Navbar() {
         })}
       </ul>
 
-      <a className="nav-resume-download" href={resumeFile} download aria-label="Download Md Arsalan resume PDF">
+      <a className="nav-resume-download" href={resumeFile} target="_blank" rel="noopener noreferrer" aria-label="View Md Arsalan resume">
         <Download size={15} aria-hidden="true" />
         <span>Resume</span>
       </a>

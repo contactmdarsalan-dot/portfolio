@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MD Arsalan — UI/UX · Product · QA Designer</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --ink:       #0B1220;
+  --ink-2:     #18243A;
+  --ink-m:     #3A4A60;
+  --ink-l:     #6B7A92;
+  --ink-ll:    #A0AEBB;
+  --teal:      #0E7A64;
+  --teal-m:    #159A7F;
+  --teal-l:    #E4F4F0;
+  --teal-ll:   #F0FAF7;
+  --gold:      #C8903A;
+  --gold-l:    #FDF4E7;
+  --white:     #FFFFFF;
+  --bg:        #EDF0F4;
+  --surf:      #F7F9FB;
+  --bdr:       #DDE4EE;
+  --bdr-l:     #EEF2F8;
+  --serif:     'Cormorant Garamond', Georgia, serif;
+  --sans:      'DM Sans', system-ui, sans-serif;
+}
+
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  min-height:100vh;
+  padding:36px 16px 60px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ──────────────────────────────────────
+   PAGE SHELL
+────────────────────────────────────── */
+.page{
+  width:980px;
+  background:var(--white);
+  display:grid;
+  grid-template-columns:300px 1fr;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.03),
+    0 12px 40px rgba(0,0,0,0.09),
+    0 32px 80px rgba(0,0,0,0.06);
+  position:relative;
+}
+
+/* ──────────────────────────────────────
+   SIDEBAR
+────────────────────────────────────── */
+.sidebar{
+  background:var(--ink);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+
+/* background orbs */
+.sidebar::before{
+  content:'';position:absolute;
+  top:-70px;right:-70px;
+  width:220px;height:220px;border-radius:50%;
+  background:rgba(14,122,100,0.13);pointer-events:none;
+}
+.sidebar::after{
+  content:'';position:absolute;
+  bottom:100px;left:-50px;
+  width:160px;height:160px;border-radius:50%;
+  background:rgba(200,144,58,0.07);pointer-events:none;
+}
+
+/* HERO */
+.hero{
+  padding:46px 30px 32px;
+  position:relative;z-index:1;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+
+.avt{
+  width:70px;height:70px;border-radius:18px;
+  background:linear-gradient(135deg,#0E7A64 0%,#0A5247 100%);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:26px;font-weight:400;
+  color:rgba(255,255,255,0.9);letter-spacing:-0.02em;
+  margin-bottom:22px;
+  box-shadow:0 4px 16px rgba(14,122,100,0.35);
+}
+
+.h-name{
+  font-family:var(--serif);font-size:32px;font-weight:400;
+  color:#FFFFFF;line-height:1.08;letter-spacing:-0.01em;
+}
+.h-name em{font-style:italic;color:var(--teal-m);}
+
+.h-role{
+  margin-top:9px;
+  font-size:10px;font-weight:600;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--gold);
+}
+
+.h-sub{
+  margin-top:14px;font-size:12px;
+  color:rgba(255,255,255,0.48);line-height:1.6;
+}
+
+.badge-row{
+  margin-top:16px;display:flex;flex-wrap:wrap;gap:7px;
+}
+
+.badge{
+  display:inline-flex;align-items:center;gap:5px;
+  border-radius:20px;padding:5px 11px;
+  font-size:10.5px;font-weight:500;
+}
+.badge-green{
+  background:rgba(14,122,100,0.22);
+  border:1px solid rgba(14,122,100,0.38);
+  color:#7ECFC6;
+}
+.badge-gold{
+  background:rgba(200,144,58,0.18);
+  border:1px solid rgba(200,144,58,0.3);
+  color:#E0B870;
+}
+.dot-live{
+  width:6px;height:6px;border-radius:50%;
+  background:#4CD6A0;
+  animation:pulse 2.2s ease-in-out infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.45;transform:scale(0.75);}
+}
+
+/* STATS */
+.stats-row{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-bottom:1px solid rgba(255,255,255,0.07);
+}
+.stat-cell{
+  padding:17px 0 17px 20px;
+  border-right:1px solid rgba(255,255,255,0.07);
+}
+.stat-cell:last-child{border-right:none;}
+.stat-n{
+  font-family:var(--serif);font-size:23px;font-weight:400;
+  color:var(--white);line-height:1;
+}
+.stat-l{
+  font-size:9px;font-weight:600;
+  color:rgba(255,255,255,0.33);
+  text-transform:uppercase;letter-spacing:0.1em;
+  margin-top:4px;
+}
+
+/* SIDEBAR BODY */
+.sb{padding:0 26px 40px;flex:1;position:relative;z-index:1;}
+
+.ss{margin-top:24px;}
+
+.sh{
+  font-size:8.5px;font-weight:700;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--teal-m);
+  padding-bottom:8px;
+  border-bottom:1px solid rgba(255,255,255,0.07);
+  margin-bottom:13px;
+}
+
+/* CONTACT ITEMS */
+.ci{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px;}
+.ci-ico{
+  width:26px;height:26px;flex-shrink:0;border-radius:7px;
+  background:rgba(14,122,100,0.18);
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.ci-ico svg{width:12px;height:12px;fill:var(--teal-m);}
+.ci-txt{font-size:12px;color:rgba(255,255,255,0.75);line-height:1.5;word-break:break-all;}
+.ci-txt a{color:rgba(255,255,255,0.75);text-decoration:none;}
+.ci-txt a:hover{color:var(--gold);}
+.ci-lbl{
+  display:block;font-size:9px;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.08em;
+  color:rgba(255,255,255,0.28);margin-bottom:2px;
+}
+
+/* SKILL BARS */
+.tb{display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;}
+.tb-name{font-size:11.5px;color:rgba(255,255,255,0.75);font-weight:400;}
+.tb-meta{font-size:9.5px;color:rgba(255,255,255,0.3);font-style:italic;}
+.tb-wrap{
+  width:86px;height:2.5px;
+  background:rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;
+}
+.tb-fill{height:100%;border-radius:10px;background:var(--teal-m);}
+.tb-fill.gold{background:var(--gold);}
+.tb-fill.soft{background:rgba(255,255,255,0.25);}
+
+/* SKILL GROUP HEADER */
+.sg{
+  font-size:9px;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:rgba(255,255,255,0.28);
+  margin-bottom:9px;margin-top:14px;
+}
+.sg:first-child{margin-top:0;}
+
+/* CHIPS */
+.chips{display:flex;flex-wrap:wrap;gap:5px;}
+.chip{
+  font-size:10px;font-weight:500;
+  color:rgba(255,255,255,0.65);
+  background:rgba(255,255,255,0.06);
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:4px;padding:4px 8px;
+}
+.chip.hi{
+  color:#7ECFC6;
+  background:rgba(14,122,100,0.2);
+  border-color:rgba(14,122,100,0.35);
+}
+.chip.gold{
+  color:#E0B870;
+  background:rgba(200,144,58,0.15);
+  border-color:rgba(200,144,58,0.28);
+}
+
+/* SKILL METER (percentage + label) */
+.sm{margin-bottom:10px;}
+.sm-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px;}
+.sm-name{font-size:11.5px;color:rgba(255,255,255,0.78);font-weight:400;}
+.sm-pct{font-size:10px;color:var(--teal-m);font-weight:600;}
+.sm-bar{height:2px;background:rgba(255,255,255,0.07);border-radius:10px;overflow:hidden;}
+.sm-fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--teal),var(--teal-m));}
+
+/* EDU */
+.edu{margin-bottom:16px;}
+.edu-deg{font-size:12.5px;font-weight:600;color:rgba(255,255,255,0.88);line-height:1.3;}
+.edu-focus{font-size:11px;color:var(--teal-m);margin-top:2px;}
+.edu-school{font-size:11px;color:rgba(255,255,255,0.44);margin-top:2px;}
+.edu-yr{font-size:10px;color:var(--gold);font-weight:600;margin-top:3px;letter-spacing:0.04em;}
+.edu-note{font-size:10.5px;color:rgba(255,255,255,0.38);margin-top:4px;line-height:1.5;font-style:italic;}
+
+/* ACHIEVEMENTS */
+.ach{
+  font-size:11.5px;color:rgba(255,255,255,0.62);
+  padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.05);
+  display:flex;align-items:flex-start;gap:8px;line-height:1.45;
+}
+.ach::before{
+  content:'';width:4px;height:4px;border-radius:50%;
+  background:var(--gold);flex-shrink:0;margin-top:5px;
+}
+
+/* CURRENTLY WORKING ON */
+.cwon{
+  background:rgba(14,122,100,0.12);
+  border:1px solid rgba(14,122,100,0.22);
+  border-radius:8px;padding:12px 14px;margin-top:8px;
+}
+.cwon-lbl{
+  font-size:8.5px;font-weight:700;letter-spacing:0.2em;
+  text-transform:uppercase;color:var(--teal-m);margin-bottom:6px;
+}
+.cwon-item{
+  font-size:11px;color:rgba(255,255,255,0.7);
+  line-height:1.5;padding:4px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.cwon-item:last-child{border-bottom:none;padding-bottom:0;}
+
+/* ──────────────────────────────────────
+   MAIN
+────────────────────────────────────── */
+.main{
+  padding:44px 44px 52px;
+  display:flex;flex-direction:column;
+}
+
+/* HEADLINE */
+.headline{
+  font-family:var(--serif);font-size:22px;font-weight:400;
+  color:var(--ink);line-height:1.4;letter-spacing:-0.005em;
+  padding-bottom:18px;
+  border-bottom:2px solid var(--bdr-l);
+  margin-bottom:18px;
+}
+.headline em{font-style:italic;color:var(--teal);}
+
+/* SUMMARY */
+.summary{
+  font-size:13px;color:var(--ink-m);line-height:1.78;
+  border-left:3px solid var(--teal);padding-left:14px;
+  margin-bottom:30px;
+}
+
+/* SECTION */
+.section{margin-bottom:28px;}
+
+.sec-hd{
+  display:flex;align-items:center;gap:12px;margin-bottom:18px;
+}
+.sec-lbl{
+  font-size:8.5px;font-weight:700;letter-spacing:0.25em;
+  text-transform:uppercase;color:var(--teal);white-space:nowrap;
+}
+.sec-line{flex:1;height:1px;background:var(--bdr);}
+
+/* EXP */
+.exp{
+  margin-bottom:22px;padding-bottom:22px;
+  border-bottom:1px solid var(--bdr-l);
+}
+.exp:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+
+.exp-hdr{
+  display:flex;align-items:flex-start;
+  justify-content:space-between;gap:12px;margin-bottom:3px;
+}
+.exp-title{
+  font-size:15px;font-weight:700;color:var(--ink);letter-spacing:-0.01em;
+}
+.exp-date{
+  font-size:10.5px;font-weight:600;color:var(--teal);
+  background:var(--teal-l);border-radius:4px;padding:3px 9px;
+  white-space:nowrap;flex-shrink:0;
+}
+.exp-co{
+  font-size:12.5px;color:var(--ink-m);margin-bottom:10px;font-weight:500;
+}
+.exp-co span{color:var(--ink-ll);font-weight:400;}
+.exp-co .loc{
+  display:inline-flex;align-items:center;gap:3px;
+  font-size:11px;color:var(--ink-ll);font-weight:400;
+}
+
+/* WHAT I LEARNED TAG */
+.learned{
+  margin-top:10px;
+  background:var(--surf);border:1px solid var(--bdr-l);
+  border-radius:6px;padding:9px 12px;
+  font-size:11.5px;color:var(--ink-m);line-height:1.6;
+  font-style:italic;
+}
+.learned::before{
+  content:'What I Learned: ';
+  font-style:normal;font-weight:600;
+  color:var(--teal);font-size:10px;
+  text-transform:uppercase;letter-spacing:0.1em;
+}
+
+/* METRICS */
+.metrics{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:8px;margin:12px 0 14px;
+}
+.metric{
+  background:var(--teal-ll);
+  border:1px solid rgba(14,122,100,0.15);
+  border-top:2.5px solid var(--teal);
+  border-radius:0 0 7px 7px;
+  padding:11px 8px;text-align:center;
+}
+.metric-n{
+  font-family:var(--serif);font-size:19px;font-weight:400;
+  color:var(--teal);display:block;line-height:1;
+}
+.metric-l{
+  font-size:9.5px;color:var(--ink-m);font-weight:500;
+  margin-top:4px;line-height:1.3;
+}
+
+/* ACHIEVEMENTS GRID (inside exp) */
+.ach-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:6px;margin-top:10px;
+}
+.ach-card{
+  background:var(--surf);border:1px solid var(--bdr-l);
+  border-radius:6px;padding:9px 11px;
+  font-size:11.5px;color:var(--ink-m);line-height:1.5;
+  display:flex;align-items:flex-start;gap:8px;
+}
+.ach-card::before{
+  content:'✓';color:var(--teal);font-size:10px;
+  font-weight:700;flex-shrink:0;margin-top:1px;
+}
+
+/* BULLETS */
+ul.cvl{list-style:none;display:flex;flex-direction:column;gap:6px;}
+ul.cvl li{
+  font-size:12.5px;color:var(--ink-m);line-height:1.68;
+  padding-left:17px;position:relative;
+}
+ul.cvl li::before{
+  content:'';position:absolute;left:0;top:8px;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--teal-m);opacity:0.45;
+}
+
+/* SKILL COMPETENCY GRID */
+.comp-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;margin-top:4px;
+}
+.comp-card{
+  background:var(--surf);border:1px solid var(--bdr-l);
+  border-radius:8px;padding:13px 14px;
+}
+.comp-cat{
+  font-size:9.5px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink-l);margin-bottom:10px;
+}
+.comp-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;}
+.comp-name{font-size:12px;color:var(--ink-m);}
+.comp-pct{font-size:10.5px;color:var(--teal);font-weight:600;}
+.comp-bar{
+  height:2px;background:var(--bdr);
+  border-radius:10px;overflow:hidden;margin-bottom:8px;
+}
+.comp-fill{height:100%;border-radius:10px;background:var(--teal-m);}
+
+/* PROJECTS GRID */
+.proj-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+.proj-card{
+  border:1px solid var(--bdr);border-radius:10px;
+  padding:14px 16px;background:var(--surf);
+  position:relative;overflow:hidden;
+}
+.proj-card::before{
+  content:'';position:absolute;
+  top:0;left:0;width:3px;height:100%;
+  background:var(--teal);
+}
+.proj-card.gold::before{background:var(--gold);}
+.proj-card.soft::before{background:var(--ink-ll);}
+
+.proj-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:3px;}
+.proj-tag{
+  font-size:9.5px;font-weight:600;text-transform:uppercase;
+  letter-spacing:0.1em;color:var(--teal);margin-bottom:7px;
+}
+.proj-card.gold .proj-tag{color:var(--gold);}
+.proj-card.soft .proj-tag{color:var(--ink-ll);}
+.proj-desc{font-size:11.5px;color:var(--ink-m);line-height:1.6;}
+
+/* APPROACH STEPS */
+.steps{
+  display:flex;position:relative;
+  padding-top:4px;
+}
+.steps::before{
+  content:'';position:absolute;
+  top:16px;left:16px;right:16px;height:1px;
+  background:var(--bdr);z-index:0;
+}
+.step{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;gap:8px;position:relative;z-index:1;
+}
+.step-n{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--white);
+  border:1.5px solid var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--teal);
+}
+.step-lbl{
+  font-size:10px;font-weight:600;color:var(--ink-l);
+  text-align:center;line-height:1.3;
+}
+.step-sub{
+  font-size:9.5px;color:var(--ink-ll);
+  text-align:center;line-height:1.4;
+}
+
+/* PORTFOLIO STRIP */
+.port-strip{
+  background:var(--ink);border-radius:10px;
+  padding:18px 22px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:16px;
+  margin-top:18px;
+}
+.port-l{display:flex;flex-direction:column;gap:3px;}
+.port-title{font-size:12px;font-weight:700;color:rgba(255,255,255,0.9);}
+.port-cnt{font-size:11px;color:rgba(255,255,255,0.42);}
+.port-link{
+  background:var(--teal);color:#fff;
+  font-size:11.5px;font-weight:600;
+  padding:9px 18px;border-radius:6px;
+  text-decoration:none;white-space:nowrap;flex-shrink:0;
+}
+.port-link:hover{background:var(--teal-m);}
+
+/* TOOLS SECTION */
+.tools-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:14px;
+}
+.tool-group{background:var(--surf);border:1px solid var(--bdr-l);border-radius:8px;padding:13px 14px;}
+.tool-group-hd{
+  font-size:9.5px;font-weight:700;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--ink-l);
+  margin-bottom:11px;
+}
+.tr{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.tr-info{display:flex;flex-direction:column;gap:1px;}
+.tr-name{font-size:12px;color:var(--ink-m);}
+.tr-meta{font-size:9.5px;color:var(--ink-ll);font-style:italic;}
+.tr-bar-w{width:80px;height:2px;background:var(--bdr);border-radius:10px;overflow:hidden;}
+.tr-bar{height:100%;border-radius:10px;background:var(--teal-m);}
+.tr-bar.g{background:var(--gold);}
+
+/* BEYOND TOOLS */
+.beyond-grid{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+.beyond-chip{
+  font-size:11px;font-weight:500;
+  color:var(--ink-m);
+  background:var(--surf);
+  border:1px solid var(--bdr);
+  border-radius:4px;padding:5px 10px;
+}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--bdr);margin:0 0 6px;}
+
+@media print{
+  body{background:white;padding:0;}
+  .page{box-shadow:none;width:100%;}
+  a{color:inherit;}
+  .download-pdf-btn{display:none !important;}
+}
+
+.download-pdf-btn {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: var(--teal);
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--sans);
+  box-shadow: 0 4px 16px rgba(14, 122, 100, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  transition: all 0.25s ease;
+}
+.download-pdf-btn:hover {
+  background: var(--teal-m);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(14, 122, 100, 0.35);
+}
+</style>
+</head>
+<body>
+
+<a href="/md-arsalan-resume.pdf" download class="download-pdf-btn" aria-label="Download PDF Resume">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+    <polyline points="7 10 12 15 17 10"></polyline>
+    <line x1="12" y1="15" x2="12" y2="3"></line>
+  </svg>
+  Download PDF
+</a>
+
+<div class="page">
+
+<!-- ══════════════════════════════════
+     SIDEBAR
+══════════════════════════════════ -->
+<aside class="sidebar">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="avt">MA</div>
+    <div class="h-name"><em>MD</em> Arsalan</div>
+    <div class="h-role">UI/UX Designer · Product · QA Specialist</div>
+    <div class="h-sub">I don't just design interfaces — I solve problems. Every pixel should serve a purpose.</div>
+    <div class="badge-row">
+      <div class="badge badge-green"><span class="dot-live"></span> Open to Work</div>
+      <div class="badge badge-gold">Remote Ready</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-cell">
+      <div class="stat-n">3+</div>
+      <div class="stat-l">Years Exp.</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">20+</div>
+      <div class="stat-l">Projects</div>
+    </div>
+    <div class="stat-cell">
+      <div class="stat-n">98%</div>
+      <div class="stat-l">Satisfaction</div>
+    </div>
+  </div>
+
+  <div class="sb">
+
+    <!-- CONTACT -->
+    <div class="ss">
+      <div class="sh">Contact</div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">Email</span>
+          <a href="mailto:contactmdarsalan@gmail.com">contactmdarsalan@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">Phone</span>
+          +977 9804376496<br>+977 9713159720
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">Location</span>
+          Kathmandu, Nepal
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM9 17H6.5v-7H9v7zm-1.25-8a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18 17h-2.4v-3.7c0-.9-.3-1.5-1.1-1.5-.6 0-1 .4-1.1.8-.1.1-.1.4-.1.6V17H10.9V10h2.3v1c.3-.5.9-1.1 2.2-1.1 1.6 0 2.8 1 2.8 3.2V17z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">LinkedIn</span>
+          <a href="https://linkedin.com/in/md-arsalan-a547a3279" target="_blank">md-arsalan-a547a3279</a>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">Portfolio</span>
+          <a href="https://portfolio-two-fawn-pmb9ov7t5m.vercel.app" target="_blank">View Portfolio →</a>
+        </div>
+      </div>
+
+      <div class="ci">
+        <div class="ci-ico">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2a7.2 7.2 0 0 1-6-3.22c.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08A7.2 7.2 0 0 1 12 19.2z"/></svg>
+        </div>
+        <div class="ci-txt">
+          <span class="ci-lbl">Dribbble</span>
+          <a href="https://dribbble.com/MDArsalan" target="_blank">dribbble.com/MDArsalan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- CURRENTLY WORKING ON -->
+    <div class="ss">
+      <div class="sh">Currently Working On</div>
+      <div class="cwon">
+        <div class="cwon-lbl">Active Projects</div>
+        <div class="cwon-item">SaaS Dashboard Redesign — Employee Payroll Management Platform</div>
+        <div class="cwon-item">Enterprise B2B Data Visualization Design System</div>
+      </div>
+    </div>
+
+    <!-- DESIGN TOOLS -->
+    <div class="ss">
+      <div class="sh">Design Tools</div>
+
+      <div class="sg">Primary</div>
+      <div class="tb">
+        <span class="tb-name">Figma</span>
+        <span class="tb-meta">5 yrs · Expert</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:98%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Adobe XD</span>
+        <span class="tb-meta">4 yrs · Advanced</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:92%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Sketch</span>
+        <span class="tb-meta">3 yrs · Proficient</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:88%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Photoshop</span>
+        <span class="tb-meta">3 yrs</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:72%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Webflow</span>
+        <span class="tb-meta">2 yrs</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:65%"></div></div>
+      </div>
+
+      <div class="sg">Prototyping & Animation</div>
+      <div class="tb">
+        <span class="tb-name">Figma Prototyping</span>
+        <span class="tb-meta">5 yrs · Expert</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:95%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">ProtoPie</span>
+        <span class="tb-meta">2 yrs · Advanced</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:88%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Framer</span>
+        <span class="tb-meta">2 yrs · Proficient</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:85%"></div></div>
+      </div>
+
+      <div class="sg">Research & Testing</div>
+      <div class="tb">
+        <span class="tb-name">Maze</span>
+        <span class="tb-meta">3 yrs · Advanced</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:85%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">UserTesting</span>
+        <span class="tb-meta">3 yrs · Proficient</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:88%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Hotjar</span>
+        <span class="tb-meta">2 yrs · Intermediate</span>
+        <div class="tb-wrap"><div class="tb-fill" style="width:82%"></div></div>
+      </div>
+
+      <div class="sg">Collaboration & QA</div>
+      <div class="tb">
+        <span class="tb-name">Miro / FigJam</span>
+        <span class="tb-meta">4 yrs · Expert</span>
+        <div class="tb-wrap"><div class="tb-fill gold" style="width:92%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Notion</span>
+        <span class="tb-meta">3 yrs · Advanced</span>
+        <div class="tb-wrap"><div class="tb-fill gold" style="width:88%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">JIRA</span>
+        <span class="tb-meta">2 yrs</span>
+        <div class="tb-wrap"><div class="tb-fill gold" style="width:80%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Postman</span>
+        <span class="tb-meta">2 yrs</span>
+        <div class="tb-wrap"><div class="tb-fill gold" style="width:65%"></div></div>
+      </div>
+      <div class="tb">
+        <span class="tb-name">Cypress</span>
+        <span class="tb-meta">1 yr</span>
+        <div class="tb-wrap"><div class="tb-fill gold" style="width:55%"></div></div>
+      </div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="ss">
+      <div class="sh">Core Skills</div>
+      <div class="chips">
+        <span class="chip hi">UI Design</span>
+        <span class="chip hi">UX Design</span>
+        <span class="chip hi">Product Design</span>
+        <span class="chip">Design Systems</span>
+        <span class="chip">UX Strategy</span>
+        <span class="chip">Wireframing</span>
+        <span class="chip">Prototyping</span>
+        <span class="chip">User Research</span>
+        <span class="chip">Usability Testing</span>
+        <span class="chip">Manual QA</span>
+        <span class="chip">Bug Tracking</span>
+        <span class="chip">Dev Handoff</span>
+        <span class="chip">Mobile-First</span>
+        <span class="chip gold">WCAG A11y</span>
+        <span class="chip">Information Architecture</span>
+        <span class="chip">Motion Design</span>
+        <span class="chip">Typography</span>
+        <span class="chip">Color Theory</span>
+        <span class="chip">A/B Testing</span>
+        <span class="chip">Agile / Scrum</span>
+        <span class="chip">HTML / CSS</span>
+        <span class="chip">JavaScript Basics</span>
+        <span class="chip">User Psychology</span>
+        <span class="chip">Design Thinking</span>
+      </div>
+    </div>
+
+    <!-- EDUCATION -->
+    <div class="ss">
+      <div class="sh">Education</div>
+
+      <div class="edu">
+        <div class="edu-deg">BSc (Hons) Computing</div>
+        <div class="edu-focus">Focus: Human-Computer Interaction</div>
+        <div class="edu-school">London Metropolitan University</div>
+        <div class="edu-yr">Sep 2021 – Apr 2024</div>
+        <div class="edu-note">Thesis: Emotional Design in Digital Healthcare — shaped my approach to creating empathetic user experiences at the intersection of psychology and design.</div>
+      </div>
+
+      <div class="edu">
+        <div class="edu-deg">+2 Computer Science</div>
+        <div class="edu-focus">Focus: Programming & Algorithms</div>
+        <div class="edu-school">Everest Higher Secondary School, Biratnagar</div>
+        <div class="edu-yr">2018 – 2020 · GPA 3.2</div>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS -->
+    <div class="ss">
+      <div class="sh">Achievements & Training</div>
+      <div class="ach">Best Mobile App Design — DesignFest 2021 (Trading App Redesign)</div>
+      <div class="ach">Industrial Idea Pitch — Runner Up</div>
+      <div class="ach">Google UX Design Professional Certificate</div>
+      <div class="ach">Nielsen Norman Group Training</div>
+      <div class="ach">14-Day UI/UX Workshop · CodeIT</div>
+      <div class="ach">7-Day Workshop · Code for Change</div>
+      <div class="ach">7-Day Workshop · Digital Pathsala</div>
+      <div class="ach">1-Day Workshop · CNFC</div>
+    </div>
+
+  </div><!-- /.sb -->
+</aside>
+
+<!-- ══════════════════════════════════
+     MAIN
+══════════════════════════════════ -->
+<main class="main">
+
+  <!-- HEADLINE -->
+  <div class="headline">
+    Designing interfaces that <em>feel right</em> — then making sure they work right.
+  </div>
+
+  <!-- SUMMARY -->
+  <p class="summary">
+    UI/UX and Product Designer with 3+ years of real product experience across SaaS, mobile, and web. Lead designer on Hajir Khata — Nepal's attendance and payroll platform now used by 1,600+ businesses. I take full ownership from the first wireframe to the final build, treating quality as part of the design process, not something that comes after it. From understanding user pain points to creating delightful experiences, I turn complex challenges into simple, elegant solutions.
+  </p>
+
+  <!-- ── WORK EXPERIENCE ── -->
+  <div class="section">
+    <div class="sec-hd">
+      <span class="sec-lbl">Work Experience</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <!-- ALPHA TECHNOLOGY -->
+    <div class="exp">
+      <div class="exp-hdr">
+        <div class="exp-title">Graphic Designer</div>
+        <div class="exp-date">Jan 2026 – Present</div>
+      </div>
+      <div class="exp-co">Alpha Technology <span>· Full-time · <span class="loc">Kathmandu, Nepal</span></span></div>
+      <ul class="cvl">
+        <li>Creating visual design assets, brand materials, and digital graphics for client projects across technology and digital services sectors.</li>
+        <li>Collaborating with the product and marketing teams to maintain brand consistency across print and digital touchpoints.</li>
+        <li>Applying UI/UX principles to graphic work — ensuring designs are not just visually strong but functionally clear and audience-appropriate.</li>
+      </ul>
+    </div>
+
+    <!-- CODE IT – SENIOR -->
+    <div class="exp">
+      <div class="exp-hdr">
+        <div class="exp-title">Senior UI/UX Designer</div>
+        <div class="exp-date">2024 – 2025</div>
+      </div>
+      <div class="exp-co">Code IT <span>· Full-time · <span class="loc">Dharan, Nepal</span></span></div>
+      <div class="ach-grid">
+        <div class="ach-card">Led complete product redesign — user engagement +45%, churn reduced by 28%</div>
+        <div class="ach-card">Established company-wide design system used across 8 products, reducing design time by 60%</div>
+        <div class="ach-card">Mentored team of 3 junior designers, helping them grow into confident design professionals</div>
+        <div class="ach-card">Decreased customer support tickets by 30% through improved UX and clearer interface patterns</div>
+      </div>
+      <ul class="cvl" style="margin-top:10px;">
+        <li>Led design vision for enterprise SaaS products serving 100,000+ users, balancing stakeholder needs with user requirements.</li>
+        <li>Transformed from a designer who executes to a design leader who shapes product strategy — owning end-to-end design decisions across multiple products simultaneously.</li>
+        <li>Established and enforced design system standards, component libraries, and documentation across all 8 active products.</li>
+      </ul>
+      <div class="learned">This role transformed me from a designer who executes to a design leader who shapes product strategy.</div>
+    </div>
+
+    <!-- HAJIR KHATA -->
+    <div class="exp">
+      <div class="exp-hdr">
+        <div class="exp-title">Lead Product Designer</div>
+        <div class="exp-date">2025</div>
+      </div>
+      <div class="exp-co">Hajir Khata — Attendance &amp; Payroll SaaS <span>· Web · iOS · Android · Nepal</span></div>
+
+      <div class="metrics">
+        <div class="metric">
+          <span class="metric-n">120+</span>
+          <div class="metric-l">Screens Designed</div>
+        </div>
+        <div class="metric">
+          <span class="metric-n">1,600+</span>
+          <div class="metric-l">Businesses Onboarded</div>
+        </div>
+        <div class="metric">
+          <span class="metric-n">Top 3</span>
+          <div class="metric-l">Nepal HR Software</div>
+        </div>
+        <div class="metric">
+          <span class="metric-n">60+</span>
+          <div class="metric-l">Reusable Components</div>
+        </div>
+      </div>
+
+      <ul class="cvl">
+        <li>Owned the entire design process solo — from user research and journey mapping through wireframes, high-fidelity UI, and full developer handoff across web, iOS, and Android.</li>
+        <li>Researched HR managers and field workers to understand Nepal-specific needs — Bikram Sambat calendar, local tax laws (SSF, CIT, PF), Nepali payslip expectations — and built these into the design from the ground up.</li>
+        <li>Built a complete Figma design system: color tokens, 6-step typography scale, 60+ components with all variant states, and a responsive 12-column grid across 3 breakpoints — ensuring zero design drift across 120+ screens.</li>
+        <li>Discovered through usability testing that managers needed leave balance visibility before anything else — moved summary cards to the top and embedded a '+ Request' button, cutting leave application clicks from 4 to 1 (60% faster task completion).</li>
+        <li>Designed mobile-first GPS attendance check-in adopted by field workers with zero training — validating the single-action, progressive disclosure approach.</li>
+        <li>Maintained WCAG AA accessibility standards and applied Material Design and iOS HIG guidelines throughout for native-feeling interactions on each platform.</li>
+      </ul>
+    </div>
+
+    <!-- HUNCHHA – FULL TIME -->
+    <div class="exp">
+      <div class="exp-hdr">
+        <div class="exp-title">UI/UX Designer</div>
+        <div class="exp-date">Aug 2023 – Feb 2026</div>
+      </div>
+      <div class="exp-co">Hunchha Digital Agency <span>· Full-time · 2 yrs 9 mos · <span class="loc">Itahari, Nepal</span></span></div>
+      <ul class="cvl">
+        <li>Took full design ownership of both mobile app and web platform — designing, iterating, and maintaining product screens across multiple features simultaneously.</li>
+        <li>Built and owned the Figma component library used across all product features, dramatically reducing inconsistencies during development and cutting handoff rework cycles.</li>
+        <li>Worked closely with engineers during implementation to catch visual and interaction issues early, staying accountable for quality beyond just the design file.</li>
+        <li>Conducted usability walkthroughs and stakeholder reviews at every major design milestone, using findings to drive iterative improvements before build began.</li>
+        <li>Successfully delivered 15+ client projects across e-commerce, healthcare, and fintech with 98% client satisfaction rate; built long-term relationships with 8 clients who requested ongoing design support.</li>
+        <li>Won "Best Mobile App Design" award at DesignFest 2021 for a trading app redesign; conducted 50+ user research sessions extracting meaningful insights across diverse industries.</li>
+      </ul>
+      <div class="learned">Collaborating with clients from different industries has shown me that strong design principles apply universally.</div>
+    </div>
+
+    <!-- HUNCHHA – INTERN -->
+    <div class="exp">
+      <div class="exp-hdr">
+        <div class="exp-title">UI/UX Designer — Intern</div>
+        <div class="exp-date">Jun 2023 – Aug 2023</div>
+      </div>
+      <div class="exp-co">Hunchha Digital Agency <span>· Internship · <span class="loc">Itahari, Nepal</span></span></div>
+      <ul class="cvl">
+        <li>Designed end-to-end flows and high-fidelity screens for mobile and web platforms within the Deep Learning and Intelligent Video Analytics (IVA) product team from day one.</li>
+        <li>Simplified complex data-heavy interfaces for small business owners — making technical information readable and immediately actionable within a 2-month timeline.</li>
+        <li>Ran informal usability walkthroughs before development began to catch friction points early — a quality-checking habit that became central to how I work.</li>
+        <li>Contributed to 10+ successful product launches for early-stage startups; created the company's first design system, establishing standards for future projects.</li>
+        <li>Completed Google UX Design Professional Certificate and Nielsen Norman Group training during this period.</li>
+      </ul>
+      <div class="learned">This foundation taught me humility, curiosity, and the value of continuous learning.</div>
+    </div>
+
+  </div>
+
+  <!-- ── CORE COMPETENCIES ── -->
+  <div class="section">
+    <div class="sec-hd">
+      <span class="sec-lbl">Core Competencies</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="comp-grid">
+      <div class="comp-card">
+        <div class="comp-cat">Discovery & Research</div>
+        <div class="comp-row"><span class="comp-name">User Research</span><span class="comp-pct">95%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:95%"></div></div>
+        <div class="comp-row"><span class="comp-name">UX Strategy</span><span class="comp-pct">92%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:92%"></div></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-cat">Design & Creation</div>
+        <div class="comp-row"><span class="comp-name">UI Design</span><span class="comp-pct">98%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:98%"></div></div>
+        <div class="comp-row"><span class="comp-name">Interaction Design</span><span class="comp-pct">91%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:91%"></div></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-cat">Prototyping & Systems</div>
+        <div class="comp-row"><span class="comp-name">Design Systems</span><span class="comp-pct">94%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:94%"></div></div>
+        <div class="comp-row"><span class="comp-name">Prototyping</span><span class="comp-pct">90%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:90%"></div></div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-cat">Testing & Analytics</div>
+        <div class="comp-row"><span class="comp-name">Usability Testing</span><span class="comp-pct">88%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:88%"></div></div>
+        <div class="comp-row"><span class="comp-name">Data Analysis</span><span class="comp-pct">85%</span></div>
+        <div class="comp-bar"><div class="comp-fill" style="width:85%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SELECTED PROJECTS ── -->
+  <div class="section">
+    <div class="sec-hd">
+      <span class="sec-lbl">Selected Projects</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="proj-grid">
+      <div class="proj-card">
+        <div class="proj-name">Hajir Khata — HR & Payroll SaaS</div>
+        <div class="proj-tag">Web · iOS · Android · SaaS</div>
+        <div class="proj-desc">Nepal's top-3 attendance and payroll platform — 120+ screens, 1,600+ onboarded businesses. Full design system with WCAG AA compliance. Designed solo end-to-end.</div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-name">Enterprise B2B Data Visualization</div>
+        <div class="proj-tag">Design System · SaaS · Dashboard</div>
+        <div class="proj-desc">Enterprise-grade data visualization design system for complex real-time dashboards. Component libraries, tokens, and documentation that reduced design-to-dev time by 60%.</div>
+      </div>
+
+      <div class="proj-card gold">
+        <div class="proj-name">Nischal — Water Distribution SaaS</div>
+        <div class="proj-tag">Web · B2B · Dashboard</div>
+        <div class="proj-desc">B2B SaaS platform for water network management — complex real-time data (consumption, billing, network alerts) made scannable through structured, consistent component design.</div>
+      </div>
+
+      <div class="proj-card gold">
+        <div class="proj-name">Playtoon — Children's Learning App</div>
+        <div class="proj-tag">Mobile · iOS & Android</div>
+        <div class="proj-desc">Age-appropriate UI with large touch targets, high contrast, and simplified navigation. Separate mapped journeys for child and parent users coexisting within a single product.</div>
+      </div>
+
+      <div class="proj-card soft">
+        <div class="proj-name">FEED — NGO Digital Platform</div>
+        <div class="proj-tag">Web · Non-Profit · Responsive</div>
+        <div class="proj-desc">Full information architecture built around user goals (research, events, donations) rather than org structure. Accessible, responsive design serving a diverse audience.</div>
+      </div>
+
+      <div class="proj-card soft">
+        <div class="proj-name">Khar-G Records — Music Label</div>
+        <div class="proj-tag">Brand Identity · Web Design</div>
+        <div class="proj-desc">Visual identity from scratch for an independent music label extended into a full web interface — balancing bold aesthetics with intuitive navigation for discography and artist profiles.</div>
+      </div>
+    </div>
+
+    <!-- PORTFOLIO STRIP -->
+    <div class="port-strip">
+      <div class="port-l">
+        <div class="port-title">Live Portfolio — 18 Projects &amp; In-Depth Case Studies</div>
+        <div class="port-cnt">UI/UX · SaaS · Mobile · Web · Brand Identity · QA · Dribbble Work</div>
+      </div>
+      <a class="port-link" href="https://portfolio-two-fawn-pmb9ov7t5m.vercel.app" target="_blank">View Portfolio →</a>
+    </div>
+  </div>
+
+  <!-- ── DESIGN APPROACH ── -->
+  <div class="section">
+    <div class="sec-hd">
+      <span class="sec-lbl">How I Approach Every Project</span>
+      <div class="sec-line"></div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-lbl">Empathize</div>
+        <div class="step-sub">Deep user research &amp; observation</div>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-lbl">Define</div>
+        <div class="step-sub">Synthesize &amp; frame core problems</div>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-lbl">Ideate</div>
+        <div class="step-sub">Creative solutions &amp; brainstorm</div>
+      </div>
+      <div class="step">
+        <div class="step-n">04</div>
+        <div class="step-lbl">Prototype</div>
+        <div class="step-sub">Build to test &amp; refine ideas</div>
+      </div>
+      <div class="step">
+        <div class="step-n">05</div>
+        <div class="step-lbl">Test &amp; Iterate</div>
+        <div class="step-sub">Validate with real users</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BEYOND THE TOOLS ── -->
+  <div class="section">
+    <div class="sec-hd">
+      <span class="sec-lbl">Beyond the Tools</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="beyond-grid">
+      <span class="beyond-chip">HTML / CSS Development</span>
+      <span class="beyond-chip">JavaScript Basics</span>
+      <span class="beyond-chip">Design Systems Architecture</span>
+      <span class="beyond-chip">WCAG Accessibility Standards</span>
+      <span class="beyond-chip">Motion Design &amp; Animation</span>
+      <span class="beyond-chip">Typography &amp; Visual Hierarchy</span>
+      <span class="beyond-chip">Color Theory</span>
+      <span class="beyond-chip">Agile / Scrum Methodology</span>
+      <span class="beyond-chip">Design Thinking Strategy</span>
+      <span class="beyond-chip">User Psychology &amp; Behavior</span>
+      <span class="beyond-chip">Information Architecture</span>
+      <span class="beyond-chip">A/B Testing &amp; Optimization</span>
+      <span class="beyond-chip">Material Design Guidelines</span>
+      <span class="beyond-chip">iOS Human Interface Guidelines</span>
+    </div>
+  </div>
+
+</main>
+</div>
+
+</body>
+</html>
