@@ -1,4 +1,4 @@
-export const resumeFile = "/md-arsalan-resume.html";
+export const resumeFile = "/md-arsalan-resume.pdf";
 
 export const portfolioServices = [
   {
