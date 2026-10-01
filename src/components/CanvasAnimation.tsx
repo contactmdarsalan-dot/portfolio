@@ -3,7 +3,10 @@
 import { resumeFile } from "@/data/profile";
 import { useEffect, useMemo, useRef } from "react";
 
-const FRAME_COUNT = 300;
+// The hero plays frames 1-93. The other 207 were only ever used by the
+// resume variant, which is now a static section, so they are no longer
+// shipped. WebP at q80 instead of palette PNG: 55.6 MB of frames became 7.5.
+const FRAME_COUNT = 93;
 
 type StoryChapter = {
   id: string;
@@ -30,10 +33,13 @@ type StoryChapter = {
 const heroChapters: StoryChapter[] = [
   {
     id: "about",
-    eyebrow: "Md Arsalan / UX, QA and product care",
-    title: "Make users Happy.",
-    lead: "I turn rough product moments into clear, satisfying user journeys.",
-    markers: ["Research", "Interface", "Quality"],
+    // "Make users happy" was true of every designer alive, which made it worth
+    // nothing to a reader deciding whether to keep scrolling. This says the one
+    // thing that is actually unusual here: design and QA in the same person.
+    eyebrow: "Md Arsalan — UX designer & QA",
+    title: "Design. Test. Ship.",
+    lead: "Three years designing product interfaces, and a habit of testing them until they hold. Most screens look finished long before they work.",
+    markers: ["Research", "Interface", "Release QA"],
     align: "left",
   },
 ];
@@ -133,8 +139,8 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
 
     for (let i = 1; i <= FRAME_COUNT; i++) {
       const img = new Image();
-      const num = String(i).padStart(4, "0");
-      img.src = `/frames/male${num}.png`;
+      const num = String(i).padStart(3, "0");
+      img.src = `/hero-frames/f${num}.webp`;
       img.onload = () => {
         loadedCount++;
         render();
@@ -156,7 +162,14 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
           ? Math.max(hRatio, vRatio) * 0.76
           : Math.min(hRatio, vRatio) * heroScale
         : Math.max(hRatio, vRatio);
-      const cx = (cvs.width - img.width * ratio) / 2;
+      // Nudged right of centre on wide screens. Dead centre meant the head and
+      // shoulders sat on top of the headline, so the first screen had a face
+      // and three half-hidden words. The type gets the left third, the
+      // character keeps the middle and right. Below 1024px the panel stacks
+      // under the headline anyway, so centring is still correct there.
+      const heroShift =
+        variant === "hero" && window.innerWidth >= 1024 ? cvs.width * 0.12 : 0;
+      const cx = (cvs.width - img.width * ratio) / 2 + heroShift;
       const mobileBottomBleed = isMobileHero ? cvs.height * 0.07 : 0;
       const desktopHeroLift = variant === "hero" && !isMobileHero ? cvs.height * 0.015 : 0;
       const cy = variant === "hero"
@@ -201,39 +214,16 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       }
 
       if (variant === "hero") {
+        // The hero copy used to be tied to scroll progress: the headline words
+        // appeared one per 20% scrolled and the panel with the lead, the proof
+        // and both calls to action only crossed zero opacity at 56%. So the
+        // first thing anyone saw - and for a reviewer skimming, the only thing
+        // - was a face filling the viewport, with nothing to read or click.
+        //
+        // The character still scrubs on scroll, which is the payoff. The text
+        // no longer waits for it; it animates in once on load, in CSS.
         const hero = chapterRefs.current[0];
         if (!hero) return;
-        const words = hero.querySelectorAll<HTMLElement>(".hero-title-word");
-        const infoPanel = hero.querySelector<HTMLElement>(".hero-info-panel");
-        const body = hero.querySelector<HTMLElement>(".story-body");
-        const markers = hero.querySelector<HTMLElement>(".story-markers");
-
-        words.forEach((word, index) => {
-          const start = index * 0.2;
-          const reveal = Math.max(0, Math.min(1, (progress - start) / 0.22));
-          word.style.opacity = String(reveal);
-          word.style.transform = `translate3d(0, ${(1 - reveal) * 34}px, 0) scale(${0.96 + reveal * 0.04})`;
-        });
-
-        const isMobileHero = window.innerWidth <= 768;
-        const bodyReveal = Math.max(0, Math.min(1, (progress - (isMobileHero ? 0.64 : 0.56)) / 0.18));
-        const markerReveal = Math.max(0, Math.min(1, (progress - 0.68) / 0.16));
-
-        if (infoPanel) {
-          infoPanel.style.opacity = String(bodyReveal);
-          infoPanel.style.transform = `translate3d(0, ${(1 - bodyReveal) * 18}px, 0)`;
-          infoPanel.style.pointerEvents = bodyReveal > 0.7 ? "auto" : "none";
-        }
-        if (body) {
-          body.style.opacity = String(bodyReveal);
-          body.style.transform = `translate3d(0, ${(1 - bodyReveal) * 18}px, 0)`;
-          body.style.pointerEvents = bodyReveal > 0.7 ? "auto" : "none";
-        }
-        if (markers) {
-          markers.style.opacity = String(markerReveal);
-          markers.style.transform = `translate3d(0, ${(1 - markerReveal) * 18}px, 0)`;
-          markers.style.pointerEvents = markerReveal > 0.7 ? "auto" : "none";
-        }
       }
     }
 
@@ -251,7 +241,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
         scrub: 0.16,
         onUpdate: (self) => {
           const startFrame = variant === "hero" ? 0 : 176;
-          const endFrame = variant === "hero" ? 92 : FRAME_COUNT - 1;
+          const endFrame = FRAME_COUNT - 1;
           imageSeq.frame = startFrame + self.progress * (endFrame - startFrame);
           render();
           updateChapterState(self.progress);
@@ -296,7 +286,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
         {chapters.map((chapter, chapterIndex) => (
           <article
             key={chapter.id}
-            id={chapter.id}
+            id={variant === "hero" ? undefined : chapter.id}
             ref={(node) => {
               chapterRefs.current[chapterIndex] = node;
             }}
@@ -306,11 +296,12 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
               <p className="story-kicker">{chapter.eyebrow}</p>
               <h1 className="color-shift-heading">
                 {variant === "hero" ? (
-                  <>
-                    <span className="hero-title-word">Make</span>
-                    <span className="hero-title-word">users</span>
-                    <span className="hero-title-word">Happy.</span>
-                  </>
+                  chapter.title.split(" ").map((word, i, all) => (
+                    <span className="hero-title-word" key={`${word}-${i}`}>
+                      {word}
+                      {i < all.length - 1 ? " " : ""}
+                    </span>
+                  ))
                 ) : (
                   chapter.title
                 )}
@@ -318,6 +309,21 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
               {variant === "hero" ? (
                 <div className="hero-info-panel">
                   {chapter.lead && <p className="story-body">{chapter.lead}</p>}
+
+                  <p className="hero-proof">
+                    <span className="hero-proof-mark">2nd place</span>{" "}
+                    Hostinger 21-Day Startup Challenge 2026, for a QA tool that
+                    audits websites.
+                  </p>
+
+                  <div className="hero-actions">
+                    <a className="hero-cta hero-cta-primary" href="#work">
+                      See selected work
+                    </a>
+                    <a className="hero-cta" href="mailto:contactmdarsalan@gmail.com">
+                      Email me
+                    </a>
+                  </div>
 
                   {chapter.markers && (
                     <div className="story-markers">

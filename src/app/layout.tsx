@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: "Md Arsalan Portfolio",
     images: [
       {
-        url: "/frames/male0150.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 900,
         alt: "Md Arsalan portfolio character render",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "Md Arsalan - UI/UX + QA Specialist",
     description:
       "UX/UI and QA case-study portfolio with process, decisions, and quality checks.",
-    images: ["/frames/male0150.png"],
+    images: ["/og-image.jpg"],
   },
   keywords: [
     "UI/UX Designer",

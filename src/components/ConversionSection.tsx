@@ -15,7 +15,6 @@ import {
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
-import NextImage from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const PROCESS_START_FRAME = 92;
@@ -81,7 +80,7 @@ export default function ConversionSection() {
   const canvasReadyRef = useRef(false);
   const [activeProcess, setActiveProcess] = useState<ProcessKey>("design");
   const [activeStep, setActiveStep] = useState(0);
-  const [canvasReady, setCanvasReady] = useState(false);
+  const [canvasReady, setCanvasReady] = useState(true);
   const currentProcess = processTabs[activeProcess];
   const currentStep = currentProcess.steps[activeStep] ?? currentProcess.steps[0];
 
@@ -252,18 +251,6 @@ export default function ConversionSection() {
       data-section-reveal
     >
       <div className="process-canvas-shell" aria-label="Design and QA process">
-        <NextImage
-          className="process-character-fallback"
-          src="/frames/male0093.png"
-          alt=""
-          fill
-          sizes="100vw"
-          aria-hidden="true"
-          priority
-          unoptimized
-        />
-        <canvas ref={canvasRef} className="process-character-canvas" aria-hidden="true" />
-
         <div className="process-canvas-wordmark" aria-hidden="true">
           Process
         </div>
