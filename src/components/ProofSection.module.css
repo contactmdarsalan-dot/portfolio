@@ -1,0 +1,191 @@
+/*
+ * Same tokens as the rest of the page: ink #14111c, muted #4a443c, soft
+ * #6f675d, lime only as a mark. Cards are a numbered list because the six
+ * items answer six lines of a brief in order; the number is the line.
+ */
+
+.section {
+  position: relative;
+  z-index: 6;
+  padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
+  background: #ffffff;
+  color: #14111c;
+}
+
+.inner {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+.head {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+  background: rgba(20, 17, 28, 0.03);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4a443c;
+}
+
+.kicker::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #c6ff36;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.25);
+}
+
+.title {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 1rem 0 0;
+  max-width: 52ch;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.55;
+  color: #4a443c;
+}
+
+.lead a {
+  color: #14111c;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: #c6ff36;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+/* ---------------------------------------------------------------- grid */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background: rgba(20, 17, 28, 0.08);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+}
+
+.card {
+  display: grid;
+  grid-template-rows: auto auto auto 1fr;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 2.6vw, 2.25rem);
+  background: #ffffff;
+}
+
+.index {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #6f675d;
+  font-variant-numeric: tabular-nums;
+}
+
+.ask {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f675d;
+}
+
+.did {
+  margin: 0;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.did::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 3px;
+  margin-top: 0.75rem;
+  border-radius: 2px;
+  background: #c6ff36;
+}
+
+.detail {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: #4a443c;
+}
+
+/* --------------------------------------------------------------- stack */
+
+.stackRow {
+  display: grid;
+  gap: 1rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: 2rem;
+  border-top: 1px solid rgba(20, 17, 28, 0.1);
+}
+
+.stackLabel {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f675d;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack li {
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(20, 17, 28, 0.035);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #14111c;
+}
+
+@media (min-width: 48rem) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 64rem) {
+  .grid { grid-template-columns: 1fr 1fr 1fr; }
+  .stackRow { grid-template-columns: 10rem 1fr; align-items: start; }
+}

@@ -10,6 +10,18 @@ export type Credential = {
 export const credentials: Credential[] = [
   {
     kind: "Experience",
+    title: "Founder, product engineer",
+    org: "FixGuard AI",
+    period: "Sep 2026 — Present",
+    meta: "Solo · Remote · fixguardai.online",
+    bullets: [
+      "Pre-flight QA for AI-built websites: real-browser form checks, route crawl, accessibility, performance, DNS and TLS, with one scoped fix prompt per finding.",
+      "FastAPI, Playwright, React, SQLite, nginx and Docker on a single-vCPU Hostinger VPS. Built in 21 days with Claude Code writing most of the code; 36 unit checks and an acceptance suite.",
+      "2nd place, Hostinger 21-Day Startup Challenge 2026.",
+    ],
+  },
+  {
+    kind: "Experience",
     title: "Graphic Designer",
     org: "Alpha Technology",
     period: "Jan 2026 — Present",

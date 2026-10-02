@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { resumeFile } from "@/data/profile";
 import { useEffect, useMemo, useRef } from "react";
 
@@ -33,13 +34,13 @@ type StoryChapter = {
 const heroChapters: StoryChapter[] = [
   {
     id: "about",
-    // "Make users happy" was true of every designer alive, which made it worth
-    // nothing to a reader deciding whether to keep scrolling. This says the one
-    // thing that is actually unusual here: design and QA in the same person.
-    eyebrow: "Md Arsalan · UX Designer & QA",
-    title: "Looks finished.|Actually works.",
-    lead: "UX designer who tests what he ships. Three years of interfaces, each one checked before release.",
-    markers: ["Research", "Interface", "Release QA"],
+    // The reader this is for runs an engineering team. The unusual thing
+    // here is not "designer" and not "QA": it is that the code is written
+    // with agents and then actually checked by the person who asked for it.
+    eyebrow: "Md Arsalan · Product engineer",
+    title: "Agents build it.|I make it work.",
+    lead: "Agents write most of my code. I write the spec, read every diff, and test what ships before a user does. Designer by training, so the screens hold up too.",
+    markers: ["Full stack", "Agent workflow", "Release QA"],
     align: "left",
   },
 ];
@@ -194,7 +195,10 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       const heroShift =
         variant === "hero" && window.innerWidth >= 1024 ? cvs.width * 0.17 : 0;
       const cx = (cvs.width - img.width * ratio) / 2 + heroShift;
-      const mobileBottomBleed = isMobileHero ? cvs.height * 0.07 : 0;
+      // On phones the copy stacks in the top half, so the character is let
+      // bleed further off the bottom: the head lands under the buttons, not
+      // behind them.
+      const mobileBottomBleed = isMobileHero ? cvs.height * 0.24 : 0;
       const desktopHeroLift = variant === "hero" && !isMobileHero ? cvs.height * 0.015 : 0;
       const cy = variant === "hero"
         ? cvs.height - img.height * ratio + mobileBottomBleed - desktopHeroLift
@@ -373,14 +377,14 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
                   </p>
 
                   <div className="hero-actions">
-                    <a className="hero-cta hero-cta-primary" href="#work">
-                      <span>See selected work</span>
+                    <Link className="hero-cta hero-cta-primary" href="/products/fixguard">
+                      <span>Read the FixGuard build</span>
                       <span className="hero-cta-icon" aria-hidden="true">
                         <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M4 12 12 4M6 4h6v6" />
                         </svg>
                       </span>
-                    </a>
+                    </Link>
                     <a className="hero-cta hero-cta-ghost" href="mailto:contactmdarsalan@gmail.com">
                       Email me
                     </a>

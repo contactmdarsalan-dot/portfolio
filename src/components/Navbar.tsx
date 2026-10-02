@@ -19,8 +19,8 @@ import styles from "./Navbar.module.css";
 
 const navItems = [
   { label: "About", href: "#about", target: "hero" },
-  { label: "Skills", href: "#skills", target: "skills" },
   { label: "Work", href: "#work", target: "work" },
+  { label: "How I build", href: "#skills", target: "skills" },
   { label: "Process", href: "#process", target: "process" },
   { label: "Contact", href: "#contact", target: "contact" },
 ] as const;
@@ -79,12 +79,12 @@ export default function Navbar() {
         setActiveChapter(navIndexByTarget.process);
         return;
       }
-      if (isInView(work)) {
-        setActiveChapter(navIndexByTarget.work);
-        return;
-      }
       if (isInView(skills)) {
         setActiveChapter(navIndexByTarget.skills);
+        return;
+      }
+      if (isInView(work)) {
+        setActiveChapter(navIndexByTarget.work);
         return;
       }
       setActiveChapter(navIndexByTarget.hero);

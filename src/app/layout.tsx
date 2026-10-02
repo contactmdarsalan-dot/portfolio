@@ -4,11 +4,11 @@ import "./globals.css";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://portfolio-two-fawn-pmb9ov7t5m.vercel.app"),
   title: {
-    default: "Md Arsalan - UI/UX + QA Specialist | Designs & Defends",
+    default: "Md Arsalan - Product engineer who builds with agents",
     template: "%s | Md Arsalan",
   },
   description:
-    "UX/UI and QA portfolio of Md Arsalan, showing case studies, product decisions, interface craft, and release-focused quality checks.",
+    "Portfolio of Md Arsalan: product engineer and designer. Ships full-stack products with AI agents writing most of the code, then tests what they wrote. 2nd place, Hostinger 21-Day Startup Challenge 2026.",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
@@ -17,9 +17,9 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Md Arsalan - UI/UX + QA Specialist",
+    title: "Md Arsalan - Product engineer who builds with agents",
     description:
-      "Case-study portfolio covering UX process, UI craft, QA checks, and release-ready product thinking.",
+      "Full-stack products shipped with AI agents on the keyboard and a QA habit behind them. FixGuard AI case study, live products, and how the work gets done.",
     url: "/",
     siteName: "Md Arsalan Portfolio",
     images: [
@@ -27,27 +27,30 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 900,
-        alt: "Md Arsalan portfolio character render",
+        alt: "Md Arsalan portfolio",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Md Arsalan - UI/UX + QA Specialist",
+    title: "Md Arsalan - Product engineer who builds with agents",
     description:
-      "UX/UI and QA case-study portfolio with process, decisions, and quality checks.",
+      "Full-stack products shipped with AI agents on the keyboard and a QA habit behind them.",
     images: ["/og-image.jpg"],
   },
   keywords: [
-    "UI/UX Designer",
-    "QA Specialist",
-    "Figma",
-    "UX Case Studies",
+    "Product Engineer",
+    "Agentic Engineering",
+    "Claude Code",
+    "Full-stack",
+    "React",
+    "TypeScript",
+    "FastAPI",
+    "Playwright",
+    "QA",
+    "UX Design",
+    "FixGuard AI",
     "Portfolio",
-    "Mobile App Design",
-    "Quality Assurance",
-    "Product Design",
-    "Nepal UX Designer",
   ],
   robots: {
     index: true,

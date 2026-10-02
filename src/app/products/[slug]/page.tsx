@@ -145,6 +145,19 @@ export default async function ProductCasePage({ params }: Props) {
           </Section>
         )}
 
+        {cs.built && cs.built.length > 0 && (
+          <Section label="Agents" title="How it was built">
+            <ul className={styles.qa}>
+              {cs.built.map((b) => (
+                <li key={b.title}>
+                  <h3>{b.title}</h3>
+                  <p>{b.detail}</p>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
         {cs.qa && cs.qa.length > 0 && (
           <Section label="Quality" title="How it was tested">
             <ul className={styles.qa}>

@@ -19,6 +19,8 @@ export type ProductCaseStudy = {
   overview: string[];
   features?: string[];
   decisions?: { title: string; detail: string }[];
+  /** How the code was produced: the agent workflow, and what it got wrong. */
+  built?: { title: string; detail: string }[];
   qa?: { title: string; detail: string }[];
   outcomes?: string[];
   next?: string[];
@@ -104,6 +106,33 @@ export const products: Product[] = [
           title: "One container.",
           detail:
             "Redis, a job queue, a separate browser worker and an ORM all came out. One process, one semaphore capping it at one browser, plain SQLite. Chromium plus a second runtime on a small box swaps, and a QA tool that falls over is worse than none.",
+        },
+      ],
+      built: [
+        {
+          title: "Spec first, in prose.",
+          detail:
+            "Each feature began as a written brief: what the user sees, what the server has to prove, and what the report must say when it cannot. The agent got the brief, not a vibe. A day-by-day development log tracked the plan and marked what was pulled forward; by day seven the build was about ten days ahead of it.",
+        },
+        {
+          title: "Claude Code wrote most of the code.",
+          detail:
+            "The FastAPI backend, the Playwright extraction, the scoring engine and the React dashboard were produced largely by the agent from those briefs. The reviewer's job was the diff: every change read, and anything that quietly widened a claim the product could not back sent back.",
+        },
+        {
+          title: "Deterministic first, model second.",
+          detail:
+            "The three in-product agents - log parser, prompt generator, summary writer - run on rules and only call a model to improve on the rule-based result. With no API key the fallback is the product, not a degraded mode, because a live demo cannot depend on a rate limit. The client is provider-agnostic: Anthropic, OpenAI, or anything speaking the chat-completions shape.",
+        },
+        {
+          title: "The discard pile.",
+          detail:
+            "Inbox-delivery verification, three-region reachability, Redis, a job queue, a separate browser worker and an ORM were all specified or generated, and all removed. Knowing what to delete was most of the engineering; an agent will build anything it is asked for.",
+        },
+        {
+          title: "What the agent got wrong, and what caught it.",
+          detail:
+            "A rename left two routes raising NameError on every call; both files imported cleanly, so nothing noticed until a request arrived. Three detectors reported problems on pages known to be fine. Each became a test, and a scope checker now resolves names the way Python does before anything ships.",
         },
       ],
       qa: [

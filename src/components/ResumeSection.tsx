@@ -29,7 +29,7 @@ export default function ResumeSection() {
         <footer className={styles.contact} id="contact">
           <div>
             <p className={styles.kicker}>Contact</p>
-            <h3 className={styles.contactTitle}>Send a screen, a flow, or a release risk.</h3>
+            <h3 className={styles.contactTitle}>Send a problem. You will get a plan, then a build.</h3>
           </div>
 
           <ul className={styles.channels}>
@@ -46,9 +46,9 @@ export default function ResumeSection() {
               </li>
             ))}
             <li>
-              <a href={resumeFile} download="Md-Arsalan-Resume.pdf" className={styles.resumeLink}>
+              <a href={resumeFile} className={styles.resumeLink}>
                 <span className={styles.channelLabel}>Resume</span>
-                <span className={styles.channelValue}>Download</span>
+                <span className={styles.channelValue}>Open, print to PDF</span>
               </a>
             </li>
           </ul>

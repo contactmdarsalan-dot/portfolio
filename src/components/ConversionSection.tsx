@@ -1,24 +1,26 @@
 "use client";
 
 import {
+  Bot,
   Bug,
   CheckCircle2,
   ClipboardCheck,
   Compass,
-  FileSearch,
+  Eye,
+  FileText,
   FlaskConical,
-  Layers3,
-  MousePointer2,
-  RefreshCw,
-  Route,
+  Gauge,
+  ShieldCheck,
   type LucideIcon,
 } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import styles from "./ConversionSection.module.css";
 
 /**
- * Process: how a screen gets from a messy moment to a shipped one, in two
- * loops - design and QA - because that pairing is the whole positioning.
+ * Process: how a customer problem gets to production, in two loops - the
+ * build loop with agents on the keyboard, and the QA loop that checks what
+ * they wrote - because that pairing is the whole positioning.
  *
  * This used to sit over a frame-sequence canvas with a grey gradient wash,
  * a ghosted wordmark, and the steps stacked as five grey pills down the
@@ -28,7 +30,7 @@ import styles from "./ConversionSection.module.css";
  * to right along a rail, with the active one carrying the detail.
  */
 
-type ProcessKey = "design" | "qa";
+type ProcessKey = "build" | "qa";
 
 type ProcessStep = {
   icon: LucideIcon;
@@ -45,20 +47,20 @@ type ProcessTab = {
   steps: ProcessStep[];
 };
 
-const processKeys: ProcessKey[] = ["design", "qa"];
+const processKeys: ProcessKey[] = ["build", "qa"];
 
 const processTabs: Record<ProcessKey, ProcessTab> = {
-  design: {
-    label: "Design",
-    eyebrow: "Design loop",
-    title: "From a messy moment to a usable screen.",
-    note: "Five passes, each one narrowing what the screen has to do until it does only that.",
+  build: {
+    label: "Build",
+    eyebrow: "Build loop",
+    title: "Problem to production, with agents typing.",
+    note: "Agents write a large share of the code. The work is deciding what to ask for, what to keep, and what to throw away.",
     steps: [
-      { icon: FileSearch, title: "Discover", label: "Need", point: "Find the friction" },
-      { icon: Route, title: "Map", label: "Flow", point: "Shape the path" },
-      { icon: Layers3, title: "Frame", label: "UI", point: "Set the hierarchy" },
-      { icon: MousePointer2, title: "Prototype", label: "Click", point: "Test the motion" },
-      { icon: RefreshCw, title: "Refine", label: "Ready", point: "Clean the release" },
+      { icon: FileText, title: "Frame", label: "Problem", point: "Write the spec in plain words, limits included" },
+      { icon: Bot, title: "Delegate", label: "Agents", point: "Hand agents one bounded task at a time" },
+      { icon: Eye, title: "Review", label: "Diff", point: "Read every change, send back what widens a claim" },
+      { icon: ShieldCheck, title: "Prove", label: "Tests", point: "Pin behaviour with tests, run it on real sites" },
+      { icon: Gauge, title: "Measure", label: "Metrics", point: "Ship, then watch the numbers, not the PR count" },
     ],
   },
   qa: {
@@ -77,7 +79,7 @@ const processTabs: Record<ProcessKey, ProcessTab> = {
 };
 
 export default function ConversionSection() {
-  const [activeProcess, setActiveProcess] = useState<ProcessKey>("design");
+  const [activeProcess, setActiveProcess] = useState<ProcessKey>("build");
   const [activeStep, setActiveStep] = useState(0);
   const current = processTabs[activeProcess];
   const step = current.steps[activeStep] ?? current.steps[0];
@@ -152,16 +154,16 @@ export default function ConversionSection() {
         </div>
 
         <div className={styles.actions}>
-          <a className="hero-cta hero-cta-primary" href="mailto:contactmdarsalan@gmail.com">
-            <span>Start a brief</span>
+          <Link className="hero-cta hero-cta-primary" href="/products/fixguard">
+            <span>See the loop on FixGuard</span>
             <span className="hero-cta-icon" aria-hidden="true">
               <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 12 12 4M6 4h6v6" />
               </svg>
             </span>
-          </a>
-          <a className="hero-cta hero-cta-ghost" href="tel:+9779713159720">
-            Book a call
+          </Link>
+          <a className="hero-cta hero-cta-ghost" href="mailto:contactmdarsalan@gmail.com">
+            Email me
           </a>
         </div>
       </div>

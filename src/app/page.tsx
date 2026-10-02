@@ -2,12 +2,10 @@ import CanvasAnimation from "@/components/CanvasAnimation";
 import ConversionSection from "@/components/ConversionSection";
 import Navbar from "@/components/Navbar";
 import ProductsSection from "@/components/ProductsSection";
+import ProofSection from "@/components/ProofSection";
 import ResumeSection from "@/components/ResumeSection";
 import ScrollExperience from "@/components/ScrollExperience";
 import Scene3D from "@/components/Scene3D";
-import ServicesSection from "@/components/ServicesSection";
-import SkillsSection from "@/components/SkillsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import WorkSection from "@/components/WorkSection";
 
 export default function Home() {
@@ -18,12 +16,10 @@ export default function Home() {
       <ScrollExperience />
       <main className="site-flow" data-scroll-container>
         <CanvasAnimation />
-        <SkillsSection />
         <ProductsSection />
-        <WorkSection />
-        <ServicesSection />
+        <ProofSection />
         <ConversionSection />
-        <TestimonialsSection />
+        <WorkSection />
         <ResumeSection />
       </main>
     </>
