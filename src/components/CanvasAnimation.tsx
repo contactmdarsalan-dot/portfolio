@@ -38,7 +38,7 @@ const heroChapters: StoryChapter[] = [
     // thing that is actually unusual here: design and QA in the same person.
     eyebrow: "Md Arsalan — UX designer & QA",
     title: "Design. Test. Ship.",
-    lead: "Three years designing product interfaces, and a habit of testing them until they hold. Most screens look finished long before they work.",
+    lead: "Three years designing interfaces. Then testing them until they hold.",
     markers: ["Research", "Interface", "Release QA"],
     align: "left",
   },
@@ -137,18 +137,42 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
     const imageSeq = { frame: variant === "hero" ? 0 : 176 };
     let loadedCount = 0;
 
-    for (let i = 1; i <= FRAME_COUNT; i++) {
-      const img = new Image();
-      const num = String(i).padStart(3, "0");
-      img.src = `/hero-frames/f${num}.webp`;
-      img.onload = () => {
+    // Two phases. Requesting all 93 frames at once meant the first one queued
+    // behind 7.5 MB of frames nobody needed yet, so the character arrived late
+    // and the hero sat empty until it did. Frame 1 is fetched alone and drawn
+    // the moment it lands; the rest follow once it is on screen.
+    const frameSrc = (i: number) => `/hero-frames/f${String(i).padStart(3, "0")}.webp`;
+
+    const first = new Image();
+    first.fetchPriority = "high";
+    first.src = frameSrc(1);
+    images.push(first);
+
+    const loadRest = () => {
+      for (let i = 2; i <= FRAME_COUNT; i++) {
+        const img = new Image();
+        img.fetchPriority = "low";
+        img.src = frameSrc(i);
+        img.onload = () => {
+          loadedCount++;
+          render();
+        };
+        images[i - 1] = img;
+      }
+    };
+
+    if (first.complete) {
+      render();
+      updateChapterState(0);
+      loadRest();
+    } else {
+      first.onload = () => {
         loadedCount++;
         render();
-        if (loadedCount === 1) {
-          updateChapterState(0);
-        }
+        updateChapterState(0);
+        loadRest();
       };
-      images.push(img);
+      first.onerror = loadRest;
     }
 
     function scaleImage(img: HTMLImageElement) {
@@ -214,16 +238,42 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       }
 
       if (variant === "hero") {
-        // The hero copy used to be tied to scroll progress: the headline words
-        // appeared one per 20% scrolled and the panel with the lead, the proof
-        // and both calls to action only crossed zero opacity at 56%. So the
-        // first thing anyone saw - and for a reviewer skimming, the only thing
-        // - was a face filling the viewport, with nothing to read or click.
-        //
-        // The character still scrubs on scroll, which is the payoff. The text
-        // no longer waits for it; it animates in once on load, in CSS.
+        // Revealed one element at a time as the hero is scrolled, but with a
+        // head start so the page is never blank: at progress 0 the first word
+        // is already most of the way in, and the whole sequence - three words,
+        // lead, proof, actions, markers - has finished by 70%. The earlier
+        // version spent 20% of the scroll per word and did not show the
+        // actions until 56%, which meant a visitor who did not scroll saw
+        // nothing to read or click at all.
         const hero = chapterRefs.current[0];
         if (!hero) return;
+
+        const reveal = (from: number, over = 0.12) =>
+          Math.max(0, Math.min(1, (progress + 0.08 - from) / over));
+
+        const apply = (el: HTMLElement | null, amount: number, lift = 18) => {
+          if (!el) return;
+          el.style.opacity = String(amount);
+          el.style.transform = `translate3d(0, ${(1 - amount) * lift}px, 0)`;
+          el.style.pointerEvents = amount > 0.6 ? "auto" : "none";
+        };
+
+        hero.querySelectorAll<HTMLElement>(".hero-title-word").forEach((word, i) => {
+          const amount = reveal(i * 0.07);
+          word.style.opacity = String(amount);
+          word.style.transform = `translate3d(0, ${(1 - amount) * 30}px, 0)`;
+        });
+
+        apply(hero.querySelector(".story-body"), reveal(0.3));
+        apply(hero.querySelector(".hero-proof"), reveal(0.4));
+        apply(hero.querySelector(".hero-actions"), reveal(0.5));
+        apply(hero.querySelector(".story-markers"), reveal(0.58));
+
+        const panel = hero.querySelector<HTMLElement>(".hero-info-panel");
+        if (panel) {
+          panel.style.opacity = "1";
+          panel.style.pointerEvents = "auto";
+        }
       }
     }
 

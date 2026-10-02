@@ -10911,27 +10911,109 @@ body {
   }
 }
 
+
 /* ===================================================================
-   Hero proof + actions
+   HERO — white ground
    -------------------------------------------------------------------
-   Appended rather than woven into the rules above: this file is ~11k
-   lines and editing in place means guessing which of several competing
-   selectors currently wins. These are new class names, so they cannot
-   collide with anything already here.
+   Appended rather than edited in place: this file is ~11k lines and
+   the hero's existing rules are spread across several media queries,
+   so overriding at the end is the only change that is reviewable.
+
+   Contrast was calculated, not eyeballed. The lime is 1.18:1 as text
+   on white and cannot be used for type here at all, so it survives as
+   a highlight block behind dark text (15.8:1) and as the proof pill.
+   Muted copy is #5C554C, 7.4:1 on white.
    =================================================================== */
+
+.canvas-section-hero {
+  background: #fff;
+  color: #14111c;
+}
+
+/* The fixed dark radial gradient that backs the rest of the page would
+   still show through a transparent hero, so it stops at the hero. */
+.canvas-section-hero::before,
+.canvas-section-hero .hero-orbit {
+  display: none;
+}
+
+.canvas-section-hero .canvas-progress .progress-track {
+  background: rgba(20, 17, 28, 0.12);
+}
+.canvas-section-hero .canvas-progress .progress-fill {
+  background: #14111c;
+}
+.canvas-section-hero .progress-label {
+  color: #5c554c;
+}
+
+/* ------------------------------------------------------------ headline */
+
+.canvas-section-hero .story-chapter h1 {
+  color: #14111c;
+  -webkit-text-stroke: 0;
+  text-transform: none;
+  letter-spacing: -0.03em;
+  font-size: clamp(2.9rem, 7vw, 6rem);
+  line-height: 0.95;
+  min-height: 0;
+  row-gap: 0.04em;
+  text-align: left;
+  justify-items: start;
+}
+
+.canvas-section-hero .story-chapter h1 span {
+  text-shadow: none;
+  color: #14111c;
+}
+
+/* The accent word. Lime behind dark type rather than lime type, which
+   would be invisible here. The inline-block keeps the highlight tight
+   to the word instead of running the width of the grid row. */
+.canvas-section-hero .story-chapter h1 span:nth-child(2) {
+  color: #14111c;
+  background: #c6ff36;
+  padding: 0.02em 0.22em 0.08em;
+  border-radius: 6px;
+  justify-self: start;
+}
+
+.canvas-section-hero .story-kicker {
+  color: #5c554c;
+  background: rgba(20, 17, 28, 0.05);
+  border-color: rgba(20, 17, 28, 0.12);
+}
+
+/* --------------------------------------------------------------- panel */
+
+.canvas-section-hero .hero-info-panel {
+  border: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  padding: 0;
+}
+
+.canvas-section-hero .hero-info-panel .story-body {
+  color: #5c554c;
+  font-size: clamp(1rem, 1.35vw, 1.1rem);
+  line-height: 1.55;
+  max-width: 34ch;
+  background: none;
+  border: 0;
+}
 
 .hero-proof {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   gap: 0.5rem;
-  margin: 0.9rem 0 0;
-  max-width: 44ch;
+  margin: 1rem 0 0;
+  max-width: 40ch;
   font-size: 0.9375rem;
-  line-height: 1.55;
-  /* 0.72 alpha, not the 0.38 used elsewhere on this page: that lands near
-     3.5:1 on this background, under the 4.5:1 body-text minimum. */
-  color: rgba(255, 250, 242, 0.72);
+  line-height: 1.5;
+  color: #5c554c;
 }
 
 .hero-proof-mark {
@@ -10946,26 +11028,32 @@ body {
   white-space: nowrap;
 }
 
+.canvas-section-hero .story-markers span {
+  color: #14111c;
+  background: rgba(20, 17, 28, 0.06);
+  border: 1px solid rgba(20, 17, 28, 0.14);
+}
+
+/* ------------------------------------------------------------- actions */
+
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: 1.05rem;
+  margin-top: 1.1rem;
 }
 
 .hero-cta {
   display: inline-flex;
   align-items: center;
-  /* 48px tall: above the 44px touch minimum even before the border. */
   min-height: 48px;
   padding: 0 1.4rem;
-  border: 1px solid rgba(255, 250, 242, 0.28);
+  border: 1px solid rgba(20, 17, 28, 0.22);
   border-radius: 999px;
   font-size: 0.9375rem;
   font-weight: 600;
-  letter-spacing: 0.01em;
   text-decoration: none;
-  color: #fffaf2;
+  color: #14111c;
   background: transparent;
   transition: background-color 200ms ease, border-color 200ms ease,
     color 200ms ease, transform 200ms ease;
@@ -10973,136 +11061,56 @@ body {
 
 .hero-cta:hover,
 .hero-cta:focus-visible {
-  background: rgba(255, 250, 242, 0.1);
-  border-color: rgba(255, 250, 242, 0.5);
+  background: rgba(20, 17, 28, 0.06);
+  border-color: rgba(20, 17, 28, 0.45);
 }
 
-.hero-cta:active {
-  transform: translateY(1px);
-}
+.hero-cta:active { transform: translateY(1px); }
 
 .hero-cta:focus-visible {
-  outline: 2px solid #c6ff36;
+  outline: 2px solid #14111c;
   outline-offset: 3px;
 }
 
 .hero-cta-primary {
-  background: #c6ff36;
-  border-color: #c6ff36;
-  color: #14111c;
+  background: #14111c;
+  border-color: #14111c;
+  color: #fffaf2;
 }
 
 .hero-cta-primary:hover,
 .hero-cta-primary:focus-visible {
-  background: #d4ff63;
-  border-color: #d4ff63;
-  color: #14111c;
+  background: #2a2621;
+  border-color: #2a2621;
+  color: #fffaf2;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .hero-cta {
-    transition: none;
-  }
-  .hero-cta:active {
-    transform: none;
-  }
-}
+/* --------------------------------------------------------- composition */
 
-/* ===================================================================
-   Hero legibility at rest
-   -------------------------------------------------------------------
-   The rules above hide the headline words and the info panel until a
-   scroll-driven script raises their opacity. Appended here so the hero
-   reads on load; the character sequence still scrubs with scroll.
-   =================================================================== */
-
-.canvas-section-hero .story-chapter h1 span.hero-title-word,
-.canvas-section-hero .hero-info-panel,
-.canvas-section-hero .story-body,
-.canvas-section-hero .story-markers {
-  opacity: 1;
-  transform: none;
-  pointer-events: auto;
-}
-
-.canvas-section-hero .story-chapter h1 span.hero-title-word {
-  display: block;
-  animation: heroWordIn 620ms cubic-bezier(0.22, 0.68, 0.36, 1) backwards;
-}
-
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(1) { animation-delay: 60ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(2) { animation-delay: 130ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(3) { animation-delay: 200ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(4) { animation-delay: 270ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(5) { animation-delay: 340ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(6) { animation-delay: 410ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(7) { animation-delay: 480ms; }
-.canvas-section-hero .story-chapter h1 span.hero-title-word:nth-child(8) { animation-delay: 550ms; }
-
-.canvas-section-hero .hero-info-panel {
-  animation: heroPanelIn 720ms cubic-bezier(0.22, 0.68, 0.36, 1) 460ms backwards;
-}
-
-@keyframes heroWordIn {
-  from { opacity: 0; transform: translate3d(0, 28px, 0); }
-  to   { opacity: 1; transform: none; }
-}
-
-@keyframes heroPanelIn {
-  from { opacity: 0; transform: translate3d(0, 18px, 0); }
-  to   { opacity: 1; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .canvas-section-hero .story-chapter h1 span.hero-title-word,
-  .canvas-section-hero .hero-info-panel {
-    animation: none;
-  }
-}
-
-
-/* The headline is centred in a 1120px grid and the info panel is pinned to the
-   right, so on a laptop the panel sat on top of the last 160px of "Design.".
-   Giving the headline the left two-thirds and the panel the right third turns
-   an accidental collision into a deliberate three-part composition: type left,
-   character centre, proof and actions right. Only above 64rem - narrower than
-   that the panel already drops below the headline. */
 @media (min-width: 64rem) {
-  .canvas-section-hero .story-chapter h1 {
-    width: min(640px, 52vw);
-    justify-items: start;
-    justify-self: start;
-    margin-left: clamp(2rem, 5vw, 5rem);
-    text-align: left;
-    /* The original size and min-height were built for a headline that was the
-       entire hero. Now it shares the screen with the proof and the two calls
-       to action, and all of it has to fit above the fold on a 720px laptop. */
-    font-size: clamp(3rem, 6.6vw, 5.5rem);
-    min-height: 0;
-    letter-spacing: -0.01em;
-    row-gap: 0.02em;
-  }
-
-  .canvas-section-hero .story-chapter h1 span {
-    justify-self: start !important;
-  }
-
-  /* Taken out of absolute positioning and placed under the headline, so the
-     hero becomes two honest columns: everything to read and click on the
-     left, the character on the right. Pinned bottom-right it kept landing
-     either on top of the type or behind the character's shoulder. */
-  .canvas-section-hero .hero-info-panel {
-    position: static;
-    width: min(30rem, 46vw);
-    margin: 1.1rem 0 0 clamp(2rem, 5vw, 5rem);
-    justify-self: start;
-    background:
-      linear-gradient(135deg, rgba(255, 250, 240, 0.1), rgba(255, 250, 240, 0.03)),
-      rgba(18, 15, 26, 0.42);
-  }
-
   .canvas-section-hero .story-chapter {
     align-content: center;
     justify-items: start;
   }
+
+  .canvas-section-hero .story-chapter h1 {
+    width: min(620px, 50vw);
+    justify-self: start;
+    margin-left: clamp(2rem, 5vw, 5rem);
+  }
+
+  /* Out of absolute positioning and under the headline, so the hero is two
+     columns: everything to read and click on the left, character on the
+     right. Pinned bottom-right it landed on the character's shoulder. */
+  .canvas-section-hero .hero-info-panel {
+    position: static;
+    width: min(30rem, 44vw);
+    margin: 1rem 0 0 clamp(2rem, 5vw, 5rem);
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta { transition: none; }
+  .hero-cta:active { transform: none; }
 }
