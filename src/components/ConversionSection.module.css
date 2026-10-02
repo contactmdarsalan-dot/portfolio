@@ -1,11 +1,12 @@
 /*
- * Scoped, like the resume section. The global sheet still carries the old
- * .process-canvas-* rules; nothing here uses those class names, so none of
- * it can leak in.
+ * Process. White ground (one of the 60 neutrals), ink #14111c for type and
+ * the active node, lime #c6ff36 only on the active feedback path and the
+ * pulse dot. Muted #4a443c, soft #6f675d for the rest.
  *
- * Same tokens as the hero: ink #14111c (17.9:1 on white), muted #4a443c
- * (9.6:1), soft #6f675d (5.6:1). Lime appears as a mark only - the active
- * dot on the rail and the icon circle - never as type.
+ * Desktop: the SVG pipeline carries the picture; the stepper beneath is a
+ * row of five quiet tabs. Phone: the SVG is hidden (a 1200-unit drawing at
+ * 360px is a smear) and the stepper becomes a vertical timeline that does
+ * the same job.
  */
 
 .section {
@@ -27,7 +28,7 @@
   display: grid;
   gap: 2rem;
   align-items: end;
-  margin-bottom: clamp(3rem, 6vw, 5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 
 .kicker {
@@ -64,10 +65,10 @@
   line-height: 1;
   letter-spacing: -0.035em;
   text-wrap: balance;
-  animation: titleIn 520ms cubic-bezier(0.32, 0.72, 0, 1) both;
+  animation: fadeUp 520ms cubic-bezier(0.32, 0.72, 0, 1) both;
 }
 
-@keyframes titleIn {
+@keyframes fadeUp {
   from { opacity: 0; transform: translate3d(0, 10px, 0); }
   to   { opacity: 1; transform: none; }
 }
@@ -80,7 +81,6 @@
   color: #4a443c;
 }
 
-/* Segmented control, two states, one of them ink. */
 .switch {
   display: inline-flex;
   align-self: start;
@@ -115,97 +115,226 @@
   background: #14111c;
 }
 
-/* ---------------------------------------------------------------- rail */
+/* --------------------------------------------------------------- panel */
 
-/* Five steps along one hairline. The rail is drawn by the list itself and
-   each step puts a dot on it; the active dot is lime and larger. Read left
-   to right on desktop, which is the order they happen in. */
-.rail {
+.panel {
+  display: grid;
+  gap: 1.5rem;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.1),
+    0 32px 70px -44px rgba(20, 17, 28, 0.35);
+}
+
+/* ------------------------------------------------------------- diagram */
+
+.diagram {
+  display: none;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  font-family: var(--font-manrope, "Manrope", sans-serif);
+}
+
+.edge,
+.edgeOn {
+  color: rgba(20, 17, 28, 0.28);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  transition: color 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.edgeOn {
+  color: #14111c;
+}
+
+.feedback,
+.feedbackOn {
+  color: rgba(20, 17, 28, 0.22);
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-dasharray: 5 6;
+  transition: color 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.feedbackOn {
+  color: #14111c;
+  stroke-dasharray: none;
+  animation: dash 1.2s linear infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -22; }
+}
+
+.feedbackOn path {
+  stroke: #c6ff36;
+  stroke-width: 2.5;
+  stroke-dasharray: 8 6;
+  filter: drop-shadow(0 0 6px rgba(198, 255, 54, 0.5));
+}
+
+.feedbackLabel {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: #6f675d;
+  stroke: none;
+  paint-order: stroke;
+  stroke: #ffffff;
+  stroke-width: 6;
+}
+
+.feedbackOn .feedbackLabel {
+  fill: #14111c;
+}
+
+.node rect,
+.nodeDone rect,
+.nodeOn rect {
+  fill: #ffffff;
+  stroke: rgba(20, 17, 28, 0.14);
+  stroke-width: 1.5;
+  transition: fill 500ms cubic-bezier(0.32, 0.72, 0, 1),
+    stroke 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.nodeDone rect {
+  fill: #f4f1ea;
+  stroke: rgba(20, 17, 28, 0.1);
+}
+
+.nodeOn rect {
+  fill: #14111c;
+  stroke: #14111c;
+}
+
+.node:hover rect {
+  stroke: #14111c;
+}
+
+.nodeIndex {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  fill: #6f675d;
+}
+
+.nodeTitle {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  fill: #14111c;
+}
+
+.nodeOn .nodeIndex { fill: rgba(255, 250, 242, 0.6); }
+.nodeOn .nodeTitle { fill: #fffaf2; }
+
+.nodePulse {
+  fill: #c6ff36;
+  animation: pulse 1.6s ease-out infinite;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+@keyframes pulse {
+  0%   { opacity: 1; transform: scale(1); }
+  70%  { opacity: 0.2; transform: scale(1.9); }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+
+/* ------------------------------------------------------------- stepper */
+
+.stepper {
   position: relative;
   display: grid;
-  grid-template-columns: 1fr;
   gap: 0;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* Phone: one vertical line down the left, a dot per step on it. */
+.stepper::before {
+  content: "";
+  position: absolute;
+  left: 0.55rem;
+  top: 1rem;
+  bottom: 1rem;
+  width: 1px;
+  background: rgba(20, 17, 28, 0.14);
+}
+
 .step,
+.stepDone,
 .stepOn {
   position: relative;
 }
 
-.rail button {
+.stepper button {
+  position: relative;
   display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.75rem;
   width: 100%;
-  gap: 0.35rem;
-  justify-items: start;
-  padding: 1.25rem 0 1.25rem 2.25rem;
+  min-height: 3.25rem;
+  padding: 0.65rem 0 0.65rem 2rem;
   border: 0;
   background: transparent;
-  text-align: left;
   font: inherit;
+  text-align: left;
   color: inherit;
   cursor: pointer;
 }
 
-.rail button:focus-visible {
-  outline: 2px solid #14111c;
-  outline-offset: 4px;
-  border-radius: 8px;
-}
-
-.index {
-  font-family: var(--font-display, "Syne", sans-serif);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #6f675d;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Vertical rail on small screens: the dot sits in the left gutter. */
-.dot {
-  position: absolute;
-  left: 0.45rem;
-  top: 1.55rem;
-  width: 0.55rem;
-  height: 0.55rem;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1.5px rgba(20, 17, 28, 0.35);
-  transition: transform 500ms cubic-bezier(0.32, 0.72, 0, 1),
-    box-shadow 500ms cubic-bezier(0.32, 0.72, 0, 1),
-    background-color 500ms cubic-bezier(0.32, 0.72, 0, 1);
-}
-
-.rail::before {
+.stepper button::before {
   content: "";
   position: absolute;
-  left: 0.7rem;
-  top: 1.5rem;
-  bottom: 1.5rem;
-  width: 1px;
-  background: rgba(20, 17, 28, 0.12);
+  left: 0.2rem;
+  top: 1.05rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1.5px rgba(20, 17, 28, 0.3);
+  transition: background-color 400ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 400ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
-.stepOn .dot {
+.stepDone button::before {
+  background: #14111c;
+  box-shadow: inset 0 0 0 1.5px #14111c;
+}
+
+.stepOn button::before {
   background: #c6ff36;
-  box-shadow: 0 0 0 1.5px #14111c, 0 0 0 6px rgba(198, 255, 54, 0.28);
-  transform: scale(1.15);
+  box-shadow: 0 0 0 4px rgba(198, 255, 54, 0.35), inset 0 0 0 1.5px #14111c;
 }
 
-.icon {
+.stepper button:focus-visible {
+  outline: 2px solid #14111c;
+  outline-offset: 2px;
+  border-radius: 0.5rem;
+}
+
+.stepIndex {
+  grid-row: 1;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   color: #6f675d;
-}
-
-.stepOn .icon {
-  color: #14111c;
+  font-variant-numeric: tabular-nums;
+  align-self: baseline;
 }
 
 .stepTitle {
+  grid-row: 1;
   font-family: var(--font-display, "Syne", sans-serif);
-  font-size: 1.25rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: -0.015em;
   color: #6f675d;
@@ -213,12 +342,14 @@
 }
 
 .stepOn .stepTitle,
-.rail button:hover .stepTitle {
+.stepDone .stepTitle,
+.stepper button:hover .stepTitle {
   color: #14111c;
 }
 
-.stepPoint {
-  font-size: 0.9375rem;
+.stepOut {
+  grid-column: 2;
+  font-size: 0.8125rem;
   line-height: 1.4;
   color: #6f675d;
 }
@@ -227,23 +358,25 @@
 
 .detail {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
   gap: 1.25rem;
-  margin-top: clamp(2rem, 4vw, 3rem);
-  padding: 1.1rem 1.4rem;
-  border-radius: 1.25rem;
-  background: rgba(20, 17, 28, 0.03);
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(20, 17, 28, 0.1);
+  animation: fadeUp 420ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.detailHead {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .detailIndex {
   font-family: var(--font-display, "Syne", sans-serif);
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 800;
-  letter-spacing: -0.03em;
   line-height: 1;
-  color: #14111c;
+  letter-spacing: -0.04em;
+  color: rgba(20, 17, 28, 0.18);
   font-variant-numeric: tabular-nums;
 }
 
@@ -256,28 +389,84 @@
   color: #6f675d;
 }
 
-.detailLine {
+.detailTitle {
   margin: 0;
-  font-size: 1.0625rem;
-  line-height: 1.4;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.375rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.cols {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.col {
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+  padding: 1.1rem 1.25rem;
+  border-radius: 1rem;
+  background: #f4f1ea;
+}
+
+.colExample {
+  background: #14111c;
+  color: #fffaf2;
+}
+
+.colLabel {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f675d;
+}
+
+.colExample .colLabel {
+  color: #c6ff36;
+}
+
+.colText {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
   color: #4a443c;
 }
 
-.detailLine strong {
-  font-weight: 700;
-  color: #14111c;
+.colExample .colText {
+  color: rgba(255, 250, 242, 0.85);
 }
 
-.detailLabel {
-  padding: 0.35rem 0.75rem;
-  border-radius: 999px;
-  background: #c6ff36;
+.io {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.io div {
+  display: grid;
+  grid-template-columns: 2.25rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.io dt {
   font-size: 0.6875rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #14111c;
-  white-space: nowrap;
+}
+
+.io dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #4a443c;
 }
 
 /* ------------------------------------------------------------- actions */
@@ -286,7 +475,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-  margin-top: clamp(2rem, 4vw, 2.75rem);
+  margin-top: clamp(2rem, 4vw, 3rem);
 }
 
 /* ------------------------------------------------------- wider screens */
@@ -295,48 +484,44 @@
   .head {
     grid-template-columns: 1fr auto;
   }
+  .cols {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 
-  /* Horizontal rail: five columns, one hairline across the top, dots on it. */
-  .rail {
+@media (min-width: 64rem) {
+  .diagram {
+    display: block;
+  }
+
+  /* The vertical timeline becomes a quiet row of five tabs under the
+     drawing: the drawing already shows order, so the line goes. */
+  .stepper {
     grid-template-columns: repeat(5, 1fr);
-    gap: 1.5rem;
-    padding-top: 1.75rem;
+    gap: 0.5rem;
   }
-
-  .rail::before {
-    left: 0;
-    right: 0;
-    top: 0.3rem;
-    bottom: auto;
-    width: auto;
-    height: 1px;
+  .stepper::before { display: none; }
+  .stepper button {
+    grid-template-columns: auto 1fr;
+    min-height: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.75rem;
+    transition: background-color 400ms cubic-bezier(0.32, 0.72, 0, 1);
   }
-
-  .rail button {
-    padding: 0.5rem 0 0;
-  }
-
-  .dot {
-    left: 0;
-    top: 0.03rem;
-    transform: translateY(-50%);
-  }
-
-  .stepOn .dot {
-    transform: translateY(-50%) scale(1.15);
-  }
-
-  .index {
-    margin-bottom: 0.4rem;
-  }
+  .stepper button::before { display: none; }
+  .stepper button:hover { background: rgba(20, 17, 28, 0.04); }
+  .stepOn button { background: rgba(198, 255, 54, 0.22); }
+  .stepTitle { font-size: 0.9375rem; }
+  .stepOut { font-size: 0.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .title,
-  .dot,
-  .stepTitle,
-  .switch button {
-    animation: none;
-    transition: none;
-  }
+  .detail { animation: none; }
+  .nodePulse,
+  .feedbackOn { animation: none; }
+  .switch button,
+  .edge, .edgeOn, .feedback, .feedbackOn,
+  .node rect, .nodeDone rect, .nodeOn rect,
+  .stepper button, .stepper button::before, .stepTitle { transition: none; }
 }
