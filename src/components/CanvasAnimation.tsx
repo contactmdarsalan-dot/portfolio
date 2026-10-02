@@ -144,9 +144,13 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
     // the moment it lands; the rest follow once it is on screen.
     const frameSrc = (i: number) => `/hero-frames/f${String(i).padStart(3, "0")}.webp`;
 
+    // On phones the character is hidden (it sat behind the copy and the
+    // buttons), so none of its 93 frames are fetched there.
+    const phoneHero = variant === "hero" && window.matchMedia("(max-width: 47.9rem)").matches;
+
     const first = new Image();
     first.fetchPriority = "high";
-    first.src = frameSrc(1);
+    if (!phoneHero) first.src = frameSrc(1);
     images.push(first);
 
     const loadRest = () => {
@@ -162,7 +166,9 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       }
     };
 
-    if (first.complete) {
+    if (phoneHero) {
+      updateChapterState(0);
+    } else if (first.complete) {
       render();
       updateChapterState(0);
       loadRest();
@@ -371,9 +377,15 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
                 <div className="hero-info-panel">
                   {chapter.lead && <p className="story-body">{chapter.lead}</p>}
 
-                  <p className="hero-proof">
-                    <span className="hero-proof-dot" aria-hidden="true" />
-                    2nd place, Hostinger 21-Day Startup Challenge 2026
+                  <p className="hero-proof hero-proof-hostinger">
+                    <span className="hero-proof-logo" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                        <path d="M16.415 0v7.16l5.785 3.384V2.949L16.415 0ZM1.8 0v11.237h18.815L14.89 8.09l-7.457-.003V3.024L1.8 0Zm14.615 20.894v-7.033l-7.3-.003c.007.01-5.82-3.36-5.82-3.36l19.105.995V24l-5.985-3.106ZM1.8 13.36v8.04l5.635 2.6V16.39L1.8 13.36Z" />
+                      </svg>
+                    </span>
+                    <span>
+                      <b>2nd place</b> · Hostinger 21-Day Startup Challenge 2026
+                    </span>
                   </p>
 
                   <div className="hero-actions">

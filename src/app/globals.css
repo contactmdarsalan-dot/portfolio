@@ -11834,3 +11834,66 @@ body,
     flex-wrap: wrap;
   }
 }
+
+/* ===================================================================
+   AWARD CHIP + PHONE HERO
+   -------------------------------------------------------------------
+   The award line is Hostinger's, so it wears Hostinger's purple and
+   mark rather than the page lime. White on #673de6 is 5.6:1.
+   On phones the character is hidden: it sat behind the copy and the
+   buttons, and its frames are no longer fetched there either.
+   =================================================================== */
+
+.canvas-section-hero .hero-proof.hero-proof-hostinger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0.5rem 0 0;
+  padding: 0.45rem 0.95rem 0.45rem 0.45rem;
+  border: 0;
+  border-radius: 999px;
+  background: #673de6;
+  box-shadow: 0 12px 28px -14px rgba(103, 61, 230, 0.65);
+  color: #ffffff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: normal;
+  flex-wrap: nowrap;
+}
+
+.canvas-section-hero .hero-proof-hostinger b {
+  font-weight: 800;
+}
+
+.hero-proof-logo {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #673de6;
+}
+
+@media (max-width: 47.9rem) {
+  .canvas-section-hero canvas {
+    display: none !important;
+  }
+
+  .canvas-section-hero .hero-info-panel {
+    background: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    padding-right: 0;
+  }
+
+  .canvas-section-hero .hero-proof.hero-proof-hostinger {
+    border-radius: 1.1rem;
+    padding: 0.5rem 0.85rem 0.5rem 0.5rem;
+    font-size: 0.78rem;
+  }
+}
