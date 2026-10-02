@@ -36,7 +36,7 @@ const heroChapters: StoryChapter[] = [
     // "Make users happy" was true of every designer alive, which made it worth
     // nothing to a reader deciding whether to keep scrolling. This says the one
     // thing that is actually unusual here: design and QA in the same person.
-    eyebrow: "Md Arsalan — UX designer & QA",
+    eyebrow: "Md Arsalan · UX Designer & QA",
     title: "Design. Test. Ship.",
     lead: "Three years designing interfaces. Then testing them until they hold.",
     markers: ["Research", "Interface", "Release QA"],
@@ -361,16 +361,20 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
                   {chapter.lead && <p className="story-body">{chapter.lead}</p>}
 
                   <p className="hero-proof">
-                    <span className="hero-proof-mark">2nd place</span>{" "}
-                    Hostinger 21-Day Startup Challenge 2026, for a QA tool that
-                    audits websites.
+                    <span className="hero-proof-dot" aria-hidden="true" />
+                    2nd place, Hostinger 21-Day Startup Challenge 2026
                   </p>
 
                   <div className="hero-actions">
                     <a className="hero-cta hero-cta-primary" href="#work">
-                      See selected work
+                      <span>See selected work</span>
+                      <span className="hero-cta-icon" aria-hidden="true">
+                        <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M4 12 12 4M6 4h6v6" />
+                        </svg>
+                      </span>
                     </a>
-                    <a className="hero-cta" href="mailto:contactmdarsalan@gmail.com">
+                    <a className="hero-cta hero-cta-ghost" href="mailto:contactmdarsalan@gmail.com">
                       Email me
                     </a>
                   </div>
