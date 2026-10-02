@@ -11441,3 +11441,274 @@ body {
     transition: none;
   }
 }
+
+/* ===================================================================
+   WHOLE PAGE - white ground, one palette
+   -------------------------------------------------------------------
+   The page was five different grounds: cream with pink and lime radial
+   glows, a dark plum grid, cream again, dark plum again, near-white.
+   Each section was its own small website. One ground, one ink, one
+   accent used only as a mark.
+
+   Appended rather than edited in place. The sections above are ~11k
+   lines across several media queries; this block is the one change
+   that can be reviewed as a whole.
+
+   Contrast on white, calculated: ink #14111c 17.9:1, muted #4a443c
+   9.6:1, soft #6f675d 5.6:1. Lime #c6ff36 is 1.18:1 as type and is
+   never used as type.
+   =================================================================== */
+
+:root {
+  --bg-deep: #ffffff;
+  --bg-surface: #ffffff;
+  --text-primary: #14111c;
+  --text-secondary: #4a443c;
+  --text-muted: #6f675d;
+  --border: rgba(20, 17, 28, 0.1);
+  --glow-purple: transparent;
+  --glow-magenta: transparent;
+  --glow-cyan: transparent;
+}
+
+body,
+.site-flow {
+  background: #ffffff;
+}
+
+/* The fixed WebGL particle scene - amber sphere, red and blue rings -
+   was composed for a dark ground and reads as noise on white. Hiding
+   it also removes the GPU stall warnings the audit logged. */
+.scene-container {
+  display: none;
+}
+
+/* Every section drew its own radial glows and a dark-on-dark hairline
+   frame. One ground, one hairline. */
+.skills-showcase,
+.work-showcase,
+.services-showcase,
+.conversion-section,
+.sp-section {
+  background: #ffffff;
+  color: #14111c;
+}
+
+.skills-showcase::before,
+.work-showcase::before,
+.services-showcase::before,
+.conversion-section::before,
+.sp-section::before {
+  border-color: rgba(20, 17, 28, 0.08);
+}
+
+.sp-glow {
+  display: none;
+}
+
+/* -------------------------------------------------------------- hero */
+
+/* Scroll marker back to the bottom-right. Moving it to the text column
+   put its 112px track line straight through the proof sentence, which
+   is what read as a strikethrough. */
+.canvas-section-hero .canvas-progress {
+  left: auto;
+  right: 2.4rem;
+}
+
+/* Two-line sentence headline. Each span is a line, never wraps. */
+.canvas-section-hero .story-chapter h1 {
+  font-size: clamp(2.6rem, 6vw, 5.75rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  max-width: none;
+}
+
+.canvas-section-hero .story-chapter h1 span.hero-title-word {
+  white-space: nowrap;
+}
+
+.canvas-section-hero .story-chapter h1 span:nth-child(2) {
+  padding-bottom: 0;
+}
+
+.canvas-section-hero .story-chapter h1 span:nth-child(2)::after {
+  display: none;
+}
+
+.canvas-section-hero .story-chapter h1 span.hero-title-accent {
+  position: relative;
+  padding-bottom: 0.08em;
+}
+
+.canvas-section-hero .story-chapter h1 span.hero-title-accent::after {
+  content: "";
+  position: absolute;
+  left: 0.02em;
+  right: 0.12em;
+  bottom: 0;
+  height: 0.07em;
+  border-radius: 999px;
+  background: #c6ff36;
+}
+
+@media (min-width: 64rem) {
+  .canvas-section-hero .story-chapter h1 {
+    max-width: none;
+  }
+}
+
+/* The proof, highlighted. A lime-tinted pill with a hairline, dark
+   text - the one place on the first screen the accent carries weight. */
+.hero-proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1.25rem 0 0;
+  padding: 0.55rem 0.95rem 0.55rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(198, 255, 54, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  color: #14111c;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.hero-proof-dot {
+  background: #14111c;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.6);
+}
+
+/* ------------------------------------------------------------ skills */
+
+.skill-system-card {
+  background: #ffffff;
+  border: 1px solid rgba(20, 17, 28, 0.1);
+  box-shadow: 0 24px 60px -32px rgba(20, 17, 28, 0.22);
+}
+
+.skill-system-card h3 {
+  color: #14111c;
+}
+
+/* -------------------------------------------------------------- work */
+
+.work-showcase .color-shift-heading {
+  color: #14111c;
+}
+
+.work-title-row p {
+  color: #4a443c;
+}
+
+.work-ia-map,
+.work-ia-map span {
+  color: #4a443c;
+  border-color: rgba(20, 17, 28, 0.12);
+  background: rgba(20, 17, 28, 0.035);
+  box-shadow: none;
+}
+
+.work-count {
+  color: #ffffff;
+  background: #14111c;
+}
+
+.portfolio-stack-card,
+.portfolio-card {
+  background: #ffffff;
+  border: 1px solid rgba(20, 17, 28, 0.1);
+  box-shadow: 0 32px 80px -36px rgba(20, 17, 28, 0.28);
+}
+
+.portfolio-stack-index {
+  color: rgba(20, 17, 28, 0.12);
+}
+
+.portfolio-stack-content {
+  color: #14111c;
+}
+
+.portfolio-kicker {
+  color: #4a443c;
+  opacity: 1;
+}
+
+.portfolio-result {
+  color: #4a443c;
+  opacity: 1;
+}
+
+.portfolio-card-footer strong {
+  color: #14111c;
+}
+
+/* ----------------------------------------------------------- process */
+
+.process-canvas-copy {
+  box-shadow: none;
+}
+
+.process-canvas-copy h2 {
+  color: #14111c;
+}
+
+.process-canvas-copy p {
+  color: #4a443c;
+}
+
+.process-canvas-wordmark {
+  color: rgba(20, 17, 28, 0.04);
+}
+
+.process-canvas-panel {
+  background: #ffffff;
+  border-color: rgba(20, 17, 28, 0.12);
+  box-shadow: 0 24px 60px -32px rgba(20, 17, 28, 0.22);
+}
+
+.process-canvas-modes button {
+  color: #4a443c;
+}
+
+.process-canvas-modes button.is-active {
+  color: #ffffff;
+  background: #14111c;
+  border-color: #14111c;
+}
+
+.process-step {
+  color: #14111c;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(20, 17, 28, 0.1);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ---------------------------------------------------------- services */
+
+.service-offer-card {
+  background: #ffffff;
+  border: 1px solid rgba(20, 17, 28, 0.1);
+  box-shadow: 0 24px 60px -32px rgba(20, 17, 28, 0.22);
+}
+
+/* ------------------------------------------------------- testimonials */
+
+.sp-title {
+  color: #14111c;
+}
+
+/* The accent rule never set display, so the earlier nth-child reset that
+   hid the old rule kept hiding this one. And the two-line headline ran
+   under the character at 1440px; the text column now holds ~44vw. */
+.canvas-section-hero .story-chapter h1 span.hero-title-accent::after {
+  display: block;
+}
+
+.canvas-section-hero .story-chapter h1 {
+  font-size: clamp(2.4rem, 5.2vw, 5rem);
+}

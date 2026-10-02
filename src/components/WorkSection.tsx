@@ -21,12 +21,12 @@ export default function WorkSection() {
       gsap.registerPlugin(ScrollTrigger);
 
       context = gsap.context(() => {
-        gsap.utils.toArray<HTMLElement>(".color-shift-heading").forEach((heading) => {
+        gsap.utils.toArray<HTMLElement>(".work-showcase .color-shift-heading").forEach((heading) => {
           gsap.fromTo(
             heading,
-            { color: "#fffaf2" },
+            { color: "#6f675d" },
             {
-              color: "#c6ff36",
+              color: "#14111c",
               scrollTrigger: {
                 trigger: heading,
                 start: "top 78%",
@@ -211,11 +211,10 @@ export default function WorkSection() {
       </div>
 
       <div className="work-title-row" data-reveal-item>
-        <h2 className="color-shift-heading">Work that stacks into proof.</h2>
+        <h2 className="color-shift-heading">Selected work, and the decisions behind it.</h2>
         <p>
-          A fast path through selected work: browse the visual signal, compare
-          the product intent, then open the case study for process, decisions,
-          and QA checks.
+          Browse the visuals, then open a case study for the process, the
+          decisions, and the QA checks that shipped with it.
         </p>
       </div>
 

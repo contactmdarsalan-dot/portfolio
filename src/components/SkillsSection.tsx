@@ -179,7 +179,7 @@ export default function SkillsSection() {
     <section ref={sectionRef} className="skills-showcase" id="skills" data-scroll-section data-section-reveal>
       <div className="skills-heading" data-reveal-item>
         <p className="section-pill">Skill Stack</p>
-        <h2 className="color-shift-heading">UX skills, built for release.</h2>
+        <h2 className="color-shift-heading">Skills that hold up after launch.</h2>
         <p>
           A practical mix of product thinking, interface craft, and quality checks.
           The goal is not more screens. The goal is fewer user doubts.

@@ -37,8 +37,8 @@ const heroChapters: StoryChapter[] = [
     // nothing to a reader deciding whether to keep scrolling. This says the one
     // thing that is actually unusual here: design and QA in the same person.
     eyebrow: "Md Arsalan · UX Designer & QA",
-    title: "Design. Test. Ship.",
-    lead: "Three years designing interfaces. Then testing them until they hold.",
+    title: "Looks finished.|Actually works.",
+    lead: "UX designer who tests what he ships. Three years of interfaces, each one checked before release.",
     markers: ["Research", "Interface", "Release QA"],
     align: "left",
   },
@@ -192,7 +192,7 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
       // character keeps the middle and right. Below 1024px the panel stacks
       // under the headline anyway, so centring is still correct there.
       const heroShift =
-        variant === "hero" && window.innerWidth >= 1024 ? cvs.width * 0.12 : 0;
+        variant === "hero" && window.innerWidth >= 1024 ? cvs.width * 0.17 : 0;
       const cx = (cvs.width - img.width * ratio) / 2 + heroShift;
       const mobileBottomBleed = isMobileHero ? cvs.height * 0.07 : 0;
       const desktopHeroLift = variant === "hero" && !isMobileHero ? cvs.height * 0.015 : 0;
@@ -346,10 +346,12 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
               <p className="story-kicker">{chapter.eyebrow}</p>
               <h1 className="color-shift-heading">
                 {variant === "hero" ? (
-                  chapter.title.split(" ").map((word, i, all) => (
-                    <span className="hero-title-word" key={`${word}-${i}`}>
-                      {word}
-                      {i < all.length - 1 ? " " : ""}
+                  chapter.title.split("|").map((line, i, all) => (
+                    <span
+                      className={`hero-title-word${i === all.length - 1 ? " hero-title-accent" : ""}`}
+                      key={`${line}-${i}`}
+                    >
+                      {line}
                     </span>
                   ))
                 ) : (
