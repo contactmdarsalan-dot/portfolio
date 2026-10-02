@@ -64,18 +64,6 @@ export const credentials: Credential[] = [
   },
   {
     kind: "Experience",
-    title: "Graphic Designer",
-    org: "Alpha Technology",
-    period: "Jan 2026 — Present",
-    start: "2026-01",
-    short: "Alpha Technology",
-    meta: "Full-time · Kathmandu, Nepal · On-site",
-    bullets: [
-      "Wireframing and interface systems for client product work.",
-    ],
-  },
-  {
-    kind: "Experience",
     title: "UI/UX Designer",
     org: "Code IT",
     period: "Apr 2024 — Jun 2026",

@@ -55,15 +55,6 @@ const resumeChapters: StoryChapter[] = [
     credentials: [
       {
         label: "Experience",
-        title: "Graphic Designer",
-        period: "Jan 2026 - Present · 5 mos",
-        meta: "Alpha Technology · Full-time · Kathmandu District, Nepal · On-site",
-        bullets: [
-          "Wireframing",
-        ],
-      },
-      {
-        label: "Experience",
         title: "User Experience Designer",
         period: "Jun 2023 - Feb 2026 · 2 yrs 9 mos",
         meta: "Hunchha Digital Agency · Full-time · Kosi Zone, Nepal",
