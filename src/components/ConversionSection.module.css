@@ -1,0 +1,342 @@
+/*
+ * Scoped, like the resume section. The global sheet still carries the old
+ * .process-canvas-* rules; nothing here uses those class names, so none of
+ * it can leak in.
+ *
+ * Same tokens as the hero: ink #14111c (17.9:1 on white), muted #4a443c
+ * (9.6:1), soft #6f675d (5.6:1). Lime appears as a mark only - the active
+ * dot on the rail and the icon circle - never as type.
+ */
+
+.section {
+  position: relative;
+  z-index: 6;
+  padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
+  background: #ffffff;
+  color: #14111c;
+}
+
+.inner {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------- head */
+
+.head {
+  display: grid;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+  background: rgba(20, 17, 28, 0.03);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4a443c;
+}
+
+.kicker::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #c6ff36;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.25);
+}
+
+.title {
+  margin: 0;
+  max-width: 16ch;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+  animation: titleIn 520ms cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@keyframes titleIn {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+.lead {
+  margin: 1rem 0 0;
+  max-width: 44ch;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.55;
+  color: #4a443c;
+}
+
+/* Segmented control, two states, one of them ink. */
+.switch {
+  display: inline-flex;
+  align-self: start;
+  padding: 0.25rem;
+  border-radius: 999px;
+  background: rgba(20, 17, 28, 0.05);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+}
+
+.switch button {
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #4a443c;
+  cursor: pointer;
+  transition: color 400ms cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 400ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.switch button:focus-visible {
+  outline: 2px solid #14111c;
+  outline-offset: 3px;
+}
+
+.switch .switchOn {
+  color: #ffffff;
+  background: #14111c;
+}
+
+/* ---------------------------------------------------------------- rail */
+
+/* Five steps along one hairline. The rail is drawn by the list itself and
+   each step puts a dot on it; the active dot is lime and larger. Read left
+   to right on desktop, which is the order they happen in. */
+.rail {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.step,
+.stepOn {
+  position: relative;
+}
+
+.rail button {
+  display: grid;
+  width: 100%;
+  gap: 0.35rem;
+  justify-items: start;
+  padding: 1.25rem 0 1.25rem 2.25rem;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.rail button:focus-visible {
+  outline: 2px solid #14111c;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.index {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #6f675d;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Vertical rail on small screens: the dot sits in the left gutter. */
+.dot {
+  position: absolute;
+  left: 0.45rem;
+  top: 1.55rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1.5px rgba(20, 17, 28, 0.35);
+  transition: transform 500ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 500ms cubic-bezier(0.32, 0.72, 0, 1),
+    background-color 500ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.rail::before {
+  content: "";
+  position: absolute;
+  left: 0.7rem;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 1px;
+  background: rgba(20, 17, 28, 0.12);
+}
+
+.stepOn .dot {
+  background: #c6ff36;
+  box-shadow: 0 0 0 1.5px #14111c, 0 0 0 6px rgba(198, 255, 54, 0.28);
+  transform: scale(1.15);
+}
+
+.icon {
+  color: #6f675d;
+}
+
+.stepOn .icon {
+  color: #14111c;
+}
+
+.stepTitle {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: #6f675d;
+  transition: color 400ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.stepOn .stepTitle,
+.rail button:hover .stepTitle {
+  color: #14111c;
+}
+
+.stepPoint {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+  color: #6f675d;
+}
+
+/* -------------------------------------------------------------- detail */
+
+.detail {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding: 1.1rem 1.4rem;
+  border-radius: 1.25rem;
+  background: rgba(20, 17, 28, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+}
+
+.detailIndex {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: #14111c;
+  font-variant-numeric: tabular-nums;
+}
+
+.detailEyebrow {
+  margin: 0 0 0.2rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f675d;
+}
+
+.detailLine {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  color: #4a443c;
+}
+
+.detailLine strong {
+  font-weight: 700;
+  color: #14111c;
+}
+
+.detailLabel {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: #c6ff36;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #14111c;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------- actions */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: clamp(2rem, 4vw, 2.75rem);
+}
+
+/* ------------------------------------------------------- wider screens */
+
+@media (min-width: 48rem) {
+  .head {
+    grid-template-columns: 1fr auto;
+  }
+
+  /* Horizontal rail: five columns, one hairline across the top, dots on it. */
+  .rail {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+    padding-top: 1.75rem;
+  }
+
+  .rail::before {
+    left: 0;
+    right: 0;
+    top: 0.3rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+  }
+
+  .rail button {
+    padding: 0.5rem 0 0;
+  }
+
+  .dot {
+    left: 0;
+    top: 0.03rem;
+    transform: translateY(-50%);
+  }
+
+  .stepOn .dot {
+    transform: translateY(-50%) scale(1.15);
+  }
+
+  .index {
+    margin-bottom: 0.4rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .title,
+  .dot,
+  .stepTitle,
+  .switch button {
+    animation: none;
+    transition: none;
+  }
+}
