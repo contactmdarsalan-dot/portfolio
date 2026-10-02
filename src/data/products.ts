@@ -51,7 +51,7 @@ export const products: Product[] = [
       "Pre-flight QA for AI-built websites. Opens your site in a real browser, submits your forms, and reports what actually happened rather than what the page claimed.",
     category: "QA tooling",
     stack: ["React", "Python", "Playwright", "Docker"],
-    screenshot: "/products/fixguard.webp",
+    screenshot: "/products/fixguard-2026-10.webp",
     note: "2nd place, Hostinger 21-Day Startup Challenge 2026",
     featured: true,
     caseStudy: {
