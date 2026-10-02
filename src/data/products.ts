@@ -107,6 +107,11 @@ export const products: Product[] = [
           detail:
             "Redis, a job queue, a separate browser worker and an ORM all came out. One process, one semaphore capping it at one browser, plain SQLite. Chromium plus a second runtime on a small box swaps, and a QA tool that falls over is worse than none.",
         },
+        {
+          title: "The marketing site, brought in-house.",
+          detail:
+            "The first landing page was generated with Hostinger AI Builder for the challenge. After the result it moved into the same repository as a static site with its own nginx container on the same VPS: one deploy for the whole product, the dashboard's security headers, and copy corrected wherever it promised more than the product does.",
+        },
       ],
       built: [
         {
