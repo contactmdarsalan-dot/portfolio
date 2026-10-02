@@ -11,6 +11,10 @@ import styles from "./ProductsSection.module.css";
  * The award-winning product is featured at full width; the rest sit in a
  * two-column grid beneath. Captures are the first screen of each site at
  * 1440px, taken with a real browser, not composed.
+ *
+ * This is the one dark section on the page (the 30 in 60/30/10): screenshots
+ * of light sites read as lit screens against ink, and the award pill is the
+ * only lime on the surface.
  */
 export default function ProductsSection() {
   const featured = products.find((p) => p.featured) ?? products[0];
@@ -23,8 +27,8 @@ export default function ProductsSection() {
           <p className={styles.kicker}>Selected work</p>
           <h2 className={styles.title}>Products that are live, with people using them.</h2>
           <p className={styles.lead}>
-            Designed, tested and shipped. Each one opens in a new tab; the code
-            is on GitHub where the link is shown.
+            Designed, tested and shipped. Each card opens the case study; the
+            domain opens the live product in a new tab.
           </p>
         </header>
 
@@ -110,11 +114,6 @@ function Card({
               <path d="M4 12 12 4M6 4h6v6" />
             </svg>
           </a>
-          {product.repo && (
-            <a href={product.repo} target="_blank" rel="noopener noreferrer" className={styles.repo}>
-              Source on GitHub
-            </a>
-          )}
         </div>
       </div>
     </article>

@@ -1,18 +1,23 @@
 /*
- * Scoped. Same tokens as the hero, nav and process sections: ink #14111c,
- * muted #4a443c, soft #6f675d, lime only as a mark.
+ * The dark section. Palette for the page is 60/30/10: neutrals (white,
+ * stone, mist) carry 60, ink #14111c carries 30 - this section and the
+ * contact band - and lime #c6ff36 is the 10, used here only for the award
+ * pill, the case-study underline and the hover ring.
  *
- * Captures sit in a double bezel - a tinted outer shell with a hairline,
+ * Text on ink: cream #fffaf2 (17.3:1), cream at 72% for body (10.8:1), at
+ * 55% for labels (6.9:1). Lime on ink is 15.2:1, so it may be type here.
+ *
+ * Captures sit in a double bezel - a lifted outer shell with a hairline,
  * and an inner frame with a concentric smaller radius - so a screenshot
- * reads as a mounted artefact rather than a pasted rectangle.
+ * reads as a lit screen rather than a pasted rectangle.
  */
 
 .section {
   position: relative;
   z-index: 6;
   padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
-  background: #ffffff;
-  color: #14111c;
+  background: #14111c;
+  color: #fffaf2;
 }
 
 .inner {
@@ -33,13 +38,13 @@
   margin: 0 0 1.25rem;
   padding: 0.35rem 0.85rem 0.35rem 0.6rem;
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
-  background: rgba(20, 17, 28, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 242, 0.14);
+  background: rgba(255, 250, 242, 0.05);
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #4a443c;
+  color: rgba(255, 250, 242, 0.8);
 }
 
 .kicker::before {
@@ -48,7 +53,7 @@
   height: 0.4rem;
   border-radius: 50%;
   background: #c6ff36;
-  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.25);
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.22);
 }
 
 .title {
@@ -60,6 +65,7 @@
   line-height: 1;
   letter-spacing: -0.035em;
   text-wrap: balance;
+  color: #fffaf2;
 }
 
 .lead {
@@ -67,7 +73,7 @@
   max-width: 46ch;
   font-size: clamp(1rem, 1.3vw, 1.125rem);
   line-height: 1.55;
-  color: #4a443c;
+  color: rgba(255, 250, 242, 0.72);
 }
 
 /* --------------------------------------------------------------- cards */
@@ -80,6 +86,8 @@
 
 .cardFeatured {
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2.5rem, 5vw, 4rem);
+  border-bottom: 1px solid rgba(255, 250, 242, 0.1);
 }
 
 .grid {
@@ -88,17 +96,14 @@
   gap: clamp(2.5rem, 5vw, 4rem) 2.5rem;
 }
 
-/* The double bezel. Outer: tinted shell, hairline, 1.5rem radius, 0.4rem
-   padding. Inner: white, radius = outer minus padding so the curves are
-   concentric, overflow clipped to the image. */
 .frame {
   display: block;
   padding: 0.4rem;
   border-radius: 1.5rem;
-  background: rgba(20, 17, 28, 0.04);
+  background: rgba(255, 250, 242, 0.06);
   box-shadow:
-    inset 0 0 0 1px rgba(20, 17, 28, 0.08),
-    0 32px 70px -40px rgba(20, 17, 28, 0.35);
+    inset 0 0 0 1px rgba(255, 250, 242, 0.12),
+    0 40px 80px -40px rgba(0, 0, 0, 0.7);
   transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1),
     box-shadow 700ms cubic-bezier(0.32, 0.72, 0, 1);
 }
@@ -106,12 +111,12 @@
 .frame:hover {
   transform: translateY(-4px);
   box-shadow:
-    inset 0 0 0 1px rgba(20, 17, 28, 0.1),
-    0 44px 80px -40px rgba(20, 17, 28, 0.42);
+    inset 0 0 0 1px rgba(198, 255, 54, 0.55),
+    0 52px 90px -40px rgba(0, 0, 0, 0.8);
 }
 
 .frame:focus-visible {
-  outline: 2px solid #14111c;
+  outline: 2px solid #c6ff36;
   outline-offset: 4px;
 }
 
@@ -119,8 +124,8 @@
   display: block;
   overflow: hidden;
   border-radius: calc(1.5rem - 0.4rem);
-  background: #ffffff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(20, 17, 28, 0.06);
+  background: #1d1926;
+  box-shadow: inset 0 1px 0 rgba(255, 250, 242, 0.08);
   aspect-ratio: 16 / 10;
 }
 
@@ -142,8 +147,8 @@
   padding: 2rem;
   text-align: center;
   background:
-    linear-gradient(rgba(20, 17, 28, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 17, 28, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(255, 250, 242, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 250, 242, 0.05) 1px, transparent 1px);
   background-size: 28px 28px;
 }
 
@@ -152,12 +157,12 @@
   font-size: clamp(1.25rem, 2.4vw, 1.75rem);
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #14111c;
+  color: #fffaf2;
 }
 
 .placeholderNote {
   font-size: 0.8125rem;
-  color: #6f675d;
+  color: rgba(255, 250, 242, 0.6);
   max-width: 32ch;
   margin: 0 auto;
 }
@@ -182,7 +187,7 @@
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6f675d;
+  color: rgba(255, 250, 242, 0.55);
 }
 
 .award {
@@ -191,10 +196,9 @@
   gap: 0.5rem;
   padding: 0.3rem 0.75rem 0.3rem 0.55rem;
   border-radius: 999px;
-  background: rgba(198, 255, 54, 0.22);
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
+  background: #c6ff36;
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #14111c;
 }
 
@@ -203,7 +207,6 @@
   height: 0.4rem;
   border-radius: 50%;
   background: #14111c;
-  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.6);
 }
 
 .name {
@@ -213,6 +216,7 @@
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
+  color: #fffaf2;
 }
 
 .tagline {
@@ -220,7 +224,7 @@
   max-width: 52ch;
   font-size: 1rem;
   line-height: 1.55;
-  color: #4a443c;
+  color: rgba(255, 250, 242, 0.72);
 }
 
 .stack {
@@ -235,13 +239,13 @@
 .stack li {
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
-  background: rgba(20, 17, 28, 0.035);
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+  background: rgba(255, 250, 242, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 242, 0.12);
   font-size: 0.6875rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #4a443c;
+  color: rgba(255, 250, 242, 0.8);
 }
 
 .links {
@@ -253,8 +257,7 @@
 }
 
 .caseLink,
-.live,
-.repo {
+.live {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -262,29 +265,23 @@
   font-size: 0.9375rem;
   font-weight: 600;
   text-decoration: none;
-  color: #14111c;
-  border-bottom: 1px solid rgba(20, 17, 28, 0.2);
+  color: #fffaf2;
+  border-bottom: 1px solid rgba(255, 250, 242, 0.25);
   transition: border-color 400ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 .caseLink:hover,
-.live:hover,
-.repo:hover {
-  border-color: #14111c;
+.live:hover {
+  border-color: #fffaf2;
 }
 
 .caseLink:focus-visible,
-.live:focus-visible,
-.repo:focus-visible {
-  outline: 2px solid #14111c;
+.live:focus-visible {
+  outline: 2px solid #c6ff36;
   outline-offset: 4px;
 }
 
-.repo {
-  color: #4a443c;
-}
-
-/* The case study is the primary read; the live link and repo follow. */
+/* The case study is the primary read; the live link follows. */
 .caseLink {
   border-bottom-color: #c6ff36;
   border-bottom-width: 2px;
@@ -309,7 +306,7 @@
 @media (prefers-reduced-motion: reduce) {
   .frame,
   .live,
-  .repo {
+  .caseLink {
     transition: none;
   }
 }

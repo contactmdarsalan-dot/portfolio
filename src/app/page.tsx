@@ -5,8 +5,8 @@ import ProductsSection from "@/components/ProductsSection";
 import ProofSection from "@/components/ProofSection";
 import ResumeSection from "@/components/ResumeSection";
 import ScrollExperience from "@/components/ScrollExperience";
+import ShotsSection from "@/components/ShotsSection";
 import Scene3D from "@/components/Scene3D";
-import WorkSection from "@/components/WorkSection";
 
 export default function Home() {
   return (
@@ -19,7 +19,7 @@ export default function Home() {
         <ProductsSection />
         <ProofSection />
         <ConversionSection />
-        <WorkSection />
+        <ShotsSection />
         <ResumeSection />
       </main>
     </>

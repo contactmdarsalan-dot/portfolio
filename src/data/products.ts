@@ -31,7 +31,6 @@ export type Product = {
   slug: string;
   name: string;
   url: string;
-  repo?: string;
   tagline: string;
   category: string;
   stack: string[];
@@ -46,7 +45,6 @@ export const products: Product[] = [
     slug: "fixguard",
     name: "FixGuard AI",
     url: "https://fixguardai.online/",
-    repo: "https://github.com/rhinopeaklabs-nepal/fixgurardai",
     tagline:
       "Pre-flight QA for AI-built websites. Opens your site in a real browser, submits your forms, and reports what actually happened rather than what the page claimed.",
     category: "QA tooling",

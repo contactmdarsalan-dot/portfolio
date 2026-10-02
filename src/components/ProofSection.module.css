@@ -1,14 +1,17 @@
 /*
- * Same tokens as the rest of the page: ink #14111c, muted #4a443c, soft
- * #6f675d, lime only as a mark. Cards are a numbered list because the six
- * items answer six lines of a brief in order; the number is the line.
+ * Stone ground (#f4f1ea), one of the three neutrals that carry 60 of the
+ * page. The six cards are white on it, so they read as sheets laid on a
+ * desk rather than boxes drawn on a page. Ink #14111c for type, muted
+ * #4a443c and soft #6f675d for the rest, lime only as the rule under each
+ * headline. Cards are a numbered list because the six items answer six
+ * lines of a brief in order; the number is the line.
  */
 
 .section {
   position: relative;
   z-index: 6;
   padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
-  background: #ffffff;
+  background: #f4f1ea;
   color: #14111c;
 }
 
@@ -28,8 +31,8 @@
   margin: 0 0 1.25rem;
   padding: 0.35rem 0.85rem 0.35rem 0.6rem;
   border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
-  background: rgba(20, 17, 28, 0.03);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
+  background: #ffffff;
   font-size: 0.625rem;
   font-weight: 600;
   letter-spacing: 0.2em;
@@ -83,10 +86,12 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  background: rgba(20, 17, 28, 0.08);
+  background: rgba(20, 17, 28, 0.1);
   border-radius: 1.5rem;
   overflow: hidden;
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.1),
+    0 32px 70px -44px rgba(20, 17, 28, 0.35);
 }
 
 .card {
@@ -149,7 +154,7 @@
   gap: 1rem;
   margin-top: clamp(2.5rem, 5vw, 4rem);
   padding-top: 2rem;
-  border-top: 1px solid rgba(20, 17, 28, 0.1);
+  border-top: 1px solid rgba(20, 17, 28, 0.12);
 }
 
 .stackLabel {
@@ -173,8 +178,8 @@
 .stack li {
   padding: 0.5rem 0.9rem;
   border-radius: 999px;
-  background: rgba(20, 17, 28, 0.035);
-  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
   font-size: 0.8125rem;
   font-weight: 600;
   letter-spacing: 0.01em;

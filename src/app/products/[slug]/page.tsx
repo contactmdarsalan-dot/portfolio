@@ -78,11 +78,9 @@ export default async function ProductCasePage({ params }: Props) {
                 </svg>
               </span>
             </a>
-            {product.repo && (
-              <a className="hero-cta hero-cta-ghost" href={product.repo} target="_blank" rel="noopener noreferrer">
-                Source on GitHub
-              </a>
-            )}
+            <Link className="hero-cta hero-cta-ghost" href="/#work">
+              All products
+            </Link>
           </div>
         </div>
       </header>

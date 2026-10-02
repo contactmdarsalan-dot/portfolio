@@ -73,13 +73,6 @@ export default function ResumePage() {
                 arsalan.fixguardai.online
               </a>
             </li>
-            {fixguard?.repo && (
-              <li>
-                <a href={fixguard.repo} target="_blank" rel="noopener noreferrer">
-                  {fixguard.repo.replace(/^https?:\/\//, "")}
-                </a>
-              </li>
-            )}
             <li>Kathmandu, Nepal · Remote</li>
           </ul>
         </header>

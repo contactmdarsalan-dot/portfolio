@@ -23,7 +23,6 @@
 
 .head {
   margin-bottom: clamp(3rem, 6vw, 5rem);
-  max-width: 34ch;
 }
 
 .kicker {
@@ -43,6 +42,7 @@
   letter-spacing: -0.02em;
   font-weight: 800;
   text-wrap: balance;
+  max-width: 16ch;
 }
 
 /* ------------------------------------------------------------------ groups */
@@ -143,11 +143,22 @@
 
 /* ----------------------------------------------------------------- contact */
 
+/* The ink band that closes the page: the second of the two dark surfaces
+   (with Products), so the page opens light, dips to ink for the work,
+   returns to light, and ends on ink with the one thing left to do. */
 .contact {
   display: grid;
   gap: 2.5rem;
-  padding-top: clamp(2.5rem, 5vw, 4rem);
-  border-top: 1px solid rgba(20, 17, 28, 0.1);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  border-radius: 1.5rem;
+  background: #14111c;
+  color: #fffaf2;
+  box-shadow: 0 40px 80px -48px rgba(20, 17, 28, 0.6);
+}
+
+.contact .kicker {
+  color: rgba(255, 250, 242, 0.55);
 }
 
 .contactTitle {
@@ -157,8 +168,9 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 800;
-  max-width: 22ch;
+  max-width: 18ch;
   text-wrap: balance;
+  color: #fffaf2;
 }
 
 .channels {
@@ -178,20 +190,24 @@
   /* 44px minimum touch height, met by padding rather than a fixed height so
      a wrapped value still gets the same generous target. */
   padding: 0.95rem 0;
-  border-bottom: 1px solid rgba(20, 17, 28, 0.1);
+  border-bottom: 1px solid rgba(255, 250, 242, 0.14);
   text-decoration: none;
   color: inherit;
   transition: color 220ms ease, padding-left 220ms ease;
 }
 
+.channels li:first-child a {
+  border-top: 1px solid rgba(255, 250, 242, 0.14);
+}
+
 .channels a:hover,
 .channels a:focus-visible {
-  color: #14111c;
+  color: #c6ff36;
   padding-left: 0.5rem;
 }
 
 .channels a:focus-visible {
-  outline: 2px solid #14111c;
+  outline: 2px solid #c6ff36;
   outline-offset: 4px;
   border-radius: 2px;
 }
@@ -201,7 +217,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6f675d;
+  color: rgba(255, 250, 242, 0.55);
 }
 
 .channelValue {
@@ -211,7 +227,6 @@
 }
 
 .resumeLink .channelValue {
-  color: #14111c;
   text-decoration: underline;
   text-decoration-color: #c6ff36;
   text-decoration-thickness: 3px;
