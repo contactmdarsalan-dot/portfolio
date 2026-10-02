@@ -218,6 +218,12 @@
   gap: 0.45rem;
 }
 
+.legendNote {
+  margin-left: auto;
+  font-weight: 500;
+  color: #6f675d;
+}
+
 .legend span {
   display: inline-block;
   width: 1.4rem;

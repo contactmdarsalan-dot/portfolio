@@ -190,6 +190,16 @@
   color: rgba(255, 250, 242, 0.55);
 }
 
+.company {
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 242, 0.22);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #fffaf2;
+}
+
 .award {
   display: inline-flex;
   align-items: center;

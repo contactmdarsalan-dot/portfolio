@@ -84,6 +84,7 @@ function Card({
       <div className={styles.body}>
         <div className={styles.meta}>
           <span className={styles.category}>{product.category}</span>
+          {product.company && <span className={styles.company}>{product.company}</span>}
           {product.featured && product.note && (
             <span className={styles.award}>
               <span className={styles.awardDot} aria-hidden="true" />

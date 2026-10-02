@@ -25,6 +25,12 @@ function months(a: string, b: string) {
 }
 
 function duration(c: Credential) {
+  if (c.approx) {
+    const y0 = Number(c.start.slice(0, 4));
+    if (!c.end) return `Since ${y0}`;
+    const y1 = Number(c.end.slice(0, 4));
+    return `${y1 - y0} yrs`;
+  }
   const m = Math.max(1, months(c.start, c.end ?? NOW) + 1);
   const y = Math.floor(m / 12);
   const r = m % 12;
@@ -55,7 +61,7 @@ function Timeline({ run }: { run: boolean }) {
           const width = Math.max(3, (months(c.start, c.end ?? NOW) / TOTAL) * 100);
           // A minimum-width bar that starts near now would run past the Now line.
           const left = Math.min((months(RANGE_START, c.start) / TOTAL) * 100, 100 - width);
-          const tone = c.kind === "Education" ? styles.barEdu : c.org === "FixGuard AI" ? styles.barOwn : styles.barJob;
+          const tone = c.kind === "Education" ? styles.barEdu : c.own ? styles.barOwn : styles.barJob;
           // Too narrow to hold a label: always outside (tiny), or outside on phones (short).
           const size = width < 8 ? styles.barTiny : width < 22 ? styles.barShort : "";
           return (
@@ -78,9 +84,10 @@ function Timeline({ run }: { run: boolean }) {
       </div>
 
       <ul className={styles.legend}>
-        <li><span className={styles.barOwn} /> Own product</li>
+        <li><span className={styles.barOwn} /> Founded</li>
         <li><span className={styles.barJob} /> Employed</li>
         <li><span className={styles.barEdu} /> Study</li>
+        <li className={styles.legendNote}>Bars with year-only dates are approximate</li>
       </ul>
     </div>
   );
@@ -106,7 +113,8 @@ export default function ResumeSection() {
     return () => io.disconnect();
   }, []);
 
-  const ordered = [...credentials].sort((a, b) => (b.end ?? NOW).localeCompare(a.end ?? NOW) || b.start.localeCompare(a.start));
+  // Cards keep the order the data is written in: own ventures first.
+  const ordered = credentials;
 
   return (
     <section className={styles.section} id="resume" data-scroll-section>
@@ -114,7 +122,7 @@ export default function ResumeSection() {
         <header className={styles.head}>
           <p className={styles.kicker}>Experience</p>
           <h2 className={styles.title}>
-            Three years of interfaces. <span className={styles.titleSoft}>One product of my own.</span>
+            Three years of interfaces. <span className={styles.titleSoft}>Now, a company of my own.</span>
           </h2>
         </header>
 
@@ -125,7 +133,7 @@ export default function ResumeSection() {
         <ol className={styles.cards}>
           {ordered.map((c) => {
             const ongoing = !c.end;
-            const own = c.org === "FixGuard AI";
+            const own = c.org === "RhinoPeak Labs Pvt Ltd";
             return (
               <li key={c.org} className={`${styles.card} ${own ? styles.cardOwn : ""}`}>
                 <div className={styles.cardSide}>

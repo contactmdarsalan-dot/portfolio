@@ -9,6 +9,10 @@ export type Credential = {
   end?: string;
   /** Short label for the timeline bar. */
   short: string;
+  /** Only the years are known: durations are shown in years, not months. */
+  approx?: boolean;
+  /** Own company or product, rather than employment. */
+  own?: boolean;
   meta: string;
   bullets: string[];
 };
@@ -16,11 +20,41 @@ export type Credential = {
 export const credentials: Credential[] = [
   {
     kind: "Experience",
+    title: "Founder",
+    org: "RhinoPeak Labs Pvt Ltd",
+    period: "2026 — Present",
+    start: "2026-01",
+    short: "RhinoPeak Labs",
+    approx: true,
+    own: true,
+    meta: "Private limited company · Registered in Nepal",
+    bullets: [
+      "Founded and run the company behind RhinoKhata, HamroDocs and RhinoPeak Academy.",
+    ],
+  },
+  {
+    kind: "Experience",
+    title: "Founder",
+    org: "RhinoKhata",
+    period: "2026 — Present",
+    start: "2026-01",
+    short: "RhinoKhata",
+    approx: true,
+    own: true,
+    meta: "A RhinoPeak Labs product · rhinokhata.cloud",
+    bullets: [
+      "Double-entry accounting, godown stock, party ledgers and work orders for wholesale distributors and manufacturers in Nepal.",
+      "Built for how business is done there: Bikram Sambat dates, a Shrawan-to-Ashadh fiscal year, and IRD-ready tax invoices.",
+    ],
+  },
+  {
+    kind: "Experience",
     title: "Founder, product engineer",
     org: "FixGuard AI",
     period: "Sep 2026 — Present",
     start: "2026-09",
     short: "FixGuard AI",
+    own: true,
     meta: "Solo · Remote · fixguardai.online",
     bullets: [
       "Pre-flight QA for AI-built websites: real-browser form checks, route crawl, accessibility, performance, DNS and TLS, with one scoped fix prompt per finding.",
@@ -38,6 +72,20 @@ export const credentials: Credential[] = [
     meta: "Full-time · Kathmandu, Nepal · On-site",
     bullets: [
       "Wireframing and interface systems for client product work.",
+    ],
+  },
+  {
+    kind: "Experience",
+    title: "UI/UX Design Mentor",
+    org: "CodeIT",
+    period: "2024 — 2026",
+    start: "2024-01",
+    end: "2026-06",
+    short: "CodeIT, mentor",
+    approx: true,
+    meta: "Freelance",
+    bullets: [
+      "Mentored UI/UX design learners on a freelance basis.",
     ],
   },
   {

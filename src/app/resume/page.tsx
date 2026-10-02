@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const summary =
-  "Product engineer and designer. I take a customer problem to production with AI agents writing most of the code, then test what they wrote before a user does. Three years designing interfaces for agency clients; one shipped product of my own, placed 2nd in the Hostinger 21-Day Startup Challenge 2026.";
+  "Product engineer and designer. I take a customer problem to production with AI agents writing most of the code, then test what they wrote before a user does. Founder of RhinoPeak Labs Pvt Ltd (Nepal), the company behind RhinoKhata, HamroDocs and RhinoPeak Academy. Three years designing interfaces for agency clients and two years mentoring UI/UX designers at CodeIT. FixGuard AI, built solo, placed 2nd in the Hostinger 21-Day Startup Challenge 2026.";
 
 const stack: { label: string; items: string }[] = [
   { label: "Frontend", items: "TypeScript, React 19, Next.js, CSS, Figma" },

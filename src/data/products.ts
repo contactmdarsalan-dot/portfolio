@@ -36,6 +36,8 @@ export type Product = {
   stack: string[];
   screenshot: string | null;
   note?: string;
+  /** Company the product belongs to, when it is not a solo project. */
+  company?: string;
   featured?: boolean;
   caseStudy: ProductCaseStudy;
 };
@@ -177,9 +179,10 @@ export const products: Product[] = [
     category: "Accounting SaaS",
     stack: ["Web app", "Double-entry ledger", "Inventory"],
     screenshot: "/products/rhinokhata.webp",
+    company: "RhinoPeak Labs",
     caseStudy: {
       year: "2026",
-      role: "UX design and QA",
+      role: "Founder. Product, UX design and QA, through RhinoPeak Labs.",
       timeline: "Ongoing",
       platform: "Web application, subscription",
       audience: "Wholesale distributors and manufacturers in Nepal",
@@ -211,9 +214,10 @@ export const products: Product[] = [
     category: "Document platform",
     stack: ["Web app", "PDF generation", "Payroll"],
     screenshot: "/products/hamrodocs.webp",
+    company: "RhinoPeak Labs",
     caseStudy: {
       year: "2026",
-      role: "UX design and QA",
+      role: "Founder of RhinoPeak Labs, the company behind it. UX design and QA.",
       timeline: "Ongoing",
       platform: "Web application, free",
       audience: "Small businesses and freelancers in Nepal who need tax-format documents without accounting software",
@@ -245,9 +249,10 @@ export const products: Product[] = [
     category: "Education",
     stack: ["Marketing site", "Enrolment flow"],
     screenshot: "/products/rhinopeak-academy.webp",
+    company: "RhinoPeak Labs",
     caseStudy: {
       year: "2026",
-      role: "UX design and QA",
+      role: "Founder of RhinoPeak Labs, the company behind it. UX design and QA.",
       timeline: "Ongoing",
       platform: "Marketing site with enrolment",
       audience: "People in Biratnagar starting a software career, including those with no prior coding experience",
