@@ -1,0 +1,306 @@
+/*
+ * Scoped. Same tokens as the hero, nav and process sections: ink #14111c,
+ * muted #4a443c, soft #6f675d, lime only as a mark.
+ *
+ * Captures sit in a double bezel - a tinted outer shell with a hairline,
+ * and an inner frame with a concentric smaller radius - so a screenshot
+ * reads as a mounted artefact rather than a pasted rectangle.
+ */
+
+.section {
+  position: relative;
+  z-index: 6;
+  padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
+  background: #ffffff;
+  color: #14111c;
+}
+
+.inner {
+  max-width: 76rem;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------- head */
+
+.head {
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.08);
+  background: rgba(20, 17, 28, 0.03);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #4a443c;
+}
+
+.kicker::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #c6ff36;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.25);
+}
+
+.title {
+  margin: 0;
+  max-width: 18ch;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(2rem, 4.4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 1rem 0 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 1.3vw, 1.125rem);
+  line-height: 1.55;
+  color: #4a443c;
+}
+
+/* --------------------------------------------------------------- cards */
+
+.card,
+.cardFeatured {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.cardFeatured {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2.5rem, 5vw, 4rem) 2.5rem;
+}
+
+/* The double bezel. Outer: tinted shell, hairline, 1.5rem radius, 0.4rem
+   padding. Inner: white, radius = outer minus padding so the curves are
+   concentric, overflow clipped to the image. */
+.frame {
+  display: block;
+  padding: 0.4rem;
+  border-radius: 1.5rem;
+  background: rgba(20, 17, 28, 0.04);
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.08),
+    0 32px 70px -40px rgba(20, 17, 28, 0.35);
+  transition: transform 700ms cubic-bezier(0.32, 0.72, 0, 1),
+    box-shadow 700ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.frame:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.1),
+    0 44px 80px -40px rgba(20, 17, 28, 0.42);
+}
+
+.frame:focus-visible {
+  outline: 2px solid #14111c;
+  outline-offset: 4px;
+}
+
+.frameInner {
+  display: block;
+  overflow: hidden;
+  border-radius: calc(1.5rem - 0.4rem);
+  background: #ffffff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(20, 17, 28, 0.06);
+  aspect-ratio: 16 / 10;
+}
+
+.shot {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+/* A site that could not be captured gets its domain set in type, and the
+   reason, instead of a broken image or a stock placeholder. */
+.placeholder {
+  display: grid;
+  place-content: center;
+  gap: 0.5rem;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  background:
+    linear-gradient(rgba(20, 17, 28, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 17, 28, 0.035) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.placeholderHost {
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #14111c;
+}
+
+.placeholderNote {
+  font-size: 0.8125rem;
+  color: #6f675d;
+  max-width: 32ch;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------------------------------- body */
+
+.body {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.category {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6f675d;
+}
+
+.award {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.75rem 0.3rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(198, 255, 54, 0.22);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #14111c;
+}
+
+.awardDot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #14111c;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.6);
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.tagline {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: #4a443c;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack li {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(20, 17, 28, 0.035);
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.07);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #4a443c;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.live,
+.repo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #14111c;
+  border-bottom: 1px solid rgba(20, 17, 28, 0.2);
+  transition: border-color 400ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+.live:hover,
+.repo:hover {
+  border-color: #14111c;
+}
+
+.live:focus-visible,
+.repo:focus-visible {
+  outline: 2px solid #14111c;
+  outline-offset: 4px;
+}
+
+.repo {
+  color: #4a443c;
+}
+
+/* ------------------------------------------------------- wider screens */
+
+@media (min-width: 48rem) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 64rem) {
+  .cardFeatured {
+    grid-template-columns: 7fr 5fr;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame,
+  .live,
+  .repo {
+    transition: none;
+  }
+}

@@ -248,8 +248,13 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
         const hero = chapterRefs.current[0];
         if (!hero) return;
 
-        const reveal = (from: number, over = 0.12) =>
-          Math.max(0, Math.min(1, (progress + 0.08 - from) / over));
+        // Head start of 0.2 against a 0.1 window: at rest the headline, lead
+        // and proof are fully in and the actions are already most of the way,
+        // so a visitor who never scrolls still has everything to read and
+        // click. The sequence completes within the first few percent of
+        // scroll - still one element at a time, just not gated behind it.
+        const reveal = (from: number, over = 0.1) =>
+          Math.max(0, Math.min(1, (progress + 0.2 - from) / over));
 
         const apply = (el: HTMLElement | null, amount: number, lift = 18) => {
           if (!el) return;
@@ -259,15 +264,15 @@ export default function CanvasAnimation({ variant = "hero" }: CanvasAnimationPro
         };
 
         hero.querySelectorAll<HTMLElement>(".hero-title-word").forEach((word, i) => {
-          const amount = reveal(i * 0.07);
+          const amount = reveal(i * 0.04);
           word.style.opacity = String(amount);
           word.style.transform = `translate3d(0, ${(1 - amount) * 30}px, 0)`;
         });
 
-        apply(hero.querySelector(".story-body"), reveal(0.3));
-        apply(hero.querySelector(".hero-proof"), reveal(0.4));
-        apply(hero.querySelector(".hero-actions"), reveal(0.5));
-        apply(hero.querySelector(".story-markers"), reveal(0.58));
+        apply(hero.querySelector(".story-body"), reveal(0.08));
+        apply(hero.querySelector(".hero-proof"), reveal(0.11));
+        apply(hero.querySelector(".hero-actions"), reveal(0.14));
+        apply(hero.querySelector(".story-markers"), reveal(0.2));
 
         const panel = hero.querySelector<HTMLElement>(".hero-info-panel");
         if (panel) {

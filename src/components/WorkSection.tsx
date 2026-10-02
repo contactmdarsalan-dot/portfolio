@@ -201,20 +201,20 @@ export default function WorkSection() {
     <section
       ref={sectionRef}
       className="work-showcase"
-      id="work"
+      id="shots"
       data-scroll-section
       data-section-reveal
     >
       <div className="work-heading-row" data-reveal-item>
-        <p className="section-pill">Portfolio</p>
+        <p className="section-pill">Design explorations</p>
         <span className="work-count">({String(projects.length).padStart(2, "0")})</span>
       </div>
 
       <div className="work-title-row" data-reveal-item>
-        <h2 className="color-shift-heading">Selected work, and the decisions behind it.</h2>
+        <h2 className="color-shift-heading">Interface explorations, on Dribbble.</h2>
         <p>
-          Browse the visuals, then open a case study for the process, the
-          decisions, and the QA checks that shipped with it.
+          Design studies and concepts, separate from the shipped products
+          above. Open any one for the thinking behind it.
         </p>
       </div>
 

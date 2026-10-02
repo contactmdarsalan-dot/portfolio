@@ -11712,3 +11712,39 @@ body,
 .canvas-section-hero .story-chapter h1 {
   font-size: clamp(2.4rem, 5.2vw, 5rem);
 }
+
+/* The hero defined --ink, --lime, --ink-muted, --ink-soft and --ease on
+   itself, and the primary-action classes read them. Reused in the nav and
+   the Process section, the variables resolved to nothing and the pill lost
+   its background: white text on transparent. Tokens belong on :root. */
+:root {
+  --ink: #14111c;
+  --ink-muted: #4a443c;
+  --ink-soft: #6f675d;
+  --lime: #c6ff36;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* The accent span was display:block, so its underline spanned the whole
+   grid column instead of the word and, on wide screens, ran past it. The
+   span now shrinks to its text and the rule sits on the baseline. */
+.canvas-section-hero .story-chapter h1 span.hero-title-accent {
+  display: block;
+  width: fit-content;
+  padding-bottom: 0;
+}
+
+.canvas-section-hero .story-chapter h1 span.hero-title-accent::after {
+  left: 0.02em;
+  right: 0.08em;
+  bottom: -0.04em;
+  height: 0.06em;
+}
+
+/* 40ch capped the pill under its own content width and it wrapped, which
+   put the dot on a line by itself. It is one line or it is nothing. */
+.hero-proof {
+  width: fit-content;
+  max-width: none;
+  flex-wrap: nowrap;
+}
