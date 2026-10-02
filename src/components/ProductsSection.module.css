@@ -252,6 +252,7 @@
   margin-top: 0.5rem;
 }
 
+.caseLink,
 .live,
 .repo {
   display: inline-flex;
@@ -266,11 +267,13 @@
   transition: border-color 400ms cubic-bezier(0.32, 0.72, 0, 1);
 }
 
+.caseLink:hover,
 .live:hover,
 .repo:hover {
   border-color: #14111c;
 }
 
+.caseLink:focus-visible,
 .live:focus-visible,
 .repo:focus-visible {
   outline: 2px solid #14111c;
@@ -279,6 +282,12 @@
 
 .repo {
   color: #4a443c;
+}
+
+/* The case study is the primary read; the live link and repo follow. */
+.caseLink {
+  border-bottom-color: #c6ff36;
+  border-bottom-width: 2px;
 }
 
 /* ------------------------------------------------------- wider screens */

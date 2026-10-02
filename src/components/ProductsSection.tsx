@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { products } from "@/data/products";
 import styles from "./ProductsSection.module.css";
 
@@ -97,6 +98,12 @@ function Card({
         </ul>
 
         <div className={styles.links}>
+          <Link href={`/products/${product.slug}`} className={styles.caseLink}>
+            Case study
+            <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" />
+            </svg>
+          </Link>
           <a href={product.url} target="_blank" rel="noopener noreferrer" className={styles.live}>
             {host}
             <svg viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
