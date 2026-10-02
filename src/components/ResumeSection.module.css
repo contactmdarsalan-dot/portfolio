@@ -1,132 +1,381 @@
 /*
- * Scoped deliberately. globals.css is ~11k lines with 35 font sizes in it;
- * adding to that would mean fighting a cascade nobody can hold in their head.
- * This section defines its own small scale and inherits only the palette.
- *
- * Three sizes of text, two weights, one accent. The restraint is the point:
- * the hero is where the visual spend goes, and a CV that reads cleanly next to
- * it looks like a decision rather than a section somebody ran out of time on.
+ * Experience. White ground; the timeline sits on a stone panel; role cards
+ * are white, the own-product card is ink. Lime marks: own-product bar,
+ * live badge, hover rail on each card. Contact closes on the ink band.
  */
 
 .section {
   position: relative;
   z-index: 6;
-  padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 5vw, 4rem);
+  padding: clamp(5rem, 11vw, 9rem) clamp(1.25rem, 6vw, 6rem);
   background: #ffffff;
   color: #14111c;
 }
 
 .inner {
-  max-width: 68rem;
+  max-width: 76rem;
   margin: 0 auto;
 }
 
 .head {
-  margin-bottom: clamp(3rem, 6vw, 5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
 }
 
 .kicker {
-  margin: 0 0 0.75rem;
-  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 1.25rem;
+  padding: 0.35rem 0.85rem 0.35rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: inset 0 0 0 1px rgba(20, 17, 28, 0.1);
+  background: #ffffff;
+  font-size: 0.625rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #6f675d;
+  color: #4a443c;
+}
+
+.kicker::before {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: #c6ff36;
+  box-shadow: 0 0 0 3px rgba(198, 255, 54, 0.25);
 }
 
 .title {
   margin: 0;
-  font-family: var(--font-syne, inherit);
-  font-size: clamp(1.9rem, 4.2vw, 3rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  max-width: 20ch;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.04em;
   text-wrap: balance;
-  max-width: 16ch;
 }
 
-/* ------------------------------------------------------------------ groups */
-
-.group {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  padding: clamp(2rem, 4vw, 3rem) 0;
-  border-top: 1px solid rgba(20, 17, 28, 0.1);
-}
-
-.groupLabel {
-  margin: 0;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+.titleSoft {
   color: #6f675d;
 }
 
-.entries {
-  list-style: none;
+/* ------------------------------------------------------------ timeline */
+
+.chart {
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --pad: clamp(1rem, 2.5vw, 1.75rem);
+  position: relative;
+  padding: 2.75rem var(--pad) 1.25rem;
+  border-radius: 1.5rem;
+  background: #f4f1ea;
+  overflow: hidden;
+}
+
+.axis {
+  position: absolute;
+  top: 1rem;
+  left: var(--pad);
+  right: var(--pad);
+  height: 1rem;
+}
+
+.axis span {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #6f675d;
+  font-variant-numeric: tabular-nums;
+}
+
+.axis .now {
+  transform: translateX(-100%);
+  padding-right: 0.4rem;
+  color: #14111c;
+}
+
+.grid {
+  position: absolute;
+  top: 2.4rem;
+  bottom: 3.4rem;
+  left: var(--pad);
+  right: var(--pad);
+  pointer-events: none;
+}
+
+.grid span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(20, 17, 28, 0.08);
+}
+
+.grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  background: #14111c;
+}
+
+.lanes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0.6rem;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: clamp(2rem, 4vw, 2.75rem);
+  list-style: none;
 }
 
-.entry {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.5rem;
+.lane {
+  position: relative;
+  height: 2.5rem;
 }
 
-/* Dates line up in a column of their own on wider screens, which is how a CV
-   is actually scanned - you look for the years first, then the role. */
+.bar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1100ms var(--ease);
+  transition-delay: calc(var(--i) * 160ms);
+}
+
+.in .bar {
+  transform: none;
+}
+
+.barLabel {
+  padding: 0 0.85rem;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  opacity: 0;
+  transition: opacity 400ms var(--ease);
+  transition-delay: calc(var(--i) * 160ms + 700ms);
+}
+
+.in .barLabel {
+  opacity: 1;
+}
+
+.barJob { background: #14111c; color: #fffaf2; }
+.barOwn { background: #c6ff36; color: #14111c; box-shadow: inset 0 0 0 1.5px #14111c; }
+.barEdu {
+  background: repeating-linear-gradient(135deg, #ffffff 0 6px, #ece7dc 6px 12px);
+  color: #14111c;
+  box-shadow: inset 0 0 0 1.5px rgba(20, 17, 28, 0.25);
+}
+
+/* Ongoing bars meet the Now line square, not rounded. */
+.barOpen {
+  border-top-right-radius: 0.35rem;
+  border-bottom-right-radius: 0.35rem;
+}
+
+/* A bar a month or two wide keeps a pill shape and puts its label
+   outside, to the left. */
+.barTiny {
+  border-radius: 999px !important;
+}
+
+.barTiny .barLabel {
+  position: absolute;
+  right: calc(100% + 0.6rem);
+  padding: 0;
+  overflow: visible;
+  color: #14111c;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.25rem;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #4a443c;
+}
+
+.legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.legend span {
+  display: inline-block;
+  width: 1.4rem;
+  height: 0.6rem;
+  border-radius: 999px;
+}
+
+/* --------------------------------------------------------------- cards */
+
+.cards {
+  display: grid;
+  gap: 1rem;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  position: relative;
+  display: grid;
+  gap: 1rem 2rem;
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.09),
+    0 20px 50px -40px rgba(20, 17, 28, 0.35);
+  transition: transform 500ms var(--ease), box-shadow 500ms var(--ease);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5rem;
+  bottom: 1.5rem;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #c6ff36;
+  transform: scaleY(0);
+  transition: transform 500ms var(--ease);
+}
+
+.card:hover {
+  transform: translate3d(0, -3px, 0);
+  box-shadow:
+    inset 0 0 0 1px rgba(20, 17, 28, 0.14),
+    0 30px 60px -40px rgba(20, 17, 28, 0.45);
+}
+
+.card:hover::before {
+  transform: none;
+}
+
+.cardOwn {
+  background: #14111c;
+  color: #fffaf2;
+}
+
+.cardOwn .period,
+.cardOwn .meta { color: rgba(255, 250, 242, 0.55); }
+.cardOwn .duration { color: #c6ff36; }
+.cardOwn .org { color: #fffaf2; }
+.cardOwn .bullets li { color: rgba(255, 250, 242, 0.78); }
+.cardOwn .bullets li::before { background: #c6ff36; }
+
+.cardSide {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.75rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #f4f1ea;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #4a443c;
+}
+
+.badgeLive {
+  background: #c6ff36;
+  color: #14111c;
+}
+
+.liveDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #14111c;
+  animation: live 1.6s ease-in-out infinite;
+}
+
+@keyframes live {
+  50% { opacity: 0.3; }
+}
+
 .period {
   margin: 0;
   font-size: 0.875rem;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
   color: #6f675d;
-  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
-.entryBody > * {
+.duration {
+  margin: 0;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #14111c;
+}
+
+.cardBody > * {
   margin: 0;
 }
 
 .role {
-  font-family: var(--font-syne, inherit);
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
+  font-family: var(--font-display, "Syne", sans-serif);
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
 }
 
 .org {
-  margin-top: 0.2rem !important;
-  font-size: 1rem;
+  margin-top: 0.3rem !important;
+  font-size: 0.9375rem;
   font-weight: 700;
   color: #14111c;
 }
 
 .meta {
-  margin-top: 0.35rem !important;
-  font-size: 0.875rem;
+  font-weight: 500;
   color: #6f675d;
 }
 
 .bullets {
-  margin: 0.9rem 0 0 !important;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 64ch;
+  margin-top: 0.9rem !important;
   padding: 0;
   list-style: none;
-  display: grid;
-  gap: 0.5rem;
-  max-width: 62ch;
 }
 
 .bullets li {
   position: relative;
   padding-left: 1.1rem;
-  font-size: 1rem;
+  font-size: 0.9375rem;
   line-height: 1.6;
   color: #4a443c;
 }
@@ -135,17 +384,16 @@
   content: "";
   position: absolute;
   left: 0;
-  top: 0.65em;
+  top: 0.62em;
   width: 0.4rem;
-  height: 1px;
-  background: rgba(20, 17, 28, 0.35);
+  height: 0.4rem;
+  border-radius: 2px;
+  background: rgba(20, 17, 28, 0.3);
 }
 
 /* ----------------------------------------------------------------- contact */
 
-/* The ink band that closes the page: the second of the two dark surfaces
-   (with Products), so the page opens light, dips to ink for the work,
-   returns to light, and ends on ink with the one thing left to do. */
+/* The ink band that closes the page. */
 .contact {
   display: grid;
   gap: 2.5rem;
@@ -158,12 +406,14 @@
 }
 
 .contact .kicker {
-  color: rgba(255, 250, 242, 0.55);
+  background: rgba(255, 250, 242, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 242, 0.14);
+  color: rgba(255, 250, 242, 0.7);
 }
 
 .contactTitle {
   margin: 0;
-  font-family: var(--font-syne, inherit);
+  font-family: var(--font-display, "Syne", sans-serif);
   font-size: clamp(1.5rem, 3.2vw, 2.25rem);
   line-height: 1.1;
   letter-spacing: -0.02em;
@@ -178,7 +428,6 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0;
 }
 
 .channels a {
@@ -187,8 +436,6 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem 1.5rem;
-  /* 44px minimum touch height, met by padding rather than a fixed height so
-     a wrapped value still gets the same generous target. */
   padding: 0.95rem 0;
   border-bottom: 1px solid rgba(255, 250, 242, 0.14);
   text-decoration: none;
@@ -236,30 +483,35 @@
 /* ------------------------------------------------------------- wider screens */
 
 @media (min-width: 48rem) {
-  .group {
+  .card {
     grid-template-columns: 12rem 1fr;
-    gap: 3rem;
   }
-
-  .groupLabel {
-    position: sticky;
-    top: 7rem;
-    align-self: start;
+  .cardSide {
+    flex-direction: column;
+    align-items: flex-start;
   }
-
-  .entry {
-    grid-template-columns: 11rem 1fr;
-    gap: 2rem;
-  }
-
   .contact {
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .channels a {
-    transition: none;
+@media (max-width: 40rem) {
+  .lane { height: 2rem; }
+  .barLabel { font-size: 0.6875rem; padding: 0 0.55rem; }
+  .barShort .barLabel {
+    position: absolute;
+    right: calc(100% + 0.5rem);
+    padding: 0;
+    overflow: visible;
+    color: #14111c;
   }
+  .axis .now { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bar, .barLabel, .card, .card::before, .channels a { transition: none; }
+  .bar { transform: none; }
+  .barLabel { opacity: 1; }
+  .liveDot { animation: none; }
 }

@@ -3,6 +3,12 @@ export type Credential = {
   title: string;
   org: string;
   period: string;
+  /** "YYYY-MM". Drives the timeline; period stays the display string. */
+  start: string;
+  /** "YYYY-MM", or omitted while ongoing. */
+  end?: string;
+  /** Short label for the timeline bar. */
+  short: string;
   meta: string;
   bullets: string[];
 };
@@ -13,6 +19,8 @@ export const credentials: Credential[] = [
     title: "Founder, product engineer",
     org: "FixGuard AI",
     period: "Sep 2026 — Present",
+    start: "2026-09",
+    short: "FixGuard AI",
     meta: "Solo · Remote · fixguardai.online",
     bullets: [
       "Pre-flight QA for AI-built websites: real-browser form checks, route crawl, accessibility, performance, DNS and TLS, with one scoped fix prompt per finding.",
@@ -25,6 +33,8 @@ export const credentials: Credential[] = [
     title: "Graphic Designer",
     org: "Alpha Technology",
     period: "Jan 2026 — Present",
+    start: "2026-01",
+    short: "Alpha Technology",
     meta: "Full-time · Kathmandu, Nepal · On-site",
     bullets: [
       "Wireframing and interface systems for client product work.",
@@ -35,6 +45,9 @@ export const credentials: Credential[] = [
     title: "User Experience Designer",
     org: "Hunchha Digital Agency",
     period: "Jun 2023 — Feb 2026",
+    start: "2023-06",
+    end: "2026-02",
+    short: "Hunchha Digital",
     meta: "Full-time · Kosi, Nepal",
     bullets: [
       "Designed digital experiences across web and mobile for agency clients, from research through to developer handoff.",
@@ -46,6 +59,9 @@ export const credentials: Credential[] = [
     title: "BSc Computer Software Engineering",
     org: "London Metropolitan University",
     period: "Sep 2021 — Apr 2024",
+    start: "2021-09",
+    end: "2024-04",
+    short: "BSc, London Met",
     meta: "Bachelor's degree",
     bullets: [
       "Design thinking, style guides, and software engineering foundations.",
