@@ -28,8 +28,8 @@ const navItems = [
 const resumeContactProgress = 0.82;
 const navIndexByTarget = {
   hero: 0,
-  skills: 1,
-  work: 2,
+  work: 1,
+  skills: 2,
   process: 3,
   contact: 4,
 } as const;
